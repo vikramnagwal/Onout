@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(cuid())
+  email      String      @unique
+  username   String     @unique
+  password   String     @unique
+  isVerified Boolean     @default(false)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  workspace  Workspace[]
+}
+
+enum Plan {
+  Basic
+  Premium
+}
+
+model Workspace {
+  id             String     @id @default(cuid())
+  name           String
+  userId         String
+  uniquePageLink String     @unique
+  plan           Plan       @default(Basic)
+  totalMessages  Int?       @default(0)
+  totalViews     Int?       @default(0)
+  totalClicks    Int?       @default(0)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  user           User       @relation(fields: [userId], references: [id])
+  Messages       Messages[]
+
+  @@unique([id, userId, uniquePageLink])
+  @@index([userId, uniquePageLink, id, totalMessages])
+}
+
+model Messages {
+  id          String    @id @default(cuid())
+  workspaceId String
+  slug        String?
+  content     String
+  views       Int   @default(0)
+  clicks      Int   @default(0)
+  IpAddress   String?
+  source      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+
+  @@unique([workspaceId])
+  @@index([workspaceId, content, views])
+}
