@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useCopyToClipboard = (timeout: number = 3000): [boolean, (value: string | ClipboardItem) => Promise<void>] => {

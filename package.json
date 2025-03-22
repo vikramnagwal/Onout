@@ -2,32 +2,46 @@
   "name": "anom",
   "version": "0.1.0",
   "private": true,
+  "size-limit": [
+    {
+      "limit": "35 KB",
+      "path": "dist/app*.js"
+    }
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "bun ./prisma/seed.ts"
+    "seed": "bun ./prisma/seed.ts",
+    "size": "bun run build && size-limit"
   },
   "dependencies": {
     "@prisma/client": "6.5.0",
+    "@radix-ui/react-tooltip": "^1.1.8",
+    "bcryptjs": "^3.0.2",
     "chalk": "^5.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "next": "15.2.2",
+    "next-safe-action": "^7.10.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.54.2",
     "swr": "^2.3.3",
     "tailwind-merge": "^3.0.2",
-    "use-debounce": "^10.0.4"
+    "use-debounce": "^10.0.4",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@size-limit/file": "^11.2.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "husky": "^9.1.7",
     "prisma": "^6.5.0",
+    "size-limit": "^11.2.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

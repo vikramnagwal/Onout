@@ -1,15 +1,14 @@
-import { prisma } from "@/packages/lib/db";
+import { Button } from "@/packages/ui/button";
+import { LoadingSpinner } from "@/packages/ui/loaders/loading-spinner";
+import { ButtonTooltip, Tooltip } from "@/packages/ui/tooltip";
 
 export default async function Home() {
-  const users = await prisma.user.findMany();
   return (
    <div>
     <p>Users</p>
-    <ol>
-      {users.map((user, id) => (
-        <li key={id}>{user.name}</li>
-      ))}
-    </ol>
+   <ButtonTooltip tooltipProps={{ content: "Tooltip content", side: "top" }} className="p-2 flex text-center mx-auto"> Click me </ButtonTooltip>
+   <Button text="here" variant="outline"/>
+   <LoadingSpinner />
    </div>
   );
 }
