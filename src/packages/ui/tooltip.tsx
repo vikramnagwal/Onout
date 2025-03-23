@@ -85,7 +85,7 @@ export function ButtonTooltip({
 } & ButtonProps) {
   return (
     <Tooltip {...tooltipProps}>
-      <button
+      <Button
         type="button"
         {...props}
         className={cn(
@@ -94,7 +94,7 @@ export function ButtonTooltip({
         )}
       >
         {children}
-      </button>
+      </Button>
     </Tooltip>
   );
 }
