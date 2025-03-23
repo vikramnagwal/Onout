@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { cn } from "../utils/functions/cn";
 
 const buttonVariants = cva(
-    "transitions-all duration-200 ease-in-out rounded-md px-2 py-1",
+    "flex items-center justify-between transitions-all duration-200 ease-in-out rounded-md px-2 py-1",
     {
         variants: {
             variant: {
@@ -41,10 +41,8 @@ export function Button({
     text,
     textWrapperClassName,
     className,
-    shortcutClassName,
     loading,
     icon,
-    right,
 }:ButtonProps) {
     return (
         <button ref={ref} className={cn(buttonVariants({variant}), className)} disabled={loading}>
