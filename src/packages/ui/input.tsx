@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { cn } from "../utils/functions/cn";
-import { Eye, EyeClosed } from "lucide-react";
+import { AlertCircle, Eye, EyeClosed } from "lucide-react";
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     error?: string;
@@ -23,24 +23,23 @@ export function Input({
     }, [isPasswordVisible, setIsPasswordVisible]);
 
     return (
-      <div>
-        <div className="flex items-center justify-between">
-          <input
-            className={cn(
-              "border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none",
-              error && "border-red-500 focus:border-red-500 focus:ring-red-500",
-              className
-            )}
-            type={isPasswordVisible ? "text" : type}
-            ref={ref}
-            {...props}
-          />
+      <div className="relative flex">
+        <input
+          type={isPasswordVisible ? "text" : type}
+          className={cn(
+            "w-full px-2 py-1 border focus:ring-2 ring-blue-500/60 rounded-md border-neutral-100 focus:outline-none focus:border-neutral-300",
+            error && "border-red-500 ring-red-500",
+            className
+          )}
+        />
+        <div className="absolute inset-y-0 right-2">
           {type === "password" && (
-            <button
-              onClick={togglePasswordVisibility}
-              aria-label={isPasswordVisible ? "Hide Password" : "Show Password"}
-            >
-              {isPasswordVisible ? <Eye className="size-4" /> : <EyeClosed className="size-4" />}
+            <button type="button" onClick={togglePasswordVisibility} className="absolute inset-y-0 right-0 flex items-center px-3 cursor-pointer" aria-label={ isPasswordVisible ? "Hide password" : "Show password" }>
+              {isPasswordVisible ? (
+                <Eye className="size-4" />
+              ) : (
+                <EyeClosed className="size-4" />
+              )}
             </button>
           )}
         </div>
