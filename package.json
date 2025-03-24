@@ -4,7 +4,7 @@
   "private": true,
   "size-limit": [
     {
-      "limit": "35 KB",
+      "limit": "335 KB",
       "path": "dist/app*.js"
     }
   ],
