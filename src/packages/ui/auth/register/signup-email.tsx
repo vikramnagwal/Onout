@@ -1,9 +1,13 @@
+"use client"
+
 import { z } from "zod";
 import { useAction } from "next-safe-action/hooks";
-// import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRegisterContext } from "./context";
 import { Input } from "../../input";
+import { sendOTPEmail } from "@/packages/lib/auth/send-otp";
+import { Button } from "../../button";
 
 const emailSignUpSchema = z.object({
     email: z.string().email(),
@@ -24,20 +28,32 @@ export function SignUpEmail() {
             setStep("verify");
         },
         onError: ({error}) => {
+            
             toast.error(
               error.serverError ||
+                // @ts-ignore (fix this)
                 error.validationErrors?.email?.[0] ||
+                // @ts-ignore (fix this)
                 error.validationErrors?.password?.[0]
             );
         }
     });
     return (
-        <form>
-            <Input {...register("email")} type="email" error={errors.email?.message} />
-            <Input {...register("password")} type="password" placeholder="Password" error={errors.password?.message} />
-            <button onClick={handleSubmit(async (data) => executeAsync(data))} disabled={isPending}>
-                Sign Up
-            </button>
-        </form>
-    )
+      <form>
+        <div className="flex flex-col space-y-4 max-w-md mx-auto">
+          <Input
+            {...register("email")}
+            type="email"
+            error={errors.email?.message}
+          />
+          <Input
+            {...register("password")}
+            type="password"
+            placeholder="Password"
+            error={errors.password?.message}
+          />
+          <Button type="submit" text={isPending ? "Submitting.." : "Sign Up"} loading={isPending} disabled={isPending} />
+        </div>
+      </form>
+    );
 }
