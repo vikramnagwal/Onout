@@ -4,7 +4,7 @@
   "private": true,
   "size-limit": [
     {
-      "limit": "335 KB",
+      "limit": "200 KB",
       "path": "dist/app*.js"
     }
   ],
@@ -23,8 +23,10 @@
     "chalk": "^5.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.483.0",
-    "next": "15.2.2",
+    "motion": "^12.5.0",
+    "next": "^15.2.4",
     "next-auth": "^4.24.11",
     "next-safe-action": "^7.10.4",
     "nodemailer": "^6.10.0",
