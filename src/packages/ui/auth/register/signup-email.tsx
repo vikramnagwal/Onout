@@ -8,6 +8,7 @@ import { useRegisterContext } from "./context";
 import { Input } from "../../input";
 import { sendOTPEmail } from "@/packages/lib/auth/send-otp";
 import { Button } from "../../button";
+import { useState } from "react";
 
 const emailSignUpSchema = z.object({
     email: z.string().email(),
@@ -16,41 +17,48 @@ const emailSignUpSchema = z.object({
 
 export type EmailSignUp = z.infer<typeof emailSignUpSchema>;
 
-export function SignUpEmail() {
+export function SignUpEmailForm() {
     const { setEmail, setPassword, setStep } = useRegisterContext();
 
-    const { register, handleSubmit, getValues, formState: { errors }, watch } = useForm<EmailSignUp>();
-    const { executeAsync, isPending} = useAction(sendOTPEmail, {
-        onSuccess: () => {
-            toast.success("Verification Email Sent");
-            setEmail(getValues().email);
-            setPassword(getValues().password);
-            setStep("verify");
-        },
-        onError: ({error}) => {
+    const [isPending, setIsPending] = useState(false);
+
+    // const { register, handleSubmit, getValues, formState: { errors }, watch } = useForm<EmailSignUp>();
+    // const { executeAsync, isPending} = useAction(sendOTPEmail, {
+    //     onSuccess: () => {
+    //         toast.success("Verification Email Sent");
+    //         setEmail(getValues().email);
+    //         setPassword(getValues().password);
+    //         setStep("verify");
+    //     },
+    //     onError: ({error}) => {
             
-            toast.error(
-              error.serverError ||
-                // @ts-ignore (fix this)
-                error.validationErrors?.email?.[0] ||
-                // @ts-ignore (fix this)
-                error.validationErrors?.password?.[0]
-            );
-        }
-    });
+    //         toast.error(
+    //           error.serverError ||
+    //             // @ts-ignore (fix this)
+    //             error.validationErrors?.email?.[0] ||
+    //             // @ts-ignore (fix this)
+    //             error.validationErrors?.password?.[0]
+    //         );
+    //     }
+    // });
+    const handleSubmit = () => {
+      setIsPending(true);
+      toast.success("Verification Email Sent");
+      setStep("verify");
+    }
     return (
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col space-y-4 max-w-md mx-auto">
           <Input
-            {...register("email")}
+            // {...register("email")}
             type="email"
-            error={errors.email?.message}
+            // error={errors.email?.message}
           />
           <Input
-            {...register("password")}
+            // {...register("password")}
             type="password"
             placeholder="Password"
-            error={errors.password?.message}
+            // error={errors.password?.message}
           />
           <Button type="submit" text={isPending ? "Submitting.." : "Sign Up"} loading={isPending} disabled={isPending} />
         </div>
