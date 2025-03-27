@@ -14,8 +14,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --forground: #0a0a0a;
+    --background: #f8f3f3;
   }
 }
 
@@ -30,4 +30,9 @@ body {
   color: var(--foreground);
   margin: 3px;
   padding: 3px;
+}
+
+.btn {
+  background: var(--foreground);
+  color: var(--background);
 }
