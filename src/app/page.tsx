@@ -1,13 +1,9 @@
-import { RegisterProvider } from "@/packages/ui/auth/register/context";
-import { VerifyEmailForm } from "@/packages/ui/auth/register/verify-email";
+import { Verify } from "./(auth)/register/page-client";
 
 export default async function Home() {
   return (
-    <RegisterProvider>
       <div>
-        <p>Users</p>
-        <VerifyEmailForm />
+        <Verify />
       </div>
-    </RegisterProvider>
   );
 }

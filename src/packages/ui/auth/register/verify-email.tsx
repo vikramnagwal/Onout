@@ -1,5 +1,3 @@
-'use client'
-
 import { Button } from "@ui/button";
 import { InputOTP } from "@ui/input-otp";
 import { MailCheck } from "lucide-react";

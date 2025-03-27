@@ -8,7 +8,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-black flex items-end justify-center text-white text-sm px-4 py-2 hover:ring-2 ring-neutral-400 border-black dark:bg-white dark:text-black",
+          "btn flex items-end justify-center text-sm px-4 py-2 hover:ring-2 ring-neutral-400 border-black dark:bg-white dark:text-black",
         secndary:
           "border-neutral-200 bg-white text-black text-neutral-900 hover:bg-neutral-50 focus-visible:border-neutral-500 outline-none",
         outline:
