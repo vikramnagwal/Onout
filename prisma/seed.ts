@@ -1,4 +1,4 @@
-import { prisma } from "@/packages/lib/db"
+import { prisma } from "@/app/lib/db"
 
 
 ;(async () => {

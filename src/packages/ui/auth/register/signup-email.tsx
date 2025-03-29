@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRegisterContext } from "./context";
 import { Input } from "../../input";
-import { sendOTPEmail } from "@/packages/lib/auth/send-otp";
+import { sendOTPEmail } from "@/app/lib/auth/send-otp";
 import { Button } from "../../button";
 import { useState } from "react";
 
