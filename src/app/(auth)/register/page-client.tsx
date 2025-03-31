@@ -1,12 +1,11 @@
 'use client';
 
-import { useMediaQuery } from "@/packages/hooks/use-media";
+import { useMediaQuery } from "@/packages/hooks/use-media"
 import { AnimatedContainer } from "@/packages/ui/animate-container";
 import { RegisterProvider, useRegisterContext } from "@/packages/ui/auth/register/context";
 import { SignUpEmailForm } from "@/packages/ui/auth/register/signup-email";
 import { VerifyEmailForm } from "@/packages/ui/auth/register/verify-email";
-import { truncate } from "fs";
-import Link from "next/link";
+
 
 export default function RegisterPageClient() {
     return (
@@ -18,11 +17,13 @@ export default function RegisterPageClient() {
 
 function SignUp() {
     return (
-        <div className="flex flex-col items-center p-2 gap-3">
-            <h1 className="text-2xl font-semibold">just one step away!</h1>
-            <SignUpEmailForm />
-        </div>
-    )
+      <div className="flex flex-col items-center p-2 gap-3">
+        <AnimatedContainer className="my-2 bg-neutral-100 p-2 rounded-md">
+          <h1 className="text-2xl mb-4 font-semibold">just one step away!</h1>
+          <SignUpEmailForm />
+        </AnimatedContainer>
+      </div>
+    );
 }
 
 export function Verify() {

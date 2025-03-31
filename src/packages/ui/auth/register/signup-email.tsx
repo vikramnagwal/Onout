@@ -8,7 +8,7 @@ import { useRegisterContext } from "./context";
 import { Input } from "../../input";
 import { sendOTPEmail } from "@/app/lib/auth/send-otp";
 import { Button } from "../../button";
-import { useState } from "react";
+
 
 const emailSignUpSchema = z.object({
     email: z.string().email(),
@@ -42,11 +42,12 @@ export function SignUpEmailForm() {
 
     return (
       <form onSubmit={() => executeAsync(handleSubmit)}>
-        <div className="flex flex-col space-y-4 max-w-md mx-auto">
+        <div className="flex flex-col space-y-4 w-md mx-auto">
           <Input
             {...register("email")}
             type="email"
             error={errors.email?.message}
+            placeholder="eg: johndoe@email.me"
           />
           <Input
             {...register("password")}

@@ -16,6 +16,7 @@ model User {
   username   String      @unique
   password   String      @unique
   isVerified Boolean     @default(false)
+  emailVerified DateTime? 
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   workspace  Workspace[]
