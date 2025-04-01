@@ -42,7 +42,7 @@ export function SignUpEmailForm() {
 
     return (
       <form onSubmit={() => executeAsync(handleSubmit)}>
-        <div className="flex flex-col space-y-4 w-md mx-auto">
+        <div className="flex flex-col space-y-4 max-w-md mx-auto">
           <Input
             {...register("email")}
             type="email"
