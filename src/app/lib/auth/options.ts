@@ -1,10 +1,10 @@
 import { NextAuthOptions, User } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import EmailProvider from "next-auth/providers/email";
 import { PrismaClient } from "@prisma/client";
 import { decryptPassword, hashPassword } from "./password";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
 import { prisma } from "../db";
 import { JWT } from "next-auth/jwt";
 import { AdapterUser } from "next-auth/adapters";
@@ -31,15 +31,16 @@ const CustomPrismaAdapter = (p: PrismaClient) => {
 }
 
 export const authOptions: NextAuthOptions = {
+    debug: true,
     providers: [
+        GithubProvider({
+            clientId: process.env.GITHUB_CLIENT_ID as string,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+        }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-            allowDangerousEmailAccountLinking: true
-        }),
-        EmailProvider({
-            server: process.env.EMAIL_SERVER,
-            from: process.env.EMAIL_FROM,
+
         }),
         CredentialsProvider({
             id: "credentials",
@@ -78,7 +79,7 @@ export const authOptions: NextAuthOptions = {
                 const isValid = await decryptPassword({ password, passwordHash: user.password });
 
                 if (!isValid) {
-                    throw new Error("Invaid Credentials")
+                    throw new Error("Invalid Credentials")
                 }
                 return {
                     id: user.id,
@@ -90,21 +91,18 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     adapter: CustomPrismaAdapter(prisma),
-    session: {
-        strategy: "jwt"
-    },
+    session: { strategy: "jwt"},
     secret: process.env.NEXTAUTH_SECRET,
-    jwt: {
-       maxAge: 30 * 24 * 60 * 60, // 30 days
-    },
+    jwt: { maxAge: 30 * 24 * 60 * 60 }, // 30 days
+    theme: { colorScheme: "auto" },
     cookies: {
         sessionToken: {
-            name: `__Secure.next-auth.session-tokens`,
+            name: `${process.env.NODE_ENV === "production" ? "__Secure" : "" }.next-auth.session-tokens`,
             options: {
                 httpOnly: true,
                 sameSite: "lax",
                 path: "/",
-                domain: process.env.NEXTAUTH_URL,
+                domain: process.env.NEXTAUTH_URL ?? undefined,
                 secure: process.env.NODE_ENV === "production",
             }
         }
@@ -121,26 +119,7 @@ export const authOptions: NextAuthOptions = {
                 return false
             }
 
-            if(account?.provider === "google") {
-                const userExists = await prisma.user.findUnique({
-                    where: { email: user.email },
-                    select: {
-                        id: true,
-                        email: true,
-                        username: true,
-                        password: true,
-                        isVerified: true,
-                    }
-                })
-                if (userExists) {
-                   const updtedUser = await prisma.user.update({
-                    where: { email: user.email },
-                    data: {
-                        isVerified: true,
-                        emailVerified: new Date(),
-                    }
-                   })
-                } 
+            if(account?.provider === "google" || account?.provider === "github") {
                 return true
             }
 

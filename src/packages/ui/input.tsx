@@ -27,7 +27,7 @@ export function Input({
         <input
           type={isPasswordVisible ? "text" : type}
           className={cn(
-            "w-full px-2 py-1 border focus:ring-2 ring-blue-500/60 rounded-md border-neutral-500 dark:border-neutral-100 focus:outline-none focus:border-neutral-300",
+            "w-full px-2 py-1 border focus:ring-1 ring-blue-500 rounded-md border-neutral-500 dark:border-neutral-600 focus:outline-none focus:border-neutral-300",
             error && "border-red-500 ring-red-500",
             className
           )}
