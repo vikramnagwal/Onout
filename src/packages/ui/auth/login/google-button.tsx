@@ -1,23 +1,21 @@
-'use client';
-
 import { signIn } from "next-auth/react"
 import { Button } from "@ui/button"
 import { Google } from "@/packages/icons/google"
+import { useSearchParams } from "next/navigation";
 
 export function GoogleButton({next}:{next?: string}) {
-    const handleClick = () => {
-        console.log("trigger")
-    }
+  const params = useSearchParams();
+  const finalNext = next ?? params.get("next") ?? "/dashboard";
+  
     return (
-      <button
-        
+      <Button
+        text="Sign in with Google"
+        type="button"
         onClick={() => {
           signIn("google", { callbackUrl: next });
-          handleClick();
         }}
-        className="w-full text-sm rounded-md px-2 py-1 cursor-pointer flex justify-between items-center bg-white text-gray-800  dark:bg-black dark:text-white dark:hover:bg-gray-700"
-      >
-        <Google className="w-4 h-4" /> Sign in with Google
-      </button>
+        className="hover:bg-neutral-950"
+        icon={<Google className="w-4 h-4" />}
+      />
     );
 }

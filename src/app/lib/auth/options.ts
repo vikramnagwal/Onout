@@ -33,10 +33,6 @@ const CustomPrismaAdapter = (p: PrismaClient) => {
 export const authOptions: NextAuthOptions = {
     debug: true,
     providers: [
-        GithubProvider({
-            clientId: process.env.GITHUB_CLIENT_ID as string,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-        }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
@@ -44,7 +40,7 @@ export const authOptions: NextAuthOptions = {
         }),
         CredentialsProvider({
             id: "credentials",
-            name: "anom",
+            name: "anom/ymous",
             type: "credentials",
             credentials: {
                 email: ({ type: "email"}),
@@ -73,6 +69,7 @@ export const authOptions: NextAuthOptions = {
                 if (!user || !user.password) {
                     throw new Error("User not exists")
                 }
+                // check on this
                 if (!user.isVerified) {
                     throw new Error("User not verified")
                 }
@@ -85,6 +82,7 @@ export const authOptions: NextAuthOptions = {
                     id: user.id,
                     email: user.email,
                     username: user.username,
+                    password: user.password,
                     isVerified: user.isVerified,
                 }
             }
@@ -120,7 +118,26 @@ export const authOptions: NextAuthOptions = {
             }
 
             if(account?.provider === "google" || account?.provider === "github") {
-                return true
+               const existedUser = await prisma.user.findUnique({
+                where: { email: user.email },
+               })
+// if user exists and is not verified
+               if (existedUser && !existedUser.isVerified) {
+                try {
+                    await prisma.user.update({
+                    where: { id: existedUser.id },
+                    data: {
+                        emailVerified: new Date(),
+                        isVerified: true,
+                    }
+                })
+                 return true
+                } catch (error) {
+                   throw new Error("Error updating user") 
+                }
+               } 
+
+               return true;
             }
 
             const userExists = await prisma.user.findUnique({
@@ -141,6 +158,7 @@ export const authOptions: NextAuthOptions = {
             if (userExists || profile) {
                 return false
             }
+
             return true
         },
         async jwt({ token, user, trigger }: {

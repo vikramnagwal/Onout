@@ -1,10 +1,12 @@
+'use client';
+import { AuthLayout } from "@/packages/ui/layout/auth-layout";
 import Register from "./page-client";
 
 export default function RegisterPage() {
     
     return (
-        <div>
-            <Register />
-        </div>
-    )
+      <AuthLayout>
+        <Register />
+      </AuthLayout>
+    );
 }

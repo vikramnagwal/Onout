@@ -17,7 +17,7 @@ const emailSignUpSchema = z.object({
 
 export type EmailSignUp = z.infer<typeof emailSignUpSchema>;
 
-export function SignUpEmailForm() {
+export function SignUpEmail() {
     const { setEmail, setPassword, setStep } = useRegisterContext();
 
     const { register, handleSubmit, getValues, formState: { errors } } = useForm<EmailSignUp>();
@@ -28,8 +28,7 @@ export function SignUpEmailForm() {
             setPassword(getValues().password);
             setStep("verify");
         },
-        onError: ({error}) => {
-            
+        onError: ({error}) => {    
             toast.error(
               error.serverError ||
                 // @ts-ignore (fix this)
@@ -42,12 +41,13 @@ export function SignUpEmailForm() {
 
     return (
       <form onSubmit={() => executeAsync(handleSubmit)}>
-        <div className="flex flex-col space-y-4 max-w-md mx-auto">
+        <div className="flex flex-col space-y-4 w-full">
           <Input
             {...register("email")}
             type="email"
             error={errors.email?.message}
-            placeholder="eg: johndoe@email.me"
+            placeholder="Email"
+            autoComplete="email"
           />
           <Input
             {...register("password")}
@@ -55,6 +55,7 @@ export function SignUpEmailForm() {
             placeholder="Password"
             error={errors.password?.message}
           />
+
           <Button type="submit" text={isPending ? "Submitting.." : "Sign Up"} loading={isPending} disabled={isPending} />
         </div>
       </form>
