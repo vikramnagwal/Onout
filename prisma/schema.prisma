@@ -30,7 +30,7 @@ enum Plan {
 
 model Workspace {
   id             String     @id @default(cuid())
-  name           String
+  name           String     @unique
   userId         String
   uniquePageLink String     @unique
   plan           Plan       @default(Basic)
