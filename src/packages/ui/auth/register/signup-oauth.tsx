@@ -1,32 +1,30 @@
 'use client';
 
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation"
+// import { useSearchParams } from "next/navigation"
 import { useState } from "react";
 import { Button } from "@ui/button";
 import { Google } from "@/packages/icons/google";
 
 
-export function SignUpOAuth({methods}: {methods: "google"}) {
-    const params = useSearchParams();
-    const next = params.get("next") ?? "/dashboard";
+export function SignUpOAuth() {
+    // const params = useSearchParams();
+    const next = "http://localhost:3000/onboarding/workspace";
     const [clickedGoogle, setClickedGoogle] = useState<boolean>(false);
     return (
-        <div className="flex flex-col gap-2">
-            {methods === "google" && (
-                <Button
+      <div className="flex flex-col gap-2">
+         <Button
                 text="Sign up with Google"
                 variant="secondary"
                     type="button"
-                    onClick={() => {
+                    onClick={async () => {
                         setClickedGoogle(true);
-                        signIn("google", { callbackUrl: next });
+                        await signIn("google", { callbackUrl: next });
                     }}
                    
                     disabled={clickedGoogle}
                     icon={<Google className="w-4 h-4" />}
-                />
-            )}
-        </div>
-    )
+                /> 
+      </div>
+    );
 }

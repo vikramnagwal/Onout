@@ -5,6 +5,7 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
+    "emailVerified" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
@@ -67,13 +68,16 @@ CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 CREATE UNIQUE INDEX "User_password_key" ON "User"("password");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Workspace_name_key" ON "Workspace"("name");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Workspace_uniquePageLink_key" ON "Workspace"("uniquePageLink");
 
 -- CreateIndex
 CREATE INDEX "Workspace_userId_uniquePageLink_id_totalMessages_idx" ON "Workspace"("userId", "uniquePageLink", "id", "totalMessages");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Workspace_id_userId_uniquePageLink_key" ON "Workspace"("id", "userId", "uniquePageLink");
+CREATE UNIQUE INDEX "Workspace_id_name_userId_uniquePageLink_key" ON "Workspace"("id", "name", "userId", "uniquePageLink");
 
 -- CreateIndex
 CREATE INDEX "Messages_workspaceId_content_views_idx" ON "Messages"("workspaceId", "content", "views");

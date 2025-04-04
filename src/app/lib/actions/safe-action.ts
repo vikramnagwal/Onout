@@ -1,7 +1,7 @@
 import { logger } from "@/packages/utils/functions/logger";
 import { createSafeActionClient } from "next-safe-action";
 
-const actionClient = createSafeActionClient({
+export const actionClient = createSafeActionClient({
     handleServerError: (e) => {
         logger.error("Server action error", e);
 

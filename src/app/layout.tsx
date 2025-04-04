@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { RegisterProvider } from "@/packages/ui/auth/register/context";
 import AuthSession from "./lib/auth/auth-provider";
+import { Poppins } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +21,13 @@ export const metadata: Metadata = {
   description: "Send messages anonymously",
 };
 
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"], // Adjust weights as needed
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.className} ${geistMono.variable} antialiased`}
       >
         <AuthSession>
           <RegisterProvider>

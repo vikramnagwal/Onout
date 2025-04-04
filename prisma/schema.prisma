@@ -11,16 +11,18 @@ datasource db {
 }
 
 model User {
-  id         String      @id @default(cuid())
-  email      String      @unique
-  username   String      @unique
-  password   String      @unique
-  isVerified Boolean     @default(false)
-  emailVerified DateTime? 
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  workspace  Workspace[]
-  Session    Session[]
+  id                String              @id @default(cuid())
+  email             String              @unique
+  username          String              @unique
+  password          String?             @unique
+  isVerified        Boolean             @default(false)
+  emailVerified     DateTime?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  workspace         Workspace[]
+  Session           Session[]
+  OAuth             OAuth[]
+  VerificationToken VerificationToken[]
 }
 
 enum Plan {
@@ -42,7 +44,7 @@ model Workspace {
   user           User       @relation(fields: [userId], references: [id])
   Messages       Messages[]
 
-  @@unique([id, userId, uniquePageLink])
+  @@unique([id, name, userId, uniquePageLink])
   @@index([userId, uniquePageLink, id, totalMessages])
 }
 
@@ -70,8 +72,8 @@ model Session {
   expires       DateTime
   user          User     @relation(fields: [userId], references: [id])
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId, sessiontokens, expires])
 }
@@ -80,6 +82,33 @@ model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@id([identifier, token])
   @@unique([identifier, token, expires])
+  @@index([userId, identifier, token, expires])
+}
+
+model OAuth {
+  id                String  @id @default(cuid())
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires           Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
 }
