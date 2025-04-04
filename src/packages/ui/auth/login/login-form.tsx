@@ -6,6 +6,8 @@ import { Input } from "@ui/input";
 import { useForm } from "react-hook-form"
 import { Button } from "@ui/button";
 import { EmailSignUp } from "../register/signup-email";
+import { SignUpOAuth } from "../register/signup-oauth";
+import { getSession } from "next-auth/react";
 
 
 export interface LoginFormProps {
@@ -19,9 +21,17 @@ export const LoginFormContext = createContext<LoginFormProps | undefined>(
 
 
 export function LoginForm() {
+
     const [authMethod, setAuthMethod] = useState<"credentials" | "google">("credentials")
     const value = { authMethod, setAuthMethod }
     const [isPending, setIsPending] = useState<boolean>(false)
+
+    async function getSessionData() {
+        const session = await getSession()
+        console.log("Session data:", session)
+    }
+
+    getSessionData()
 
     const { handleSubmit, register, formState: { errors } } = useForm<EmailSignUp>();
 
@@ -33,32 +43,36 @@ export function LoginForm() {
 
     return (
       <LoginFormContext.Provider value={value}>
-        <div className="w-full p-2">
-          <AnimatedContainer className="flex flex-col items-center gap-3 my-2 bg-neutral-100 p-2 rounded-md">
-            <div className="flex flex-col gap-2 w-full">
-              <h1 className="text-2xl font-bold text-center">Welcome back</h1>
-              <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-               <div className="flex flex-col space-y-4 w-full">
-                         <Input
-                           {...register("email")}
-                           type="email"
-                           placeholder="Email"
-                           autoComplete="email"
-                           error={errors.email?.message}  
-                         />
-                         <Input
-                           {...register("password")}
-                           type="password"
-                           placeholder="Password"
-                           error={errors.password?.message}
-                         />
-               
-                         <Button type="submit" text={isPending ? "Submitting.." : "Sign Up"} loading={isPending} disabled={isPending} />
-                       </div>
-              </form>
-            </div>
-          </AnimatedContainer>
-        </div>
+        <AnimatedContainer>
+          <div className="flex flex-col gap-2 max-w-md mx-auto p-2">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex flex-col space-y-4">
+                <Input
+                  {...register("email")}
+                  type="email"
+                  placeholder="Email"
+                  autoComplete="email"
+                  error={errors.email?.message}
+                />
+                <Input
+                  {...register("password")}
+                  type="password"
+                  placeholder="Password"
+                  error={errors.password?.message}
+                />
+
+                <Button
+                  type="submit"
+                  text={isPending ? "logging in.." : "login"}
+                  loading={isPending}
+                  disabled={isPending}
+                />
+              </div>
+            </form>
+            <span className="text-center">or</span>
+            <SignUpOAuth />
+          </div>
+        </AnimatedContainer>
       </LoginFormContext.Provider>
     );
 }

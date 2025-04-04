@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
         }),
         CredentialsProvider({
             id: "credentials",
-            name: "anom/ymous",
+            name: "Anom",
             type: "credentials",
             credentials: {
                 email: ({ type: "email"}),
@@ -111,32 +111,52 @@ export const authOptions: NextAuthOptions = {
     },
     callbacks: {
         async signIn({ user, account, profile }) {
-            console.log({ user, account, profile });
-
+            console.table([user, account, profile])
             if (!user || !user.email) {
                 return false
             }
 
-            if(account?.provider === "google" || account?.provider === "github") {
-               const existedUser = await prisma.user.findUnique({
-                where: { email: user.email },
-               })
-// if user exists and is not verified
-               if (existedUser && !existedUser.isVerified) {
-                try {
-                    await prisma.user.update({
-                    where: { id: existedUser.id },
-                    data: {
-                        emailVerified: new Date(),
+            if(account?.provider === "google") {
+                const userExists = await prisma.user.findUnique({
+                    where: { email: user.email },
+                    select: {
+                        id: true,
+                        email: true,
+                        username: true,
                         isVerified: true,
                     }
                 })
-                 return true
-                } catch (error) {
-                   throw new Error("Error updating user") 
-                }
-               } 
 
+                if (userExists || profile) {
+                    return true
+                }
+
+                const [_, createdUser] = await prisma.$transaction([
+                    prisma.user.create({
+                        data: {
+                            email: user.email,
+                            username: user.email.split("@")[0],
+                            isVerified: true,
+                        }
+                    }),
+                    prisma.verificationToken.deleteMany({
+                        where: { user: {
+                            email: user.email
+                        } }
+                    }),
+                    
+                    prisma.oAuth.create({
+                        data: {
+                            provider: account.provider,
+                            providerAccountId: account.providerAccountId,
+                            user: {
+                                connect: { email: user.email }
+                            },
+                            access_token: account.access_token,
+                            refresh_token: account.refresh_token,
+                        }
+                    })
+                ])
                return true;
             }
 
