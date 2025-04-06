@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { Button } from "@ui/button";
 import { EmailSignUp } from "../register/signup-email";
 import { SignUpOAuth } from "../register/signup-oauth";
-import { getSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 
 export interface LoginFormProps {
@@ -26,19 +26,14 @@ export function LoginForm() {
     const value = { authMethod, setAuthMethod }
     const [isPending, setIsPending] = useState<boolean>(false)
 
-    async function getSessionData() {
-        const session = await getSession()
-        console.log("Session data:", session)
-    }
-
-    getSessionData()
-
     const { handleSubmit, register, formState: { errors } } = useForm<EmailSignUp>();
 
-    function onSubmit(data: EmailSignUp) {
-        setIsPending(true)
-        console.log(data)
-        setIsPending(false)
+    async function onSubmit(data: EmailSignUp) {
+        signIn("credentials", {
+          email: data.email,
+          password: data.password,
+          callbackUrl: "/"
+        })
     } 
 
     return (

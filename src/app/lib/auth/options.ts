@@ -4,11 +4,10 @@ import { PrismaClient } from "@prisma/client";
 import { decryptPassword, hashPassword } from "./password";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import GithubProvider from "next-auth/providers/github";
-import { prisma } from "../db";
 import { JWT } from "next-auth/jwt";
 import { AdapterUser } from "next-auth/adapters";
 import { UserProps } from "../types";
+import { prisma } from "../db";
 
 
 const CustomPrismaAdapter = (p: PrismaClient) => {
@@ -31,7 +30,6 @@ const CustomPrismaAdapter = (p: PrismaClient) => {
 }
 
 export const authOptions: NextAuthOptions = {
-    debug: true,
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -46,7 +44,7 @@ export const authOptions: NextAuthOptions = {
                 email: ({ type: "email"}),
                 password: ({ type: "password"}),
             },
-            authorize: async (credentials, req) => {
+            authorize: async (credentials) => {
                 if (!credentials) {
                     throw new Error("no credentials")
                 }
@@ -69,12 +67,8 @@ export const authOptions: NextAuthOptions = {
                 if (!user || !user.password) {
                     throw new Error("User not exists")
                 }
-                // check on this
-                if (!user.isVerified) {
-                    throw new Error("User not verified")
-                }
-                const isValid = await decryptPassword({ password, passwordHash: user.password });
 
+                const isValid = await decryptPassword({ password, passwordHash: user.password });
                 if (!isValid) {
                     throw new Error("Invalid Credentials")
                 }
@@ -88,7 +82,7 @@ export const authOptions: NextAuthOptions = {
             }
         })
     ],
-    adapter: CustomPrismaAdapter(prisma),
+    // adapter: CustomPrismaAdapter(p),
     session: { strategy: "jwt"},
     secret: process.env.NEXTAUTH_SECRET,
     jwt: { maxAge: 30 * 24 * 60 * 60 }, // 30 days
@@ -111,12 +105,12 @@ export const authOptions: NextAuthOptions = {
     },
     callbacks: {
         async signIn({ user, account, profile }) {
-            console.table([user, account, profile])
             if (!user || !user.email) {
                 return false
             }
 
             if(account?.provider === "google") {
+
                 const userExists = await prisma.user.findUnique({
                     where: { email: user.email },
                     select: {
@@ -127,36 +121,38 @@ export const authOptions: NextAuthOptions = {
                     }
                 })
 
-                if (userExists || profile) {
-                    return true
+                const createdUser = await prisma.user.create({
+  data: {
+    email: user.email,
+    username: user.email.split("@")[0],
+    isVerified: true,
+  },
+});
+
+await prisma.verificationToken.deleteMany({
+  where: { user: { email: user.email } },
+});
+
+await prisma.oAuth.create({
+  data: {
+    provider: account.provider,
+    providerAccountId: account.providerAccountId,
+    user: {
+      connect: { email: user.email },
+    },
+    expires: account.expires_at,
+    scope: account.scope,
+    token_type: account.token_type,
+    id_token: account.id_token,
+    session_state: account.session_state,
+    access_token: account.access_token,
+    refresh_token: account.refresh_token,
+  },
+});
+                if(!createdUser) {
+                    throw new Error("Failed to create user")
                 }
 
-                const [_, createdUser] = await prisma.$transaction([
-                    prisma.user.create({
-                        data: {
-                            email: user.email,
-                            username: user.email.split("@")[0],
-                            isVerified: true,
-                        }
-                    }),
-                    prisma.verificationToken.deleteMany({
-                        where: { user: {
-                            email: user.email
-                        } }
-                    }),
-                    
-                    prisma.oAuth.create({
-                        data: {
-                            provider: account.provider,
-                            providerAccountId: account.providerAccountId,
-                            user: {
-                                connect: { email: user.email }
-                            },
-                            access_token: account.access_token,
-                            refresh_token: account.refresh_token,
-                        }
-                    })
-                ])
                return true;
             }
 
@@ -170,14 +166,6 @@ export const authOptions: NextAuthOptions = {
                     isVerified: true,
                 }
             })
-
-            if (!userExists?.isVerified) {
-                throw new Error("User not verified")
-            }
-
-            if (userExists || profile) {
-                return false
-            }
 
             return true
         },
