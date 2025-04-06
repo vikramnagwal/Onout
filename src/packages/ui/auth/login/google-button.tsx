@@ -12,7 +12,7 @@ export function GoogleButton({next}:{next?: string}) {
         text="Sign in with Google"
         type="button"
         onClick={() => {
-          signIn("google", { callbackUrl: next });
+          signIn("google", { callbackUrl: '/onboarding/workspace' });
         }}
         className="hover:bg-neutral-950"
         icon={<Google className="w-4 h-4" />}

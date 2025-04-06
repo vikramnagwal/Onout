@@ -1,11 +1,15 @@
-import { SignUpForm } from "@/packages/ui/auth/register/signup-form";
-import { NewBackground } from "@/packages/ui/shared/new-background";
+'use client'
 
-export default async function Home() {
+import { SignOutButton } from "@/packages/ui/auth/sign-out";
+
+export default function Home() {
   return (
-      <div>
+    <div>
+      <div className="flex flex-col items-center justify-center h-screen z-30">
         <h1>home</h1>
-        <NewBackground />
+        <SignOutButton />
       </div>
+      <p>Welcome to the home page!</p>
+    </div>
   );
 }
