@@ -1,64 +1,66 @@
 {
-  "name": "anom",
-  "version": "0.1.0",
-  "private": true,
-  "size-limit": [
-    {
-      "limit": "200 KB",
-      "path": "dist/app*.js"
-    }
-  ],
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "seed": "bun ./prisma/seed.ts",
-    "size": "bun run build && size-limit",
-    "test": "vitest --run"
-  },
-  "dependencies": {
-    "@auth/prisma-adapter": "^2.8.0",
-    "@prisma/client": "6.5.0",
-    "@prisma/extension-optimize": "^1.1.8",
-    "@prisma/instrumentation": "^6",
-    "@radix-ui/react-tooltip": "^1.1.8",
-    "@uidotdev/usehooks": "^2.4.1",
-    "bcryptjs": "^3.0.2",
-    "chalk": "^5.4.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.6.2",
-    "input-otp": "^1.4.2",
-    "lucide-react": "^0.483.0",
-    "motion": "^12.5.0",
-    "next": "^15.2.4",
-    "next-auth": "^4.24.11",
-    "next-safe-action": "^7.10.4",
-    "nodemailer": "^6.10.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-hook-form": "^7.54.2",
-    "sonner": "^2.0.1",
-    "swr": "^2.3.3",
-    "tailwind-merge": "^3.0.2",
-    "use-debounce": "^10.0.4",
-    "uuid": "^11.1.0",
-    "vaul": "^1.1.2",
-    "zod": "^3.24.2"
-  },
-  "devDependencies": {
-    "@size-limit/file": "^11.2.0",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/nodemailer": "^6.4.17",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "husky": "^9.1.7",
-    "prisma": "^6.5.0",
-    "size-limit": "^11.2.0",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "vitest": "^3.1.1"
-  }
+	"name": "anom",
+	"version": "0.1.0",
+	"private": true,
+	"size-limit": [
+		{
+			"limit": "200 KB",
+			"path": "dist/app*.js"
+		}
+	],
+	"scripts": {
+		"dev": "next dev --turbopack",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"seed": "bun ./prisma/seed.ts",
+		"size": "bun run build && size-limit",
+		"test": "vitest --run",
+		"format": "biome format --write"
+	},
+	"dependencies": {
+		"@auth/prisma-adapter": "^2.8.0",
+		"@prisma/client": "6.5.0",
+		"@prisma/extension-optimize": "^1.1.8",
+		"@prisma/instrumentation": "^6",
+		"@radix-ui/react-tooltip": "^1.1.8",
+		"@uidotdev/usehooks": "^2.4.1",
+		"bcryptjs": "^3.0.2",
+		"chalk": "^5.4.1",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"framer-motion": "^12.6.2",
+		"input-otp": "^1.4.2",
+		"lucide-react": "^0.483.0",
+		"motion": "^12.5.0",
+		"next": "^15.2.4",
+		"next-auth": "^4.24.11",
+		"next-safe-action": "^7.10.4",
+		"nodemailer": "^6.10.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-hook-form": "^7.54.2",
+		"sonner": "^2.0.1",
+		"swr": "^2.3.3",
+		"tailwind-merge": "^3.0.2",
+		"use-debounce": "^10.0.4",
+		"uuid": "^11.1.0",
+		"vaul": "^1.1.2",
+		"zod": "^3.24.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@size-limit/file": "^11.2.0",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/nodemailer": "^6.4.17",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"husky": "^9.1.7",
+		"prisma": "^6.5.0",
+		"size-limit": "^11.2.0",
+		"tailwindcss": "^4",
+		"typescript": "^5",
+		"vitest": "^3.1.1"
+	}
 }

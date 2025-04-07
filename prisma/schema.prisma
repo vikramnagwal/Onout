@@ -13,7 +13,7 @@ datasource db {
 model User {
   id                String              @id @default(cuid())
   email             String              @unique
-  username          String              @unique
+  username          String?
   password          String?             @unique
   isVerified        Boolean             @default(false)
   emailVerified     DateTime?
@@ -112,3 +112,4 @@ model OAuth {
 
   @@unique([provider, providerAccountId])
 }
+
