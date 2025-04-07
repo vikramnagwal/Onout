@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { throwIfAuthenticated } from "./auth/throw-if-authenticated";
 import { actionClient } from "./safe-action";
@@ -7,28 +7,27 @@ import { hashPassword } from "../auth/password";
 import { z } from "zod";
 
 const EmailSignUpSchema = z.object({
-    username: z.string().min(3).max(20),
-    email: z.string().email(),
-    password: z.string().min(6),
-})
+	email: z.string().email(),
+	password: z.string().min(6),
+});
 
 export const createNewUser = actionClient
-    .use(throwIfAuthenticated)
-    .schema(EmailSignUpSchema)
-    .action( async ({ parsedInput }) => {
-            const { username, email, password } = parsedInput;
-            const newUser = await prisma.user.create({
-                data: {
-                    email,
-                    username,
-                    password: await hashPassword(password),
-                    isVerified: false,
-                }
-            })
+	.use(throwIfAuthenticated)
+	.schema(EmailSignUpSchema)
+	.action(async ({ parsedInput }) => {
+		const { email, password } = parsedInput;
 
-            if (!newUser) {
-                throw new Error("Failed to create user")
-            }
+		const newUser = await prisma.user.create({
+			data: {
+				email,
+				password: await hashPassword(password),
+				isVerified: false,
+			},
+		});
 
-            return newUser;
-    })
+		if (!newUser) {
+			throw new Error("Failed to create user");
+		}
+
+		return newUser;
+	});

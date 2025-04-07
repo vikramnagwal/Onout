@@ -1,38 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #ffffff;
+	--foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --forground: #0a0a0a;
-    --background: #f8f3f3;
-  }
+	:root {
+		--forground: #0a0a0a;
+		--background: #f8f3f3;
+	}
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 .input-otp {
-  background: var(--background);
-  color: var(--foreground);
-  margin: 3px;
-  padding: 3px;
+	background: var(--background);
+	color: var(--foreground);
+	margin: 3px;
+	padding: 3px;
 }
 
 .btn {
-  background: var(--foreground);
-  color: var(--background);
+	background: var(--foreground);
+	color: var(--background);
 }
