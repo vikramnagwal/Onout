@@ -1,37 +1,57 @@
 import { NextAuthOptions, User } from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
-import { decryptPassword, hashPassword } from "./password";
-import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { decryptPassword } from "./password";
 import { JWT } from "next-auth/jwt";
 import { AdapterUser } from "next-auth/adapters";
 import { UserProps } from "../types";
 import { prisma } from "../db";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import { authorizeSchema } from "../zod/schema/auth-schema";
+import { PrismaClient } from "@prisma/client";
+
+
+const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
+
+const CustomPrismaAdapter = (p: PrismaClient) => {
+  return {
+    ...PrismaAdapter(p),
+    createUser: async (data: any) => {
+      return await p.user.create({
+        data: {
+          email: data.email,
+          emailVerified: data.emailVerified,
+          image: data.image,
+          username: data.name || undefined,
+        }
+      })
+    }
+  }
+}
 
 export const authOptions: NextAuthOptions = {
 	providers: [
 		GoogleProvider({
-			clientId: process.env.GOOGLE_CLIENT_ID as string,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+			clientId: process.env.AUTH_GOOGLE_ID as string,
+			clientSecret: process.env.AUTH_GOOGLE_SECRET as string,
 		}),
 		CredentialsProvider({
 			id: "credentials",
-			name: "Anom",
+			name: "AnomCredentials",
 			type: "credentials",
 			credentials: {
 				email: { type: "email" },
 				password: { type: "password" },
 			},
-			authorize: async (credentials, req) => {
+			authorize: async (credentials, request) => {
+        console.log("authorize", credentials, request); // Remove this line
+
 				if (!credentials) {
 					throw new Error("no credentials");
 				}
 
-				const { email, password } = credentials;
-				if (!email || !password) {
-					throw new Error("Missing credentials");
-				}
+				const { email, password } = await authorizeSchema.parseAsync(credentials);
+
 				const user = await prisma.user.findUnique({
 					where: { email },
 					select: {
@@ -44,16 +64,17 @@ export const authOptions: NextAuthOptions = {
 				});
 
 				if (!user || !user.password) {
-					throw new Error("User not exists");
+					throw new Error("Unauthorized");
 				}
 
-				const isValid = await decryptPassword({
+				const isValidPassword = await decryptPassword({
 					password,
 					passwordHash: user.password,
 				});
-				if (!isValid) {
+				if (!isValidPassword) {
 					throw new Error("Invalid Credentials");
 				}
+
 				return {
 					id: user.id,
 					email: user.email,
@@ -63,18 +84,21 @@ export const authOptions: NextAuthOptions = {
 			},
 		}),
 	],
+  adapter: CustomPrismaAdapter(prisma),
 	session: { strategy: "jwt" },
 	secret: process.env.NEXTAUTH_SECRET,
 	jwt: { maxAge: 30 * 24 * 60 * 60 }, // 30 days
 	theme: { colorScheme: "auto" },
 	cookies: {
 		sessionToken: {
-			name: `${process.env.NODE_ENV === "production" ? "__Secure-" : ""}.next-auth.session-tokens`,
+			 name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
 			options: {
 				httpOnly: true,
 				sameSite: "lax",
 				path: "/",
-				domain: process.env.NEXTAUTH_URL ?? undefined,
+			domain: VERCEL_DEPLOYMENT
+          ? `.${process.env.NEXT_PUBLIC_DOMAIN}`
+          : undefined,
 				secure: process.env.NODE_ENV === "production",
 			},
 		},
@@ -92,6 +116,7 @@ export const authOptions: NextAuthOptions = {
 			}
 
 			if (account?.provider === "google") {
+
 				const userExists = await prisma.user.findUnique({
 					where: { email: user.email },
 					select: {
@@ -101,44 +126,25 @@ export const authOptions: NextAuthOptions = {
 						isVerified: true,
 					},
 				});
-				if (userExists) {
-					return true;
-				}
 
-				const createdUser = await prisma.user.create({
-					data: {
-						email: user.email,
-						username: user.email.split("@")[0],
-						isVerified: true,
-					},
-				});
+        if (!userExists || !profile) {
+          return true
+        }
+      
+         try {
+          await prisma.user.update({
+            where: {id: userExists.id},
+            data: {
+              username: user.username || userExists.username,
+              isVerified: true,
+            }
+          })
+         } catch (error) {
+          throw new Error("Error updating user")
+         }     
 
-				await prisma.verificationToken.deleteMany({
-					where: { user: { email: user.email } },
-				});
-
-				await prisma.oAuth.create({
-					data: {
-						provider: account.provider,
-						providerAccountId: account.providerAccountId,
-						user: {
-							connect: { email: user.email },
-						},
-						expires: account.expires_at,
-						scope: account.scope,
-						token_type: account.token_type,
-						id_token: account.id_token,
-						session_state: account.session_state,
-						access_token: account.access_token,
-						refresh_token: account.refresh_token,
-					},
-				});
-				if (!createdUser) {
-					throw new Error("Failed to create user");
-				}
-
-				return true;
-			}
+    return true;
+  }
 			const userExists = await prisma.user.findUnique({
 				where: { email: user.email },
 				select: {
@@ -149,7 +155,7 @@ export const authOptions: NextAuthOptions = {
 				},
 			});
 			if (!userExists) {
-				throw new Error("User not exists");
+				throw new Error("Invalid Credentials");
 			}
 			return true;
 		},
@@ -162,7 +168,6 @@ export const authOptions: NextAuthOptions = {
 			user: User | AdapterUser | UserProps;
 			trigger?: "signIn" | "update" | "signUp";
 		}) {
-			console.log("jwt", token, user, trigger);
 			if (user) {
 				token.user = {
 					id: user.id ?? token.sub ?? "",

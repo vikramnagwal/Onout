@@ -11,7 +11,7 @@ export default function Home() {
 			<div className="flex flex-col items-center justify-center h-screen z-30">
 				<h1>home</h1>
 				<h2 className="text-3xl font-bold">
-					Welcome abroad {session?.user?.name}
+					Welcome abroad {session?.user.email}
 				</h2>
 				<SignOutButton />
 			</div>

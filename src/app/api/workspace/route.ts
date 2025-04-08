@@ -2,7 +2,7 @@ import { AnomError } from "@/app/lib/error";
 import { prisma } from "@/app/lib/db";
 import { checkUserExists } from "@/app/lib/postgres/check-uses-exists";
 import { getSession } from "@/app/lib/session";
-import { createWorkspaceSchema } from "@/app/lib/zod/schema/workspace";
+import { createWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { NextRequest, NextResponse } from "next/server";
 
 // GET: /api/workspace fetch all the associated workspaces with user
