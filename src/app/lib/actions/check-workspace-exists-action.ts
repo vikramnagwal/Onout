@@ -1,3 +1,5 @@
+"use server";
+
 import { actionClient } from "./safe-action";
 import { z } from "zod";
 

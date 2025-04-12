@@ -1,6 +1,7 @@
 import { cva, VariantProps } from "class-variance-authority";
 import { ReactNode } from "react";
 import { cn } from "../utils/functions/cn";
+import { LoadingSpinner } from "./loaders/loading-spinner";
 
 const buttonVariants = cva(
 	"transitions-all duration-200 ease-in-out rounded-md text-sm p-2 cursor-pointer flex items-center justify-center",
@@ -67,7 +68,7 @@ export function Button({
 			disabled={loading}
 			{...rest}
 		>
-			{icon && <span className="mr-3">{icon}</span>}
+			{loading ? <LoadingSpinner /> : (icon && <span className="mr-3">{icon}</span>)}
 			{text && <span className={textWrapperClassName}>{text}</span>}
 		</button>
 	);

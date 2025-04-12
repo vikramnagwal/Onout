@@ -4,8 +4,7 @@ import { SignOutButton } from "@/packages/ui/auth/sign-out";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
-	const { data: session, status } = useSession();
-	console.log(session);
+	const { data: session } = useSession();
 	return (
 		<div>
 			<div className="flex flex-col items-center justify-center h-screen z-30">
