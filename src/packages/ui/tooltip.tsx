@@ -52,6 +52,8 @@ export function Tooltip({
 				<TooltipTrigger
 					asChild
 					onClick={() => setOpen(true)}
+					onMouseEnter={() => setOpen(true)}
+					onMouseLeave={() => setOpen(false)}
 					onBlur={() => setOpen(false)}
 					className="flex px-2 py-1 cursor-pointer mx-auto"
 				>
@@ -86,22 +88,23 @@ export function Tooltip({
 }
 
 export function ButtonTooltip({
-	children,
+	text,
+	content,
 	tooltipProps,
 	...props
 }: {
-	children: ReactNode;
-	tooltipProps: TooltipProps;
+	text: string;
+	content: string;
+	tooltipProps?: Omit<TooltipProps, "content">;
 } & ButtonProps) {
 	return (
-		<Tooltip {...tooltipProps}>
+		<Tooltip content={content} {...tooltipProps}>
 			<Button
+			    text={text}
 				type="button"
 				{...props}
 				className={cn("flex px-2 py-1 rounded-md duration-75", props.className)}
-			>
-				{children}
-			</Button>
+			/>
 		</Tooltip>
 	);
 }

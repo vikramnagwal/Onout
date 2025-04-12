@@ -44,8 +44,6 @@ export const authOptions: NextAuthOptions = {
 				password: { type: "password" },
 			},
 			authorize: async (credentials, request) => {
-        console.log("authorize", credentials, request); // Remove this line
-
 				if (!credentials) {
 					throw new Error("no credentials");
 				}
@@ -109,7 +107,6 @@ export const authOptions: NextAuthOptions = {
 	},
 	callbacks: {
 		async signIn({ user, account, profile }) {
-			console.log("signIn", user, account, profile);
 
 			if (!user || !user.email) {
 				return false;

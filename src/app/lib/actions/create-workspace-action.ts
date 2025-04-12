@@ -1,28 +1,34 @@
-"use server";
+"use server"
 
-import { WorkspaceFormSchema } from "@/packages/ui/workspace/create-workspace-form";
 import { actionClient } from "./safe-action";
-import { prisma } from "../db";
-import { getSession } from "../session";
-import { checkWorkspaceExists } from "./check-workspace-exists-action";
+import { CreateWorkspaceSchema } from "../zod/schema/workspace-schema";
 
 export const createWorkspace = actionClient
-	.schema(WorkspaceFormSchema)
+	.schema(CreateWorkspaceSchema)
 	.action(async ({ parsedInput }) => {
 		const { name: workspaceName } = parsedInput;
-		const session = await getSession();
-		// Check if the workspace already exists
-		const workspaceId = await checkWorkspaceExists(workspaceName);
-		if (workspaceId) {
-			return {
-				exists: true,
-				message: `Workspace ${workspaceName} already exists.`,
-			};
-		}
+		const workspaceId = workspaceName.replace(/\s+/g, "-").toLowerCase();
+		console.log("Creating workspace with ID:", workspaceId); // Remove this line in production
+
 		// Create the workspace
-		const workspace = await prisma.workspace.create({
-			data: {
-				name: workspaceName.toLowerCase().replace(/\s+/g, "-"),
+		const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/workspace`, {
+			method: "POST",
+			body: JSON.stringify({ workspaceId }),
+			headers: {
+				"Content-Type": "application/json",
 			},
-		});
+		})
+
+		if (!response.ok) {
+			console.error("Error creating workspace:", response.statusText); // Remove this line in production
+			return null;
+		}
+		const workspace = await response.json();
+		console.log("Workspace created:", workspace); // Remove this line in production
+
+		if (!workspace) {
+			return {
+				message: "Error creating workspace",
+			}
+		}
 	});

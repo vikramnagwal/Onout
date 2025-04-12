@@ -10,106 +10,129 @@ import { useAction } from "next-safe-action/hooks";
 import { checkWorkspaceExists } from "@/app/lib/actions/check-workspace-exists-action";
 import { cn } from "@/packages/utils/functions/cn";
 import { toast } from "sonner";
+import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
+import { createWorkspace } from "@/app/lib/actions/create-workspace-action";
+import { useRouter } from "next/navigation";
+import { AlertIcon } from "@/packages/icons/alert";
 
-export const WorkspaceFormSchema = z.object({
-	name: z
-		.string()
-		.min(3, { message: "Workspace name must be greater than 3 characters." })
-		.max(199, { message: "Wow hold on, that's a long name!" }),
-});
+type CreateWorkspaceFormProps = z.infer<typeof CreateWorkspaceSchema>;
 
-type CreateWorkspaceFormProps = z.infer<typeof WorkspaceFormSchema>;
+const DEBOUNCE_DELAY = 800;
+const MIN_WORKSPACE_NAME_LENGTH = 2;
 
 export function CreateWorkspaceForm() {
-	const [isAvailable, setIsAvailable] = useState<boolean>(false);
+	const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
+	const [isCreating, setIsCreating] = useState<boolean>(false);
+	const router = useRouter();
+
 	const {
 		register,
 		handleSubmit,
 		watch,
 		formState: { errors },
 		getValues,
+		setError,
+		clearErrors
 	} = useForm<CreateWorkspaceFormProps>({
 		defaultValues: {
 			name: "",
 		},
 	});
 
-	const slug = watch("name");
-	const isValidWorkspaceName = WorkspaceFormSchema.safeParse({
-		name: slug,
-	}).success;
-	const debouncedWorkspaceName = useDebounce(slug, 800);
 
-	const { executeAsync, isPending } = useAction(checkWorkspaceExists, {
-		onSuccess: (data) => {
-			const { data: isUnAvailable } = data;
-			if (isUnAvailable) {
-				toast.error(
-					`Workspace name "${debouncedWorkspaceName}" is already taken`,
-				);
+	const slug = watch("name");
+	const debouncedWorkspaceName = useDebounce(slug, DEBOUNCE_DELAY);
+
+	const { executeAsync: executeNameCheck, status: checkStatus } = useAction(checkWorkspaceExists, {
+		onSuccess: (result) => {
+			const isTaken = result.data;
+			if (isTaken) {
+				setIsAvailable(false);
+				setError("name", {
+					type: "manual",
+					message: "Workspace name already taken",
+				});
 			}
-			setIsAvailable(!isUnAvailable);
+			else {
+				setIsAvailable(true);
+			}
 		},
-		onError: (error) => {
-			console.error("Error checking workspace existence:", error);
+		onError: (_) => {
 			toast.error("Error checking workspace existence");
+			setIsAvailable(null)
 		},
 	});
 
 	async function fetchWorkspaceExistance() {
-		if (isValidWorkspaceName && debouncedWorkspaceName.length > 3) {
-			await executeAsync({ name: debouncedWorkspaceName });
+		const isValidWorkspaceName = await CreateWorkspaceSchema.safeParseAsync({
+			name: debouncedWorkspaceName
+		})
+		
+		if (isValidWorkspaceName.success && debouncedWorkspaceName.length > MIN_WORKSPACE_NAME_LENGTH) {
+			setIsAvailable(null);
+			clearErrors("name");
+			await executeNameCheck({ name: debouncedWorkspaceName });
 		}
 		return;
 	}
 
-	async function onSubmit() {
-		if (!isAvailable) return;
-
-		const response = await fetch("/api/workspace", {
-			method: "POST",
-			body: JSON.stringify({ name: debouncedWorkspaceName }),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-		const data = await response.json();
-		console.log("Workspace creation response:", data);
+	async function onSubmit(data: CreateWorkspaceFormProps) {
+		setIsCreating(true);
+		if (isAvailable) {
+			const { name } = data;
+			const response = await fetch("/api/workspace", {
+				method: "POST",
+				body: JSON.stringify({ name }),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+			if (response.ok) {
+				const { workspace } = await response.json();
+				toast.success("Workspace created successfully");
+				router.push(`/${workspace?.name}`);
+			} else {
+				toast.error("Error creating workspace");
+				setIsCreating(false);
+			}
+		}
 	}
 
 	useEffect(() => {
 		fetchWorkspaceExistance();
-	}, [debouncedWorkspaceName]);
+	}, [debouncedWorkspaceName, executeNameCheck]);
+
+	const isChecking = checkStatus === "executing";
 
 	return (
-		<>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<Input
-					{...register("name", { required: true })}
-					placeholder="Workspace Name"
-					type="text"
-					error={errors.name?.message}
-					className={cn(
-						"mb-4",
-						isAvailable && "border-green-500 focus-visible:ring-green-300",
-						errors.name && "border-red-500 focus-visible:ring-red-300",
-					)}
-					autoComplete="off"
-					onBlur={async () => {
-						await executeAsync({ name: getValues("name") });
-					}}
-					required
-				/>
-				{errors.name?.message}
-				<Button
-					text={"Create Workspace"}
-					type="submit"
-					variant="primary"
-					className="w-full"
-					disabled={!!errors.name || isPending}
-					loading={isPending}
-				/>
-			</form>
-		</>
-	);
+    <>
+	  <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col my-2">
+          <Input
+            {...register("name", { required: true })}
+            placeholder="Workspace Name"
+            type="text"
+            error={errors.name?.message}
+            className={cn(
+              "mb-2",
+              isAvailable && "border-green-500 focus-visible:ring-green-300",
+              errors.name && "border-red-500 focus-visible:ring-red-300"
+            )}
+            autoComplete="off"
+            required
+          />
+		  <span className="text-sm text-red-500/80 min-h-[28px] flex items-end justify-center mb-2">{errors.name?.message && <><AlertIcon /> {errors.name.message}</>}</span>
+        </div>
+
+          <Button
+            text={isCreating ? "Creating..." : "Create Workspace"}
+            type="submit"
+            variant="primary"
+            className="w-full"
+            disabled={!!errors.name || isChecking || isCreating}
+            loading={isCreating}
+          />
+      </form>
+    </>
+  );
 }
