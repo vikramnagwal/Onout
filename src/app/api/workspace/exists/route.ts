@@ -2,8 +2,10 @@ import { prisma } from "@/app/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
+	console.log("request", request);
 	const { searchParams } = new URL(request.url);
 	const query = searchParams.get("query") || "";
+	console.log("query", query);
 
 	if (!query) {
 		return NextResponse.json(
@@ -27,9 +29,6 @@ export async function GET(request: NextRequest) {
 		}
 		return NextResponse.json(1);
 	} catch (_) {
-		return NextResponse.json(
-			{ message: "Error checking workspace existence" },
-			{ status: 500 },
-		);
+		return NextResponse.json({message: "Error hj checking workspace existence"}, { status: 500 });
 	}
 }

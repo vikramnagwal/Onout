@@ -49,10 +49,10 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  */
 export type OAuth = $Result.DefaultSelection<Prisma.$OAuthPayload>
 /**
- * Model Page
+ * Model Inbox
  * 
  */
-export type Page = $Result.DefaultSelection<Prisma.$PagePayload>
+export type Inbox = $Result.DefaultSelection<Prisma.$InboxPayload>
 
 /**
  * Enums
@@ -267,14 +267,14 @@ export class PrismaClient<
   get oAuth(): Prisma.OAuthDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.page`: Exposes CRUD operations for the **Page** model.
+   * `prisma.inbox`: Exposes CRUD operations for the **Inbox** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Pages
-    * const pages = await prisma.page.findMany()
+    * // Fetch zero or more Inboxes
+    * const inboxes = await prisma.inbox.findMany()
     * ```
     */
-  get page(): Prisma.PageDelegate<ExtArgs, ClientOptions>;
+  get inbox(): Prisma.InboxDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -722,7 +722,7 @@ export namespace Prisma {
     Session: 'Session',
     VerificationToken: 'VerificationToken',
     OAuth: 'OAuth',
-    Page: 'Page'
+    Inbox: 'Inbox'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -741,7 +741,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "workspace" | "messages" | "session" | "verificationToken" | "oAuth" | "page"
+      modelProps: "user" | "account" | "workspace" | "messages" | "session" | "verificationToken" | "oAuth" | "inbox"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1263,77 +1263,77 @@ export namespace Prisma {
           }
         }
       }
-      Page: {
-        payload: Prisma.$PagePayload<ExtArgs>
-        fields: Prisma.PageFieldRefs
+      Inbox: {
+        payload: Prisma.$InboxPayload<ExtArgs>
+        fields: Prisma.InboxFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.PageFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload> | null
+            args: Prisma.InboxFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.PageFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>
+            args: Prisma.InboxFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>
           }
           findFirst: {
-            args: Prisma.PageFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload> | null
+            args: Prisma.InboxFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.PageFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>
+            args: Prisma.InboxFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>
           }
           findMany: {
-            args: Prisma.PageFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>[]
+            args: Prisma.InboxFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>[]
           }
           create: {
-            args: Prisma.PageCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>
+            args: Prisma.InboxCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>
           }
           createMany: {
-            args: Prisma.PageCreateManyArgs<ExtArgs>
+            args: Prisma.InboxCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.PageCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>[]
+            args: Prisma.InboxCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>[]
           }
           delete: {
-            args: Prisma.PageDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>
+            args: Prisma.InboxDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>
           }
           update: {
-            args: Prisma.PageUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>
+            args: Prisma.InboxUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>
           }
           deleteMany: {
-            args: Prisma.PageDeleteManyArgs<ExtArgs>
+            args: Prisma.InboxDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.PageUpdateManyArgs<ExtArgs>
+            args: Prisma.InboxUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.PageUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>[]
+            args: Prisma.InboxUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>[]
           }
           upsert: {
-            args: Prisma.PageUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$PagePayload>
+            args: Prisma.InboxUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InboxPayload>
           }
           aggregate: {
-            args: Prisma.PageAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregatePage>
+            args: Prisma.InboxAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInbox>
           }
           groupBy: {
-            args: Prisma.PageGroupByArgs<ExtArgs>
-            result: $Utils.Optional<PageGroupByOutputType>[]
+            args: Prisma.InboxGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InboxGroupByOutputType>[]
           }
           count: {
-            args: Prisma.PageCountArgs<ExtArgs>
-            result: $Utils.Optional<PageCountAggregateOutputType> | number
+            args: Prisma.InboxCountArgs<ExtArgs>
+            result: $Utils.Optional<InboxCountAggregateOutputType> | number
           }
         }
       }
@@ -1428,7 +1428,7 @@ export namespace Prisma {
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
     oAuth?: OAuthOmit
-    page?: PageOmit
+    inbox?: InboxOmit
   }
 
   /* Types for Logging */
@@ -1528,7 +1528,6 @@ export namespace Prisma {
     OAuth: number
     VerificationToken: number
     Account: number
-    Page: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1537,7 +1536,6 @@ export namespace Prisma {
     OAuth?: boolean | UserCountOutputTypeCountOAuthArgs
     VerificationToken?: boolean | UserCountOutputTypeCountVerificationTokenArgs
     Account?: boolean | UserCountOutputTypeCountAccountArgs
-    Page?: boolean | UserCountOutputTypeCountPageArgs
   }
 
   // Custom InputTypes
@@ -1586,13 +1584,6 @@ export namespace Prisma {
     where?: AccountWhereInput
   }
 
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountPageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PageWhereInput
-  }
-
 
   /**
    * Count Type WorkspaceCountOutputType
@@ -1600,12 +1591,12 @@ export namespace Prisma {
 
   export type WorkspaceCountOutputType = {
     Messages: number
-    pages: number
+    Inbox: number
   }
 
   export type WorkspaceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Messages?: boolean | WorkspaceCountOutputTypeCountMessagesArgs
-    pages?: boolean | WorkspaceCountOutputTypeCountPagesArgs
+    Inbox?: boolean | WorkspaceCountOutputTypeCountInboxArgs
   }
 
   // Custom InputTypes
@@ -1629,8 +1620,8 @@ export namespace Prisma {
   /**
    * WorkspaceCountOutputType without action
    */
-  export type WorkspaceCountOutputTypeCountPagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PageWhereInput
+  export type WorkspaceCountOutputTypeCountInboxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InboxWhereInput
   }
 
 
@@ -1839,7 +1830,6 @@ export namespace Prisma {
     OAuth?: boolean | User$OAuthArgs<ExtArgs>
     VerificationToken?: boolean | User$VerificationTokenArgs<ExtArgs>
     Account?: boolean | User$AccountArgs<ExtArgs>
-    Page?: boolean | User$PageArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1886,7 +1876,6 @@ export namespace Prisma {
     OAuth?: boolean | User$OAuthArgs<ExtArgs>
     VerificationToken?: boolean | User$VerificationTokenArgs<ExtArgs>
     Account?: boolean | User$AccountArgs<ExtArgs>
-    Page?: boolean | User$PageArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1900,7 +1889,6 @@ export namespace Prisma {
       OAuth: Prisma.$OAuthPayload<ExtArgs>[]
       VerificationToken: Prisma.$VerificationTokenPayload<ExtArgs>[]
       Account: Prisma.$AccountPayload<ExtArgs>[]
-      Page: Prisma.$PagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2311,7 +2299,6 @@ export namespace Prisma {
     OAuth<T extends User$OAuthArgs<ExtArgs> = {}>(args?: Subset<T, User$OAuthArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OAuthPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     VerificationToken<T extends User$VerificationTokenArgs<ExtArgs> = {}>(args?: Subset<T, User$VerificationTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Account<T extends User$AccountArgs<ExtArgs> = {}>(args?: Subset<T, User$AccountArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Page<T extends User$PageArgs<ExtArgs> = {}>(args?: Subset<T, User$PageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2853,30 +2840,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountScalarFieldEnum | AccountScalarFieldEnum[]
-  }
-
-  /**
-   * User.Page
-   */
-  export type User$PageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Page
-     */
-    select?: PageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Page
-     */
-    omit?: PageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PageInclude<ExtArgs> | null
-    where?: PageWhereInput
-    orderBy?: PageOrderByWithRelationInput | PageOrderByWithRelationInput[]
-    cursor?: PageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PageScalarFieldEnum | PageScalarFieldEnum[]
   }
 
   /**
@@ -4345,7 +4308,7 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     Messages?: boolean | Workspace$MessagesArgs<ExtArgs>
-    pages?: boolean | Workspace$pagesArgs<ExtArgs>
+    Inbox?: boolean | Workspace$InboxArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workspace"]>
 
@@ -4391,7 +4354,7 @@ export namespace Prisma {
   export type WorkspaceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     Messages?: boolean | Workspace$MessagesArgs<ExtArgs>
-    pages?: boolean | Workspace$pagesArgs<ExtArgs>
+    Inbox?: boolean | Workspace$InboxArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4406,7 +4369,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       Messages: Prisma.$MessagesPayload<ExtArgs>[]
-      pages: Prisma.$PagePayload<ExtArgs>[]
+      Inbox: Prisma.$InboxPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4814,7 +4777,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Messages<T extends Workspace$MessagesArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$MessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MessagesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    pages<T extends Workspace$pagesArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$pagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Inbox<T extends Workspace$InboxArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$InboxArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5271,27 +5234,27 @@ export namespace Prisma {
   }
 
   /**
-   * Workspace.pages
+   * Workspace.Inbox
    */
-  export type Workspace$pagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Workspace$InboxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
-    where?: PageWhereInput
-    orderBy?: PageOrderByWithRelationInput | PageOrderByWithRelationInput[]
-    cursor?: PageWhereUniqueInput
+    include?: InboxInclude<ExtArgs> | null
+    where?: InboxWhereInput
+    orderBy?: InboxOrderByWithRelationInput | InboxOrderByWithRelationInput[]
+    cursor?: InboxWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: PageScalarFieldEnum | PageScalarFieldEnum[]
+    distinct?: InboxScalarFieldEnum | InboxScalarFieldEnum[]
   }
 
   /**
@@ -9798,447 +9761,440 @@ export namespace Prisma {
 
 
   /**
-   * Model Page
+   * Model Inbox
    */
 
-  export type AggregatePage = {
-    _count: PageCountAggregateOutputType | null
-    _avg: PageAvgAggregateOutputType | null
-    _sum: PageSumAggregateOutputType | null
-    _min: PageMinAggregateOutputType | null
-    _max: PageMaxAggregateOutputType | null
+  export type AggregateInbox = {
+    _count: InboxCountAggregateOutputType | null
+    _avg: InboxAvgAggregateOutputType | null
+    _sum: InboxSumAggregateOutputType | null
+    _min: InboxMinAggregateOutputType | null
+    _max: InboxMaxAggregateOutputType | null
   }
 
-  export type PageAvgAggregateOutputType = {
+  export type InboxAvgAggregateOutputType = {
     totalMessages: number | null
     totalViews: number | null
     totalClicks: number | null
   }
 
-  export type PageSumAggregateOutputType = {
+  export type InboxSumAggregateOutputType = {
     totalMessages: number | null
     totalViews: number | null
     totalClicks: number | null
   }
 
-  export type PageMinAggregateOutputType = {
+  export type InboxMinAggregateOutputType = {
     id: string | null
-    workspaceId: string | null
-    uniquePageLink: string | null
+    InboxName: string | null
     plan: $Enums.Plan | null
     totalMessages: number | null
     totalViews: number | null
     totalClicks: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    workspaceId: string | null
   }
 
-  export type PageMaxAggregateOutputType = {
+  export type InboxMaxAggregateOutputType = {
     id: string | null
-    workspaceId: string | null
-    uniquePageLink: string | null
+    InboxName: string | null
     plan: $Enums.Plan | null
     totalMessages: number | null
     totalViews: number | null
     totalClicks: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    workspaceId: string | null
   }
 
-  export type PageCountAggregateOutputType = {
+  export type InboxCountAggregateOutputType = {
     id: number
-    workspaceId: number
-    uniquePageLink: number
+    InboxName: number
     plan: number
     totalMessages: number
     totalViews: number
     totalClicks: number
     createdAt: number
     updatedAt: number
+    workspaceId: number
     _all: number
   }
 
 
-  export type PageAvgAggregateInputType = {
+  export type InboxAvgAggregateInputType = {
     totalMessages?: true
     totalViews?: true
     totalClicks?: true
   }
 
-  export type PageSumAggregateInputType = {
+  export type InboxSumAggregateInputType = {
     totalMessages?: true
     totalViews?: true
     totalClicks?: true
   }
 
-  export type PageMinAggregateInputType = {
+  export type InboxMinAggregateInputType = {
     id?: true
-    workspaceId?: true
-    uniquePageLink?: true
+    InboxName?: true
     plan?: true
     totalMessages?: true
     totalViews?: true
     totalClicks?: true
     createdAt?: true
     updatedAt?: true
+    workspaceId?: true
   }
 
-  export type PageMaxAggregateInputType = {
+  export type InboxMaxAggregateInputType = {
     id?: true
-    workspaceId?: true
-    uniquePageLink?: true
+    InboxName?: true
     plan?: true
     totalMessages?: true
     totalViews?: true
     totalClicks?: true
     createdAt?: true
     updatedAt?: true
+    workspaceId?: true
   }
 
-  export type PageCountAggregateInputType = {
+  export type InboxCountAggregateInputType = {
     id?: true
-    workspaceId?: true
-    uniquePageLink?: true
+    InboxName?: true
     plan?: true
     totalMessages?: true
     totalViews?: true
     totalClicks?: true
     createdAt?: true
     updatedAt?: true
+    workspaceId?: true
     _all?: true
   }
 
-  export type PageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Page to aggregate.
+     * Filter which Inbox to aggregate.
      */
-    where?: PageWhereInput
+    where?: InboxWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pages to fetch.
+     * Determine the order of Inboxes to fetch.
      */
-    orderBy?: PageOrderByWithRelationInput | PageOrderByWithRelationInput[]
+    orderBy?: InboxOrderByWithRelationInput | InboxOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: PageWhereUniqueInput
+    cursor?: InboxWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pages from the position of the cursor.
+     * Take `±n` Inboxes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pages.
+     * Skip the first `n` Inboxes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Pages
+     * Count returned Inboxes
     **/
-    _count?: true | PageCountAggregateInputType
+    _count?: true | InboxCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: PageAvgAggregateInputType
+    _avg?: InboxAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: PageSumAggregateInputType
+    _sum?: InboxSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: PageMinAggregateInputType
+    _min?: InboxMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: PageMaxAggregateInputType
+    _max?: InboxMaxAggregateInputType
   }
 
-  export type GetPageAggregateType<T extends PageAggregateArgs> = {
-        [P in keyof T & keyof AggregatePage]: P extends '_count' | 'count'
+  export type GetInboxAggregateType<T extends InboxAggregateArgs> = {
+        [P in keyof T & keyof AggregateInbox]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregatePage[P]>
-      : GetScalarType<T[P], AggregatePage[P]>
+        : GetScalarType<T[P], AggregateInbox[P]>
+      : GetScalarType<T[P], AggregateInbox[P]>
   }
 
 
 
 
-  export type PageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PageWhereInput
-    orderBy?: PageOrderByWithAggregationInput | PageOrderByWithAggregationInput[]
-    by: PageScalarFieldEnum[] | PageScalarFieldEnum
-    having?: PageScalarWhereWithAggregatesInput
+  export type InboxGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InboxWhereInput
+    orderBy?: InboxOrderByWithAggregationInput | InboxOrderByWithAggregationInput[]
+    by: InboxScalarFieldEnum[] | InboxScalarFieldEnum
+    having?: InboxScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: PageCountAggregateInputType | true
-    _avg?: PageAvgAggregateInputType
-    _sum?: PageSumAggregateInputType
-    _min?: PageMinAggregateInputType
-    _max?: PageMaxAggregateInputType
+    _count?: InboxCountAggregateInputType | true
+    _avg?: InboxAvgAggregateInputType
+    _sum?: InboxSumAggregateInputType
+    _min?: InboxMinAggregateInputType
+    _max?: InboxMaxAggregateInputType
   }
 
-  export type PageGroupByOutputType = {
+  export type InboxGroupByOutputType = {
     id: string
-    workspaceId: string
-    uniquePageLink: string
+    InboxName: string
     plan: $Enums.Plan
     totalMessages: number | null
     totalViews: number | null
     totalClicks: number | null
     createdAt: Date
     updatedAt: Date
-    _count: PageCountAggregateOutputType | null
-    _avg: PageAvgAggregateOutputType | null
-    _sum: PageSumAggregateOutputType | null
-    _min: PageMinAggregateOutputType | null
-    _max: PageMaxAggregateOutputType | null
+    workspaceId: string
+    _count: InboxCountAggregateOutputType | null
+    _avg: InboxAvgAggregateOutputType | null
+    _sum: InboxSumAggregateOutputType | null
+    _min: InboxMinAggregateOutputType | null
+    _max: InboxMaxAggregateOutputType | null
   }
 
-  type GetPageGroupByPayload<T extends PageGroupByArgs> = Prisma.PrismaPromise<
+  type GetInboxGroupByPayload<T extends InboxGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<PageGroupByOutputType, T['by']> &
+      PickEnumerable<InboxGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof PageGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof InboxGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], PageGroupByOutputType[P]>
-            : GetScalarType<T[P], PageGroupByOutputType[P]>
+              : GetScalarType<T[P], InboxGroupByOutputType[P]>
+            : GetScalarType<T[P], InboxGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type PageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type InboxSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    workspaceId?: boolean
-    uniquePageLink?: boolean
+    InboxName?: boolean
     plan?: boolean
     totalMessages?: boolean
     totalViews?: boolean
     totalClicks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    workspace?: boolean | UserDefaultArgs<ExtArgs>
-    Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["page"]>
-
-  export type PageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     workspaceId?: boolean
-    uniquePageLink?: boolean
+    Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inbox"]>
+
+  export type InboxSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    InboxName?: boolean
     plan?: boolean
     totalMessages?: boolean
     totalViews?: boolean
     totalClicks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    workspace?: boolean | UserDefaultArgs<ExtArgs>
-    Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["page"]>
-
-  export type PageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     workspaceId?: boolean
-    uniquePageLink?: boolean
+    Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inbox"]>
+
+  export type InboxSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    InboxName?: boolean
     plan?: boolean
     totalMessages?: boolean
     totalViews?: boolean
     totalClicks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    workspace?: boolean | UserDefaultArgs<ExtArgs>
-    Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["page"]>
-
-  export type PageSelectScalar = {
-    id?: boolean
     workspaceId?: boolean
-    uniquePageLink?: boolean
+    Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["inbox"]>
+
+  export type InboxSelectScalar = {
+    id?: boolean
+    InboxName?: boolean
     plan?: boolean
     totalMessages?: boolean
     totalViews?: boolean
     totalClicks?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    workspaceId?: boolean
   }
 
-  export type PageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "uniquePageLink" | "plan" | "totalMessages" | "totalViews" | "totalClicks" | "createdAt" | "updatedAt", ExtArgs["result"]["page"]>
-  export type PageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workspace?: boolean | UserDefaultArgs<ExtArgs>
+  export type InboxOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "InboxName" | "plan" | "totalMessages" | "totalViews" | "totalClicks" | "createdAt" | "updatedAt" | "workspaceId", ExtArgs["result"]["inbox"]>
+  export type InboxInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
   }
-  export type PageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workspace?: boolean | UserDefaultArgs<ExtArgs>
+  export type InboxIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
   }
-  export type PageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    workspace?: boolean | UserDefaultArgs<ExtArgs>
+  export type InboxIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
   }
 
-  export type $PagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Page"
+  export type $InboxPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Inbox"
     objects: {
-      workspace: Prisma.$UserPayload<ExtArgs>
       Workspace: Prisma.$WorkspacePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      workspaceId: string
-      uniquePageLink: string
+      InboxName: string
       plan: $Enums.Plan
       totalMessages: number | null
       totalViews: number | null
       totalClicks: number | null
       createdAt: Date
       updatedAt: Date
-    }, ExtArgs["result"]["page"]>
+      workspaceId: string
+    }, ExtArgs["result"]["inbox"]>
     composites: {}
   }
 
-  type PageGetPayload<S extends boolean | null | undefined | PageDefaultArgs> = $Result.GetResult<Prisma.$PagePayload, S>
+  type InboxGetPayload<S extends boolean | null | undefined | InboxDefaultArgs> = $Result.GetResult<Prisma.$InboxPayload, S>
 
-  type PageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<PageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: PageCountAggregateInputType | true
+  type InboxCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InboxFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InboxCountAggregateInputType | true
     }
 
-  export interface PageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Page'], meta: { name: 'Page' } }
+  export interface InboxDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Inbox'], meta: { name: 'Inbox' } }
     /**
-     * Find zero or one Page that matches the filter.
-     * @param {PageFindUniqueArgs} args - Arguments to find a Page
+     * Find zero or one Inbox that matches the filter.
+     * @param {InboxFindUniqueArgs} args - Arguments to find a Inbox
      * @example
-     * // Get one Page
-     * const page = await prisma.page.findUnique({
+     * // Get one Inbox
+     * const inbox = await prisma.inbox.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends PageFindUniqueArgs>(args: SelectSubset<T, PageFindUniqueArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends InboxFindUniqueArgs>(args: SelectSubset<T, InboxFindUniqueArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Page that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Inbox that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {PageFindUniqueOrThrowArgs} args - Arguments to find a Page
+     * @param {InboxFindUniqueOrThrowArgs} args - Arguments to find a Inbox
      * @example
-     * // Get one Page
-     * const page = await prisma.page.findUniqueOrThrow({
+     * // Get one Inbox
+     * const inbox = await prisma.inbox.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends PageFindUniqueOrThrowArgs>(args: SelectSubset<T, PageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends InboxFindUniqueOrThrowArgs>(args: SelectSubset<T, InboxFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Page that matches the filter.
+     * Find the first Inbox that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageFindFirstArgs} args - Arguments to find a Page
+     * @param {InboxFindFirstArgs} args - Arguments to find a Inbox
      * @example
-     * // Get one Page
-     * const page = await prisma.page.findFirst({
+     * // Get one Inbox
+     * const inbox = await prisma.inbox.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends PageFindFirstArgs>(args?: SelectSubset<T, PageFindFirstArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends InboxFindFirstArgs>(args?: SelectSubset<T, InboxFindFirstArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Page that matches the filter or
+     * Find the first Inbox that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageFindFirstOrThrowArgs} args - Arguments to find a Page
+     * @param {InboxFindFirstOrThrowArgs} args - Arguments to find a Inbox
      * @example
-     * // Get one Page
-     * const page = await prisma.page.findFirstOrThrow({
+     * // Get one Inbox
+     * const inbox = await prisma.inbox.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends PageFindFirstOrThrowArgs>(args?: SelectSubset<T, PageFindFirstOrThrowArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends InboxFindFirstOrThrowArgs>(args?: SelectSubset<T, InboxFindFirstOrThrowArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Pages that matches the filter.
+     * Find zero or more Inboxes that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {InboxFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Pages
-     * const pages = await prisma.page.findMany()
+     * // Get all Inboxes
+     * const inboxes = await prisma.inbox.findMany()
      * 
-     * // Get first 10 Pages
-     * const pages = await prisma.page.findMany({ take: 10 })
+     * // Get first 10 Inboxes
+     * const inboxes = await prisma.inbox.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const pageWithIdOnly = await prisma.page.findMany({ select: { id: true } })
+     * const inboxWithIdOnly = await prisma.inbox.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends PageFindManyArgs>(args?: SelectSubset<T, PageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends InboxFindManyArgs>(args?: SelectSubset<T, InboxFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Page.
-     * @param {PageCreateArgs} args - Arguments to create a Page.
+     * Create a Inbox.
+     * @param {InboxCreateArgs} args - Arguments to create a Inbox.
      * @example
-     * // Create one Page
-     * const Page = await prisma.page.create({
+     * // Create one Inbox
+     * const Inbox = await prisma.inbox.create({
      *   data: {
-     *     // ... data to create a Page
+     *     // ... data to create a Inbox
      *   }
      * })
      * 
      */
-    create<T extends PageCreateArgs>(args: SelectSubset<T, PageCreateArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends InboxCreateArgs>(args: SelectSubset<T, InboxCreateArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Pages.
-     * @param {PageCreateManyArgs} args - Arguments to create many Pages.
+     * Create many Inboxes.
+     * @param {InboxCreateManyArgs} args - Arguments to create many Inboxes.
      * @example
-     * // Create many Pages
-     * const page = await prisma.page.createMany({
+     * // Create many Inboxes
+     * const inbox = await prisma.inbox.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends PageCreateManyArgs>(args?: SelectSubset<T, PageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends InboxCreateManyArgs>(args?: SelectSubset<T, InboxCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Pages and returns the data saved in the database.
-     * @param {PageCreateManyAndReturnArgs} args - Arguments to create many Pages.
+     * Create many Inboxes and returns the data saved in the database.
+     * @param {InboxCreateManyAndReturnArgs} args - Arguments to create many Inboxes.
      * @example
-     * // Create many Pages
-     * const page = await prisma.page.createManyAndReturn({
+     * // Create many Inboxes
+     * const inbox = await prisma.inbox.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Pages and only return the `id`
-     * const pageWithIdOnly = await prisma.page.createManyAndReturn({
+     * // Create many Inboxes and only return the `id`
+     * const inboxWithIdOnly = await prisma.inbox.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -10248,28 +10204,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends PageCreateManyAndReturnArgs>(args?: SelectSubset<T, PageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends InboxCreateManyAndReturnArgs>(args?: SelectSubset<T, InboxCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Page.
-     * @param {PageDeleteArgs} args - Arguments to delete one Page.
+     * Delete a Inbox.
+     * @param {InboxDeleteArgs} args - Arguments to delete one Inbox.
      * @example
-     * // Delete one Page
-     * const Page = await prisma.page.delete({
+     * // Delete one Inbox
+     * const Inbox = await prisma.inbox.delete({
      *   where: {
-     *     // ... filter to delete one Page
+     *     // ... filter to delete one Inbox
      *   }
      * })
      * 
      */
-    delete<T extends PageDeleteArgs>(args: SelectSubset<T, PageDeleteArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends InboxDeleteArgs>(args: SelectSubset<T, InboxDeleteArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Page.
-     * @param {PageUpdateArgs} args - Arguments to update one Page.
+     * Update one Inbox.
+     * @param {InboxUpdateArgs} args - Arguments to update one Inbox.
      * @example
-     * // Update one Page
-     * const page = await prisma.page.update({
+     * // Update one Inbox
+     * const inbox = await prisma.inbox.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10279,30 +10235,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends PageUpdateArgs>(args: SelectSubset<T, PageUpdateArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends InboxUpdateArgs>(args: SelectSubset<T, InboxUpdateArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Pages.
-     * @param {PageDeleteManyArgs} args - Arguments to filter Pages to delete.
+     * Delete zero or more Inboxes.
+     * @param {InboxDeleteManyArgs} args - Arguments to filter Inboxes to delete.
      * @example
-     * // Delete a few Pages
-     * const { count } = await prisma.page.deleteMany({
+     * // Delete a few Inboxes
+     * const { count } = await prisma.inbox.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends PageDeleteManyArgs>(args?: SelectSubset<T, PageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends InboxDeleteManyArgs>(args?: SelectSubset<T, InboxDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Pages.
+     * Update zero or more Inboxes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {InboxUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Pages
-     * const page = await prisma.page.updateMany({
+     * // Update many Inboxes
+     * const inbox = await prisma.inbox.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10312,14 +10268,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends PageUpdateManyArgs>(args: SelectSubset<T, PageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends InboxUpdateManyArgs>(args: SelectSubset<T, InboxUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Pages and returns the data updated in the database.
-     * @param {PageUpdateManyAndReturnArgs} args - Arguments to update many Pages.
+     * Update zero or more Inboxes and returns the data updated in the database.
+     * @param {InboxUpdateManyAndReturnArgs} args - Arguments to update many Inboxes.
      * @example
-     * // Update many Pages
-     * const page = await prisma.page.updateManyAndReturn({
+     * // Update many Inboxes
+     * const inbox = await prisma.inbox.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -10328,8 +10284,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Pages and only return the `id`
-     * const pageWithIdOnly = await prisma.page.updateManyAndReturn({
+     * // Update zero or more Inboxes and only return the `id`
+     * const inboxWithIdOnly = await prisma.inbox.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -10342,56 +10298,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends PageUpdateManyAndReturnArgs>(args: SelectSubset<T, PageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends InboxUpdateManyAndReturnArgs>(args: SelectSubset<T, InboxUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Page.
-     * @param {PageUpsertArgs} args - Arguments to update or create a Page.
+     * Create or update one Inbox.
+     * @param {InboxUpsertArgs} args - Arguments to update or create a Inbox.
      * @example
-     * // Update or create a Page
-     * const page = await prisma.page.upsert({
+     * // Update or create a Inbox
+     * const inbox = await prisma.inbox.upsert({
      *   create: {
-     *     // ... data to create a Page
+     *     // ... data to create a Inbox
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Page we want to update
+     *     // ... the filter for the Inbox we want to update
      *   }
      * })
      */
-    upsert<T extends PageUpsertArgs>(args: SelectSubset<T, PageUpsertArgs<ExtArgs>>): Prisma__PageClient<$Result.GetResult<Prisma.$PagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends InboxUpsertArgs>(args: SelectSubset<T, InboxUpsertArgs<ExtArgs>>): Prisma__InboxClient<$Result.GetResult<Prisma.$InboxPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Pages.
+     * Count the number of Inboxes.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageCountArgs} args - Arguments to filter Pages to count.
+     * @param {InboxCountArgs} args - Arguments to filter Inboxes to count.
      * @example
-     * // Count the number of Pages
-     * const count = await prisma.page.count({
+     * // Count the number of Inboxes
+     * const count = await prisma.inbox.count({
      *   where: {
-     *     // ... the filter for the Pages we want to count
+     *     // ... the filter for the Inboxes we want to count
      *   }
      * })
     **/
-    count<T extends PageCountArgs>(
-      args?: Subset<T, PageCountArgs>,
+    count<T extends InboxCountArgs>(
+      args?: Subset<T, InboxCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], PageCountAggregateOutputType>
+          : GetScalarType<T['select'], InboxCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Page.
+     * Allows you to perform aggregations operations on a Inbox.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {InboxAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -10411,13 +10367,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends PageAggregateArgs>(args: Subset<T, PageAggregateArgs>): Prisma.PrismaPromise<GetPageAggregateType<T>>
+    aggregate<T extends InboxAggregateArgs>(args: Subset<T, InboxAggregateArgs>): Prisma.PrismaPromise<GetInboxAggregateType<T>>
 
     /**
-     * Group by Page.
+     * Group by Inbox.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {PageGroupByArgs} args - Group by arguments.
+     * @param {InboxGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -10432,14 +10388,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends PageGroupByArgs,
+      T extends InboxGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: PageGroupByArgs['orderBy'] }
-        : { orderBy?: PageGroupByArgs['orderBy'] },
+        ? { orderBy: InboxGroupByArgs['orderBy'] }
+        : { orderBy?: InboxGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -10488,22 +10444,21 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, PageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, InboxGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInboxGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Page model
+   * Fields of the Inbox model
    */
-  readonly fields: PageFieldRefs;
+  readonly fields: InboxFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Page.
+   * The delegate class that acts as a "Promise-like" for Inbox.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__PageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__InboxClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    workspace<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Workspace<T extends WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceDefaultArgs<ExtArgs>>): Prisma__WorkspaceClient<$Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -10531,427 +10486,427 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Page model
+   * Fields of the Inbox model
    */
-  interface PageFieldRefs {
-    readonly id: FieldRef<"Page", 'String'>
-    readonly workspaceId: FieldRef<"Page", 'String'>
-    readonly uniquePageLink: FieldRef<"Page", 'String'>
-    readonly plan: FieldRef<"Page", 'Plan'>
-    readonly totalMessages: FieldRef<"Page", 'Int'>
-    readonly totalViews: FieldRef<"Page", 'Int'>
-    readonly totalClicks: FieldRef<"Page", 'Int'>
-    readonly createdAt: FieldRef<"Page", 'DateTime'>
-    readonly updatedAt: FieldRef<"Page", 'DateTime'>
+  interface InboxFieldRefs {
+    readonly id: FieldRef<"Inbox", 'String'>
+    readonly InboxName: FieldRef<"Inbox", 'String'>
+    readonly plan: FieldRef<"Inbox", 'Plan'>
+    readonly totalMessages: FieldRef<"Inbox", 'Int'>
+    readonly totalViews: FieldRef<"Inbox", 'Int'>
+    readonly totalClicks: FieldRef<"Inbox", 'Int'>
+    readonly createdAt: FieldRef<"Inbox", 'DateTime'>
+    readonly updatedAt: FieldRef<"Inbox", 'DateTime'>
+    readonly workspaceId: FieldRef<"Inbox", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * Page findUnique
+   * Inbox findUnique
    */
-  export type PageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * Filter, which Page to fetch.
+     * Filter, which Inbox to fetch.
      */
-    where: PageWhereUniqueInput
+    where: InboxWhereUniqueInput
   }
 
   /**
-   * Page findUniqueOrThrow
+   * Inbox findUniqueOrThrow
    */
-  export type PageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * Filter, which Page to fetch.
+     * Filter, which Inbox to fetch.
      */
-    where: PageWhereUniqueInput
+    where: InboxWhereUniqueInput
   }
 
   /**
-   * Page findFirst
+   * Inbox findFirst
    */
-  export type PageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * Filter, which Page to fetch.
+     * Filter, which Inbox to fetch.
      */
-    where?: PageWhereInput
+    where?: InboxWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pages to fetch.
+     * Determine the order of Inboxes to fetch.
      */
-    orderBy?: PageOrderByWithRelationInput | PageOrderByWithRelationInput[]
+    orderBy?: InboxOrderByWithRelationInput | InboxOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Pages.
+     * Sets the position for searching for Inboxes.
      */
-    cursor?: PageWhereUniqueInput
+    cursor?: InboxWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pages from the position of the cursor.
+     * Take `±n` Inboxes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pages.
+     * Skip the first `n` Inboxes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Pages.
+     * Filter by unique combinations of Inboxes.
      */
-    distinct?: PageScalarFieldEnum | PageScalarFieldEnum[]
+    distinct?: InboxScalarFieldEnum | InboxScalarFieldEnum[]
   }
 
   /**
-   * Page findFirstOrThrow
+   * Inbox findFirstOrThrow
    */
-  export type PageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * Filter, which Page to fetch.
+     * Filter, which Inbox to fetch.
      */
-    where?: PageWhereInput
+    where?: InboxWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pages to fetch.
+     * Determine the order of Inboxes to fetch.
      */
-    orderBy?: PageOrderByWithRelationInput | PageOrderByWithRelationInput[]
+    orderBy?: InboxOrderByWithRelationInput | InboxOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Pages.
+     * Sets the position for searching for Inboxes.
      */
-    cursor?: PageWhereUniqueInput
+    cursor?: InboxWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pages from the position of the cursor.
+     * Take `±n` Inboxes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pages.
+     * Skip the first `n` Inboxes.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Pages.
+     * Filter by unique combinations of Inboxes.
      */
-    distinct?: PageScalarFieldEnum | PageScalarFieldEnum[]
+    distinct?: InboxScalarFieldEnum | InboxScalarFieldEnum[]
   }
 
   /**
-   * Page findMany
+   * Inbox findMany
    */
-  export type PageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * Filter, which Pages to fetch.
+     * Filter, which Inboxes to fetch.
      */
-    where?: PageWhereInput
+    where?: InboxWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Pages to fetch.
+     * Determine the order of Inboxes to fetch.
      */
-    orderBy?: PageOrderByWithRelationInput | PageOrderByWithRelationInput[]
+    orderBy?: InboxOrderByWithRelationInput | InboxOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Pages.
+     * Sets the position for listing Inboxes.
      */
-    cursor?: PageWhereUniqueInput
+    cursor?: InboxWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Pages from the position of the cursor.
+     * Take `±n` Inboxes from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Pages.
+     * Skip the first `n` Inboxes.
      */
     skip?: number
-    distinct?: PageScalarFieldEnum | PageScalarFieldEnum[]
+    distinct?: InboxScalarFieldEnum | InboxScalarFieldEnum[]
   }
 
   /**
-   * Page create
+   * Inbox create
    */
-  export type PageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * The data needed to create a Page.
+     * The data needed to create a Inbox.
      */
-    data: XOR<PageCreateInput, PageUncheckedCreateInput>
+    data: XOR<InboxCreateInput, InboxUncheckedCreateInput>
   }
 
   /**
-   * Page createMany
+   * Inbox createMany
    */
-  export type PageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Pages.
+     * The data used to create many Inboxes.
      */
-    data: PageCreateManyInput | PageCreateManyInput[]
+    data: InboxCreateManyInput | InboxCreateManyInput[]
   }
 
   /**
-   * Page createManyAndReturn
+   * Inbox createManyAndReturn
    */
-  export type PageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelectCreateManyAndReturn<ExtArgs> | null
+    select?: InboxSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
-     * The data used to create many Pages.
+     * The data used to create many Inboxes.
      */
-    data: PageCreateManyInput | PageCreateManyInput[]
+    data: InboxCreateManyInput | InboxCreateManyInput[]
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: InboxIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Page update
+   * Inbox update
    */
-  export type PageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * The data needed to update a Page.
+     * The data needed to update a Inbox.
      */
-    data: XOR<PageUpdateInput, PageUncheckedUpdateInput>
+    data: XOR<InboxUpdateInput, InboxUncheckedUpdateInput>
     /**
-     * Choose, which Page to update.
+     * Choose, which Inbox to update.
      */
-    where: PageWhereUniqueInput
+    where: InboxWhereUniqueInput
   }
 
   /**
-   * Page updateMany
+   * Inbox updateMany
    */
-  export type PageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Pages.
+     * The data used to update Inboxes.
      */
-    data: XOR<PageUpdateManyMutationInput, PageUncheckedUpdateManyInput>
+    data: XOR<InboxUpdateManyMutationInput, InboxUncheckedUpdateManyInput>
     /**
-     * Filter which Pages to update
+     * Filter which Inboxes to update
      */
-    where?: PageWhereInput
+    where?: InboxWhereInput
     /**
-     * Limit how many Pages to update.
+     * Limit how many Inboxes to update.
      */
     limit?: number
   }
 
   /**
-   * Page updateManyAndReturn
+   * Inbox updateManyAndReturn
    */
-  export type PageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: InboxSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
-     * The data used to update Pages.
+     * The data used to update Inboxes.
      */
-    data: XOR<PageUpdateManyMutationInput, PageUncheckedUpdateManyInput>
+    data: XOR<InboxUpdateManyMutationInput, InboxUncheckedUpdateManyInput>
     /**
-     * Filter which Pages to update
+     * Filter which Inboxes to update
      */
-    where?: PageWhereInput
+    where?: InboxWhereInput
     /**
-     * Limit how many Pages to update.
+     * Limit how many Inboxes to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: InboxIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Page upsert
+   * Inbox upsert
    */
-  export type PageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * The filter to search for the Page to update in case it exists.
+     * The filter to search for the Inbox to update in case it exists.
      */
-    where: PageWhereUniqueInput
+    where: InboxWhereUniqueInput
     /**
-     * In case the Page found by the `where` argument doesn't exist, create a new Page with this data.
+     * In case the Inbox found by the `where` argument doesn't exist, create a new Inbox with this data.
      */
-    create: XOR<PageCreateInput, PageUncheckedCreateInput>
+    create: XOR<InboxCreateInput, InboxUncheckedCreateInput>
     /**
-     * In case the Page was found with the provided `where` argument, update it with this data.
+     * In case the Inbox was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<PageUpdateInput, PageUncheckedUpdateInput>
+    update: XOR<InboxUpdateInput, InboxUncheckedUpdateInput>
   }
 
   /**
-   * Page delete
+   * Inbox delete
    */
-  export type PageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
     /**
-     * Filter which Page to delete.
+     * Filter which Inbox to delete.
      */
-    where: PageWhereUniqueInput
+    where: InboxWhereUniqueInput
   }
 
   /**
-   * Page deleteMany
+   * Inbox deleteMany
    */
-  export type PageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Pages to delete
+     * Filter which Inboxes to delete
      */
-    where?: PageWhereInput
+    where?: InboxWhereInput
     /**
-     * Limit how many Pages to delete.
+     * Limit how many Inboxes to delete.
      */
     limit?: number
   }
 
   /**
-   * Page without action
+   * Inbox without action
    */
-  export type PageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type InboxDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Page
+     * Select specific fields to fetch from the Inbox
      */
-    select?: PageSelect<ExtArgs> | null
+    select?: InboxSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Page
+     * Omit specific fields from the Inbox
      */
-    omit?: PageOmit<ExtArgs> | null
+    omit?: InboxOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: PageInclude<ExtArgs> | null
+    include?: InboxInclude<ExtArgs> | null
   }
 
 
@@ -11073,19 +11028,19 @@ export namespace Prisma {
   export type OAuthScalarFieldEnum = (typeof OAuthScalarFieldEnum)[keyof typeof OAuthScalarFieldEnum]
 
 
-  export const PageScalarFieldEnum: {
+  export const InboxScalarFieldEnum: {
     id: 'id',
-    workspaceId: 'workspaceId',
-    uniquePageLink: 'uniquePageLink',
+    InboxName: 'InboxName',
     plan: 'plan',
     totalMessages: 'totalMessages',
     totalViews: 'totalViews',
     totalClicks: 'totalClicks',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    workspaceId: 'workspaceId'
   };
 
-  export type PageScalarFieldEnum = (typeof PageScalarFieldEnum)[keyof typeof PageScalarFieldEnum]
+  export type InboxScalarFieldEnum = (typeof InboxScalarFieldEnum)[keyof typeof InboxScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11172,7 +11127,6 @@ export namespace Prisma {
     OAuth?: OAuthListRelationFilter
     VerificationToken?: VerificationTokenListRelationFilter
     Account?: AccountListRelationFilter
-    Page?: PageListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11190,7 +11144,6 @@ export namespace Prisma {
     OAuth?: OAuthOrderByRelationAggregateInput
     VerificationToken?: VerificationTokenOrderByRelationAggregateInput
     Account?: AccountOrderByRelationAggregateInput
-    Page?: PageOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11211,7 +11164,6 @@ export namespace Prisma {
     OAuth?: OAuthListRelationFilter
     VerificationToken?: VerificationTokenListRelationFilter
     Account?: AccountListRelationFilter
-    Page?: PageListRelationFilter
   }, "id" | "email" | "password">
 
   export type UserOrderByWithAggregationInput = {
@@ -11362,7 +11314,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Messages?: MessagesListRelationFilter
-    pages?: PageListRelationFilter
+    Inbox?: InboxListRelationFilter
   }
 
   export type WorkspaceOrderByWithRelationInput = {
@@ -11377,7 +11329,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     Messages?: MessagesOrderByRelationAggregateInput
-    pages?: PageOrderByRelationAggregateInput
+    Inbox?: InboxOrderByRelationAggregateInput
   }
 
   export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -11396,7 +11348,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     Messages?: MessagesListRelationFilter
-    pages?: PageListRelationFilter
+    Inbox?: InboxListRelationFilter
   }, "id" | "name" | "id_name_userId">
 
   export type WorkspaceOrderByWithAggregationInput = {
@@ -11722,84 +11674,81 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"OAuth"> | Date | string
   }
 
-  export type PageWhereInput = {
-    AND?: PageWhereInput | PageWhereInput[]
-    OR?: PageWhereInput[]
-    NOT?: PageWhereInput | PageWhereInput[]
-    id?: StringFilter<"Page"> | string
-    workspaceId?: StringFilter<"Page"> | string
-    uniquePageLink?: StringFilter<"Page"> | string
-    plan?: EnumPlanFilter<"Page"> | $Enums.Plan
-    totalMessages?: IntNullableFilter<"Page"> | number | null
-    totalViews?: IntNullableFilter<"Page"> | number | null
-    totalClicks?: IntNullableFilter<"Page"> | number | null
-    createdAt?: DateTimeFilter<"Page"> | Date | string
-    updatedAt?: DateTimeFilter<"Page"> | Date | string
-    workspace?: XOR<UserScalarRelationFilter, UserWhereInput>
+  export type InboxWhereInput = {
+    AND?: InboxWhereInput | InboxWhereInput[]
+    OR?: InboxWhereInput[]
+    NOT?: InboxWhereInput | InboxWhereInput[]
+    id?: StringFilter<"Inbox"> | string
+    InboxName?: StringFilter<"Inbox"> | string
+    plan?: EnumPlanFilter<"Inbox"> | $Enums.Plan
+    totalMessages?: IntNullableFilter<"Inbox"> | number | null
+    totalViews?: IntNullableFilter<"Inbox"> | number | null
+    totalClicks?: IntNullableFilter<"Inbox"> | number | null
+    createdAt?: DateTimeFilter<"Inbox"> | Date | string
+    updatedAt?: DateTimeFilter<"Inbox"> | Date | string
+    workspaceId?: StringFilter<"Inbox"> | string
     Workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
   }
 
-  export type PageOrderByWithRelationInput = {
+  export type InboxOrderByWithRelationInput = {
     id?: SortOrder
-    workspaceId?: SortOrder
-    uniquePageLink?: SortOrder
+    InboxName?: SortOrder
     plan?: SortOrder
     totalMessages?: SortOrderInput | SortOrder
     totalViews?: SortOrderInput | SortOrder
     totalClicks?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    workspace?: UserOrderByWithRelationInput
+    workspaceId?: SortOrder
     Workspace?: WorkspaceOrderByWithRelationInput
   }
 
-  export type PageWhereUniqueInput = Prisma.AtLeast<{
+  export type InboxWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    uniquePageLink?: string
-    AND?: PageWhereInput | PageWhereInput[]
-    OR?: PageWhereInput[]
-    NOT?: PageWhereInput | PageWhereInput[]
-    workspaceId?: StringFilter<"Page"> | string
-    plan?: EnumPlanFilter<"Page"> | $Enums.Plan
-    totalMessages?: IntNullableFilter<"Page"> | number | null
-    totalViews?: IntNullableFilter<"Page"> | number | null
-    totalClicks?: IntNullableFilter<"Page"> | number | null
-    createdAt?: DateTimeFilter<"Page"> | Date | string
-    updatedAt?: DateTimeFilter<"Page"> | Date | string
-    workspace?: XOR<UserScalarRelationFilter, UserWhereInput>
+    InboxName?: string
+    AND?: InboxWhereInput | InboxWhereInput[]
+    OR?: InboxWhereInput[]
+    NOT?: InboxWhereInput | InboxWhereInput[]
+    plan?: EnumPlanFilter<"Inbox"> | $Enums.Plan
+    totalMessages?: IntNullableFilter<"Inbox"> | number | null
+    totalViews?: IntNullableFilter<"Inbox"> | number | null
+    totalClicks?: IntNullableFilter<"Inbox"> | number | null
+    createdAt?: DateTimeFilter<"Inbox"> | Date | string
+    updatedAt?: DateTimeFilter<"Inbox"> | Date | string
+    workspaceId?: StringFilter<"Inbox"> | string
     Workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
-  }, "id" | "uniquePageLink">
+  }, "id" | "InboxName">
 
-  export type PageOrderByWithAggregationInput = {
+  export type InboxOrderByWithAggregationInput = {
     id?: SortOrder
-    workspaceId?: SortOrder
-    uniquePageLink?: SortOrder
+    InboxName?: SortOrder
     plan?: SortOrder
     totalMessages?: SortOrderInput | SortOrder
     totalViews?: SortOrderInput | SortOrder
     totalClicks?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: PageCountOrderByAggregateInput
-    _avg?: PageAvgOrderByAggregateInput
-    _max?: PageMaxOrderByAggregateInput
-    _min?: PageMinOrderByAggregateInput
-    _sum?: PageSumOrderByAggregateInput
+    workspaceId?: SortOrder
+    _count?: InboxCountOrderByAggregateInput
+    _avg?: InboxAvgOrderByAggregateInput
+    _max?: InboxMaxOrderByAggregateInput
+    _min?: InboxMinOrderByAggregateInput
+    _sum?: InboxSumOrderByAggregateInput
   }
 
-  export type PageScalarWhereWithAggregatesInput = {
-    AND?: PageScalarWhereWithAggregatesInput | PageScalarWhereWithAggregatesInput[]
-    OR?: PageScalarWhereWithAggregatesInput[]
-    NOT?: PageScalarWhereWithAggregatesInput | PageScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Page"> | string
-    workspaceId?: StringWithAggregatesFilter<"Page"> | string
-    uniquePageLink?: StringWithAggregatesFilter<"Page"> | string
-    plan?: EnumPlanWithAggregatesFilter<"Page"> | $Enums.Plan
-    totalMessages?: IntNullableWithAggregatesFilter<"Page"> | number | null
-    totalViews?: IntNullableWithAggregatesFilter<"Page"> | number | null
-    totalClicks?: IntNullableWithAggregatesFilter<"Page"> | number | null
-    createdAt?: DateTimeWithAggregatesFilter<"Page"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Page"> | Date | string
+  export type InboxScalarWhereWithAggregatesInput = {
+    AND?: InboxScalarWhereWithAggregatesInput | InboxScalarWhereWithAggregatesInput[]
+    OR?: InboxScalarWhereWithAggregatesInput[]
+    NOT?: InboxScalarWhereWithAggregatesInput | InboxScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Inbox"> | string
+    InboxName?: StringWithAggregatesFilter<"Inbox"> | string
+    plan?: EnumPlanWithAggregatesFilter<"Inbox"> | $Enums.Plan
+    totalMessages?: IntNullableWithAggregatesFilter<"Inbox"> | number | null
+    totalViews?: IntNullableWithAggregatesFilter<"Inbox"> | number | null
+    totalClicks?: IntNullableWithAggregatesFilter<"Inbox"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"Inbox"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Inbox"> | Date | string
+    workspaceId?: StringWithAggregatesFilter<"Inbox"> | string
   }
 
   export type UserCreateInput = {
@@ -11817,7 +11766,6 @@ export namespace Prisma {
     OAuth?: OAuthCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenCreateNestedManyWithoutUserInput
     Account?: AccountCreateNestedManyWithoutUserInput
-    Page?: PageCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -11835,7 +11783,6 @@ export namespace Prisma {
     OAuth?: OAuthUncheckedCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenUncheckedCreateNestedManyWithoutUserInput
     Account?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Page?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserUpdateInput = {
@@ -11853,7 +11800,6 @@ export namespace Prisma {
     OAuth?: OAuthUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUpdateManyWithoutUserNestedInput
     Account?: AccountUpdateManyWithoutUserNestedInput
-    Page?: PageUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -11871,7 +11817,6 @@ export namespace Prisma {
     OAuth?: OAuthUncheckedUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUncheckedUpdateManyWithoutUserNestedInput
     Account?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Page?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12039,7 +11984,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutWorkspaceInput
     Messages?: MessagesCreateNestedManyWithoutWorkspaceInput
-    pages?: PageCreateNestedManyWithoutWorkspaceInput
+    Inbox?: InboxCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateInput = {
@@ -12053,7 +11998,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Messages?: MessagesUncheckedCreateNestedManyWithoutWorkspaceInput
-    pages?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
+    Inbox?: InboxUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUpdateInput = {
@@ -12067,7 +12012,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutWorkspaceNestedInput
     Messages?: MessagesUpdateManyWithoutWorkspaceNestedInput
-    pages?: PageUpdateManyWithoutWorkspaceNestedInput
+    Inbox?: InboxUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateInput = {
@@ -12081,7 +12026,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Messages?: MessagesUncheckedUpdateManyWithoutWorkspaceNestedInput
-    pages?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
+    Inbox?: InboxUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateManyInput = {
@@ -12430,71 +12375,69 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PageCreateInput = {
+  export type InboxCreateInput = {
     id?: string
-    uniquePageLink: string
+    InboxName: string
     plan?: $Enums.Plan
     totalMessages?: number | null
     totalViews?: number | null
     totalClicks?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    workspace: UserCreateNestedOneWithoutPageInput
-    Workspace: WorkspaceCreateNestedOneWithoutPagesInput
+    Workspace: WorkspaceCreateNestedOneWithoutInboxInput
   }
 
-  export type PageUncheckedCreateInput = {
+  export type InboxUncheckedCreateInput = {
     id?: string
+    InboxName: string
+    plan?: $Enums.Plan
+    totalMessages?: number | null
+    totalViews?: number | null
+    totalClicks?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     workspaceId: string
-    uniquePageLink: string
-    plan?: $Enums.Plan
-    totalMessages?: number | null
-    totalViews?: number | null
-    totalClicks?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
-  export type PageUpdateInput = {
+  export type InboxUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
+    InboxName?: StringFieldUpdateOperationsInput | string
     plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
     totalViews?: NullableIntFieldUpdateOperationsInput | number | null
     totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    workspace?: UserUpdateOneRequiredWithoutPageNestedInput
-    Workspace?: WorkspaceUpdateOneRequiredWithoutPagesNestedInput
+    Workspace?: WorkspaceUpdateOneRequiredWithoutInboxNestedInput
   }
 
-  export type PageUncheckedUpdateInput = {
+  export type InboxUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InboxName?: StringFieldUpdateOperationsInput | string
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
+    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
+    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
-    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
-    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
-    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PageCreateManyInput = {
+  export type InboxCreateManyInput = {
     id?: string
-    workspaceId: string
-    uniquePageLink: string
+    InboxName: string
     plan?: $Enums.Plan
     totalMessages?: number | null
     totalViews?: number | null
     totalClicks?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    workspaceId: string
   }
 
-  export type PageUpdateManyMutationInput = {
+  export type InboxUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
+    InboxName?: StringFieldUpdateOperationsInput | string
     plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
     totalViews?: NullableIntFieldUpdateOperationsInput | number | null
@@ -12503,16 +12446,16 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PageUncheckedUpdateManyInput = {
+  export type InboxUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    InboxName?: StringFieldUpdateOperationsInput | string
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
+    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
+    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspaceId?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
-    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
-    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
-    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -12600,12 +12543,6 @@ export namespace Prisma {
     none?: AccountWhereInput
   }
 
-  export type PageListRelationFilter = {
-    every?: PageWhereInput
-    some?: PageWhereInput
-    none?: PageWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -12628,10 +12565,6 @@ export namespace Prisma {
   }
 
   export type AccountOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PageOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12850,7 +12783,17 @@ export namespace Prisma {
     none?: MessagesWhereInput
   }
 
+  export type InboxListRelationFilter = {
+    every?: InboxWhereInput
+    some?: InboxWhereInput
+    none?: InboxWhereInput
+  }
+
   export type MessagesOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InboxOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -13118,49 +13061,49 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type PageCountOrderByAggregateInput = {
+  export type InboxCountOrderByAggregateInput = {
     id?: SortOrder
-    workspaceId?: SortOrder
-    uniquePageLink?: SortOrder
+    InboxName?: SortOrder
     plan?: SortOrder
     totalMessages?: SortOrder
     totalViews?: SortOrder
     totalClicks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workspaceId?: SortOrder
   }
 
-  export type PageAvgOrderByAggregateInput = {
+  export type InboxAvgOrderByAggregateInput = {
     totalMessages?: SortOrder
     totalViews?: SortOrder
     totalClicks?: SortOrder
   }
 
-  export type PageMaxOrderByAggregateInput = {
+  export type InboxMaxOrderByAggregateInput = {
     id?: SortOrder
-    workspaceId?: SortOrder
-    uniquePageLink?: SortOrder
+    InboxName?: SortOrder
     plan?: SortOrder
     totalMessages?: SortOrder
     totalViews?: SortOrder
     totalClicks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workspaceId?: SortOrder
   }
 
-  export type PageMinOrderByAggregateInput = {
+  export type InboxMinOrderByAggregateInput = {
     id?: SortOrder
-    workspaceId?: SortOrder
-    uniquePageLink?: SortOrder
+    InboxName?: SortOrder
     plan?: SortOrder
     totalMessages?: SortOrder
     totalViews?: SortOrder
     totalClicks?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    workspaceId?: SortOrder
   }
 
-  export type PageSumOrderByAggregateInput = {
+  export type InboxSumOrderByAggregateInput = {
     totalMessages?: SortOrder
     totalViews?: SortOrder
     totalClicks?: SortOrder
@@ -13201,13 +13144,6 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
   }
 
-  export type PageCreateNestedManyWithoutWorkspaceInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-  }
-
   export type WorkspaceUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput> | WorkspaceCreateWithoutUserInput[] | WorkspaceUncheckedCreateWithoutUserInput[]
     connectOrCreate?: WorkspaceCreateOrConnectWithoutUserInput | WorkspaceCreateOrConnectWithoutUserInput[]
@@ -13241,13 +13177,6 @@ export namespace Prisma {
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
     createMany?: AccountCreateManyUserInputEnvelope
     connect?: AccountWhereUniqueInput | AccountWhereUniqueInput[]
-  }
-
-  export type PageUncheckedCreateNestedManyWithoutWorkspaceInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -13340,20 +13269,6 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type PageUpdateManyWithoutWorkspaceNestedInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    upsert?: PageUpsertWithWhereUniqueWithoutWorkspaceInput | PageUpsertWithWhereUniqueWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    set?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    disconnect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    delete?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    update?: PageUpdateWithWhereUniqueWithoutWorkspaceInput | PageUpdateWithWhereUniqueWithoutWorkspaceInput[]
-    updateMany?: PageUpdateManyWithWhereWithoutWorkspaceInput | PageUpdateManyWithWhereWithoutWorkspaceInput[]
-    deleteMany?: PageScalarWhereInput | PageScalarWhereInput[]
-  }
-
   export type WorkspaceUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<WorkspaceCreateWithoutUserInput, WorkspaceUncheckedCreateWithoutUserInput> | WorkspaceCreateWithoutUserInput[] | WorkspaceUncheckedCreateWithoutUserInput[]
     connectOrCreate?: WorkspaceCreateOrConnectWithoutUserInput | WorkspaceCreateOrConnectWithoutUserInput[]
@@ -13424,20 +13339,6 @@ export namespace Prisma {
     deleteMany?: AccountScalarWhereInput | AccountScalarWhereInput[]
   }
 
-  export type PageUncheckedUpdateManyWithoutWorkspaceNestedInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    upsert?: PageUpsertWithWhereUniqueWithoutWorkspaceInput | PageUpsertWithWhereUniqueWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    set?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    disconnect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    delete?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    update?: PageUpdateWithWhereUniqueWithoutWorkspaceInput | PageUpdateWithWhereUniqueWithoutWorkspaceInput[]
-    updateMany?: PageUpdateManyWithWhereWithoutWorkspaceInput | PageUpdateManyWithWhereWithoutWorkspaceInput[]
-    deleteMany?: PageScalarWhereInput | PageScalarWhereInput[]
-  }
-
   export type UserCreateNestedOneWithoutAccountInput = {
     create?: XOR<UserCreateWithoutAccountInput, UserUncheckedCreateWithoutAccountInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountInput
@@ -13473,11 +13374,11 @@ export namespace Prisma {
     connect?: MessagesWhereUniqueInput | MessagesWhereUniqueInput[]
   }
 
-  export type PageCreateNestedManyWithoutWorkspaceInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
+  export type InboxCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<InboxCreateWithoutWorkspaceInput, InboxUncheckedCreateWithoutWorkspaceInput> | InboxCreateWithoutWorkspaceInput[] | InboxUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: InboxCreateOrConnectWithoutWorkspaceInput | InboxCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: InboxCreateManyWorkspaceInputEnvelope
+    connect?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
   }
 
   export type MessagesUncheckedCreateNestedManyWithoutWorkspaceInput = {
@@ -13487,11 +13388,11 @@ export namespace Prisma {
     connect?: MessagesWhereUniqueInput | MessagesWhereUniqueInput[]
   }
 
-  export type PageUncheckedCreateNestedManyWithoutWorkspaceInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
+  export type InboxUncheckedCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<InboxCreateWithoutWorkspaceInput, InboxUncheckedCreateWithoutWorkspaceInput> | InboxCreateWithoutWorkspaceInput[] | InboxUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: InboxCreateOrConnectWithoutWorkspaceInput | InboxCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: InboxCreateManyWorkspaceInputEnvelope
+    connect?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
   }
 
   export type EnumPlanFieldUpdateOperationsInput = {
@@ -13520,18 +13421,18 @@ export namespace Prisma {
     deleteMany?: MessagesScalarWhereInput | MessagesScalarWhereInput[]
   }
 
-  export type PageUpdateManyWithoutWorkspaceNestedInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    upsert?: PageUpsertWithWhereUniqueWithoutWorkspaceInput | PageUpsertWithWhereUniqueWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    set?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    disconnect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    delete?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    update?: PageUpdateWithWhereUniqueWithoutWorkspaceInput | PageUpdateWithWhereUniqueWithoutWorkspaceInput[]
-    updateMany?: PageUpdateManyWithWhereWithoutWorkspaceInput | PageUpdateManyWithWhereWithoutWorkspaceInput[]
-    deleteMany?: PageScalarWhereInput | PageScalarWhereInput[]
+  export type InboxUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<InboxCreateWithoutWorkspaceInput, InboxUncheckedCreateWithoutWorkspaceInput> | InboxCreateWithoutWorkspaceInput[] | InboxUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: InboxCreateOrConnectWithoutWorkspaceInput | InboxCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: InboxUpsertWithWhereUniqueWithoutWorkspaceInput | InboxUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: InboxCreateManyWorkspaceInputEnvelope
+    set?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    disconnect?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    delete?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    connect?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    update?: InboxUpdateWithWhereUniqueWithoutWorkspaceInput | InboxUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: InboxUpdateManyWithWhereWithoutWorkspaceInput | InboxUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: InboxScalarWhereInput | InboxScalarWhereInput[]
   }
 
   export type MessagesUncheckedUpdateManyWithoutWorkspaceNestedInput = {
@@ -13548,18 +13449,18 @@ export namespace Prisma {
     deleteMany?: MessagesScalarWhereInput | MessagesScalarWhereInput[]
   }
 
-  export type PageUncheckedUpdateManyWithoutWorkspaceNestedInput = {
-    create?: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput> | PageCreateWithoutWorkspaceInput[] | PageUncheckedCreateWithoutWorkspaceInput[]
-    connectOrCreate?: PageCreateOrConnectWithoutWorkspaceInput | PageCreateOrConnectWithoutWorkspaceInput[]
-    upsert?: PageUpsertWithWhereUniqueWithoutWorkspaceInput | PageUpsertWithWhereUniqueWithoutWorkspaceInput[]
-    createMany?: PageCreateManyWorkspaceInputEnvelope
-    set?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    disconnect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    delete?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    connect?: PageWhereUniqueInput | PageWhereUniqueInput[]
-    update?: PageUpdateWithWhereUniqueWithoutWorkspaceInput | PageUpdateWithWhereUniqueWithoutWorkspaceInput[]
-    updateMany?: PageUpdateManyWithWhereWithoutWorkspaceInput | PageUpdateManyWithWhereWithoutWorkspaceInput[]
-    deleteMany?: PageScalarWhereInput | PageScalarWhereInput[]
+  export type InboxUncheckedUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<InboxCreateWithoutWorkspaceInput, InboxUncheckedCreateWithoutWorkspaceInput> | InboxCreateWithoutWorkspaceInput[] | InboxUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: InboxCreateOrConnectWithoutWorkspaceInput | InboxCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: InboxUpsertWithWhereUniqueWithoutWorkspaceInput | InboxUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: InboxCreateManyWorkspaceInputEnvelope
+    set?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    disconnect?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    delete?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    connect?: InboxWhereUniqueInput | InboxWhereUniqueInput[]
+    update?: InboxUpdateWithWhereUniqueWithoutWorkspaceInput | InboxUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: InboxUpdateManyWithWhereWithoutWorkspaceInput | InboxUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: InboxScalarWhereInput | InboxScalarWhereInput[]
   }
 
   export type WorkspaceCreateNestedOneWithoutMessagesInput = {
@@ -13628,32 +13529,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOAuthInput, UserUpdateWithoutOAuthInput>, UserUncheckedUpdateWithoutOAuthInput>
   }
 
-  export type UserCreateNestedOneWithoutPageInput = {
-    create?: XOR<UserCreateWithoutPageInput, UserUncheckedCreateWithoutPageInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPageInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type WorkspaceCreateNestedOneWithoutPagesInput = {
-    create?: XOR<WorkspaceCreateWithoutPagesInput, WorkspaceUncheckedCreateWithoutPagesInput>
-    connectOrCreate?: WorkspaceCreateOrConnectWithoutPagesInput
+  export type WorkspaceCreateNestedOneWithoutInboxInput = {
+    create?: XOR<WorkspaceCreateWithoutInboxInput, WorkspaceUncheckedCreateWithoutInboxInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutInboxInput
     connect?: WorkspaceWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutPageNestedInput = {
-    create?: XOR<UserCreateWithoutPageInput, UserUncheckedCreateWithoutPageInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPageInput
-    upsert?: UserUpsertWithoutPageInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPageInput, UserUpdateWithoutPageInput>, UserUncheckedUpdateWithoutPageInput>
-  }
-
-  export type WorkspaceUpdateOneRequiredWithoutPagesNestedInput = {
-    create?: XOR<WorkspaceCreateWithoutPagesInput, WorkspaceUncheckedCreateWithoutPagesInput>
-    connectOrCreate?: WorkspaceCreateOrConnectWithoutPagesInput
-    upsert?: WorkspaceUpsertWithoutPagesInput
+  export type WorkspaceUpdateOneRequiredWithoutInboxNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutInboxInput, WorkspaceUncheckedCreateWithoutInboxInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutInboxInput
+    upsert?: WorkspaceUpsertWithoutInboxInput
     connect?: WorkspaceWhereUniqueInput
-    update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutPagesInput, WorkspaceUpdateWithoutPagesInput>, WorkspaceUncheckedUpdateWithoutPagesInput>
+    update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutInboxInput, WorkspaceUpdateWithoutInboxInput>, WorkspaceUncheckedUpdateWithoutInboxInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -13884,7 +13771,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Messages?: MessagesCreateNestedManyWithoutWorkspaceInput
-    pages?: PageCreateNestedManyWithoutWorkspaceInput
+    Inbox?: InboxCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutUserInput = {
@@ -13897,7 +13784,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Messages?: MessagesUncheckedCreateNestedManyWithoutWorkspaceInput
-    pages?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
+    Inbox?: InboxUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutUserInput = {
@@ -14033,38 +13920,6 @@ export namespace Prisma {
 
   export type AccountCreateManyUserInputEnvelope = {
     data: AccountCreateManyUserInput | AccountCreateManyUserInput[]
-  }
-
-  export type PageCreateWithoutWorkspaceInput = {
-    id?: string
-    uniquePageLink: string
-    plan?: $Enums.Plan
-    totalMessages?: number | null
-    totalViews?: number | null
-    totalClicks?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Workspace: WorkspaceCreateNestedOneWithoutPagesInput
-  }
-
-  export type PageUncheckedCreateWithoutWorkspaceInput = {
-    id?: string
-    uniquePageLink: string
-    plan?: $Enums.Plan
-    totalMessages?: number | null
-    totalViews?: number | null
-    totalClicks?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PageCreateOrConnectWithoutWorkspaceInput = {
-    where: PageWhereUniqueInput
-    create: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput>
-  }
-
-  export type PageCreateManyWorkspaceInputEnvelope = {
-    data: PageCreateManyWorkspaceInput | PageCreateManyWorkspaceInput[]
   }
 
   export type WorkspaceUpsertWithWhereUniqueWithoutUserInput = {
@@ -14223,37 +14078,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
   }
 
-  export type PageUpsertWithWhereUniqueWithoutWorkspaceInput = {
-    where: PageWhereUniqueInput
-    update: XOR<PageUpdateWithoutWorkspaceInput, PageUncheckedUpdateWithoutWorkspaceInput>
-    create: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput>
-  }
-
-  export type PageUpdateWithWhereUniqueWithoutWorkspaceInput = {
-    where: PageWhereUniqueInput
-    data: XOR<PageUpdateWithoutWorkspaceInput, PageUncheckedUpdateWithoutWorkspaceInput>
-  }
-
-  export type PageUpdateManyWithWhereWithoutWorkspaceInput = {
-    where: PageScalarWhereInput
-    data: XOR<PageUpdateManyMutationInput, PageUncheckedUpdateManyWithoutWorkspaceInput>
-  }
-
-  export type PageScalarWhereInput = {
-    AND?: PageScalarWhereInput | PageScalarWhereInput[]
-    OR?: PageScalarWhereInput[]
-    NOT?: PageScalarWhereInput | PageScalarWhereInput[]
-    id?: StringFilter<"Page"> | string
-    workspaceId?: StringFilter<"Page"> | string
-    uniquePageLink?: StringFilter<"Page"> | string
-    plan?: EnumPlanFilter<"Page"> | $Enums.Plan
-    totalMessages?: IntNullableFilter<"Page"> | number | null
-    totalViews?: IntNullableFilter<"Page"> | number | null
-    totalClicks?: IntNullableFilter<"Page"> | number | null
-    createdAt?: DateTimeFilter<"Page"> | Date | string
-    updatedAt?: DateTimeFilter<"Page"> | Date | string
-  }
-
   export type UserCreateWithoutAccountInput = {
     id?: string
     email: string
@@ -14268,7 +14092,6 @@ export namespace Prisma {
     Session?: SessionCreateNestedManyWithoutUserInput
     OAuth?: OAuthCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenCreateNestedManyWithoutUserInput
-    Page?: PageCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserUncheckedCreateWithoutAccountInput = {
@@ -14285,7 +14108,6 @@ export namespace Prisma {
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     OAuth?: OAuthUncheckedCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    Page?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserCreateOrConnectWithoutAccountInput = {
@@ -14318,7 +14140,6 @@ export namespace Prisma {
     Session?: SessionUpdateManyWithoutUserNestedInput
     OAuth?: OAuthUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUpdateManyWithoutUserNestedInput
-    Page?: PageUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountInput = {
@@ -14335,7 +14156,6 @@ export namespace Prisma {
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     OAuth?: OAuthUncheckedUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    Page?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserCreateWithoutWorkspaceInput = {
@@ -14352,7 +14172,6 @@ export namespace Prisma {
     OAuth?: OAuthCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenCreateNestedManyWithoutUserInput
     Account?: AccountCreateNestedManyWithoutUserInput
-    Page?: PageCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserUncheckedCreateWithoutWorkspaceInput = {
@@ -14369,7 +14188,6 @@ export namespace Prisma {
     OAuth?: OAuthUncheckedCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenUncheckedCreateNestedManyWithoutUserInput
     Account?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Page?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserCreateOrConnectWithoutWorkspaceInput = {
@@ -14410,27 +14228,35 @@ export namespace Prisma {
     data: MessagesCreateManyWorkspaceInput | MessagesCreateManyWorkspaceInput[]
   }
 
-  export type PageCreateWithoutWorkspaceInput = {
+  export type InboxCreateWithoutWorkspaceInput = {
     id?: string
-    uniquePageLink: string
+    InboxName: string
     plan?: $Enums.Plan
     totalMessages?: number | null
     totalViews?: number | null
     totalClicks?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    workspace: UserCreateNestedOneWithoutPageInput
   }
 
-  export type PageUncheckedCreateWithoutWorkspaceInput = {
+  export type InboxUncheckedCreateWithoutWorkspaceInput = {
     id?: string
-    uniquePageLink: string
+    InboxName: string
     plan?: $Enums.Plan
     totalMessages?: number | null
     totalViews?: number | null
     totalClicks?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type InboxCreateOrConnectWithoutWorkspaceInput = {
+    where: InboxWhereUniqueInput
+    create: XOR<InboxCreateWithoutWorkspaceInput, InboxUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type InboxCreateManyWorkspaceInputEnvelope = {
+    data: InboxCreateManyWorkspaceInput | InboxCreateManyWorkspaceInput[]
   }
 
   export type UserUpsertWithoutWorkspaceInput = {
@@ -14458,7 +14284,6 @@ export namespace Prisma {
     OAuth?: OAuthUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUpdateManyWithoutUserNestedInput
     Account?: AccountUpdateManyWithoutUserNestedInput
-    Page?: PageUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWorkspaceInput = {
@@ -14475,7 +14300,6 @@ export namespace Prisma {
     OAuth?: OAuthUncheckedUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUncheckedUpdateManyWithoutUserNestedInput
     Account?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Page?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type MessagesUpsertWithWhereUniqueWithoutWorkspaceInput = {
@@ -14510,20 +14334,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Messages"> | Date | string
   }
 
-  export type PageUpsertWithWhereUniqueWithoutWorkspaceInput = {
-    where: PageWhereUniqueInput
-    update: XOR<PageUpdateWithoutWorkspaceInput, PageUncheckedUpdateWithoutWorkspaceInput>
-    create: XOR<PageCreateWithoutWorkspaceInput, PageUncheckedCreateWithoutWorkspaceInput>
+  export type InboxUpsertWithWhereUniqueWithoutWorkspaceInput = {
+    where: InboxWhereUniqueInput
+    update: XOR<InboxUpdateWithoutWorkspaceInput, InboxUncheckedUpdateWithoutWorkspaceInput>
+    create: XOR<InboxCreateWithoutWorkspaceInput, InboxUncheckedCreateWithoutWorkspaceInput>
   }
 
-  export type PageUpdateWithWhereUniqueWithoutWorkspaceInput = {
-    where: PageWhereUniqueInput
-    data: XOR<PageUpdateWithoutWorkspaceInput, PageUncheckedUpdateWithoutWorkspaceInput>
+  export type InboxUpdateWithWhereUniqueWithoutWorkspaceInput = {
+    where: InboxWhereUniqueInput
+    data: XOR<InboxUpdateWithoutWorkspaceInput, InboxUncheckedUpdateWithoutWorkspaceInput>
   }
 
-  export type PageUpdateManyWithWhereWithoutWorkspaceInput = {
-    where: PageScalarWhereInput
-    data: XOR<PageUpdateManyMutationInput, PageUncheckedUpdateManyWithoutWorkspaceInput>
+  export type InboxUpdateManyWithWhereWithoutWorkspaceInput = {
+    where: InboxScalarWhereInput
+    data: XOR<InboxUpdateManyMutationInput, InboxUncheckedUpdateManyWithoutWorkspaceInput>
+  }
+
+  export type InboxScalarWhereInput = {
+    AND?: InboxScalarWhereInput | InboxScalarWhereInput[]
+    OR?: InboxScalarWhereInput[]
+    NOT?: InboxScalarWhereInput | InboxScalarWhereInput[]
+    id?: StringFilter<"Inbox"> | string
+    InboxName?: StringFilter<"Inbox"> | string
+    plan?: EnumPlanFilter<"Inbox"> | $Enums.Plan
+    totalMessages?: IntNullableFilter<"Inbox"> | number | null
+    totalViews?: IntNullableFilter<"Inbox"> | number | null
+    totalClicks?: IntNullableFilter<"Inbox"> | number | null
+    createdAt?: DateTimeFilter<"Inbox"> | Date | string
+    updatedAt?: DateTimeFilter<"Inbox"> | Date | string
+    workspaceId?: StringFilter<"Inbox"> | string
   }
 
   export type WorkspaceCreateWithoutMessagesInput = {
@@ -14536,7 +14375,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutWorkspaceInput
-    pages?: PageCreateNestedManyWithoutWorkspaceInput
+    Inbox?: InboxCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutMessagesInput = {
@@ -14549,7 +14388,7 @@ export namespace Prisma {
     totalClicks?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    pages?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
+    Inbox?: InboxUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutMessagesInput = {
@@ -14578,7 +14417,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutWorkspaceNestedInput
-    pages?: PageUpdateManyWithoutWorkspaceNestedInput
+    Inbox?: InboxUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutMessagesInput = {
@@ -14591,7 +14430,7 @@ export namespace Prisma {
     totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    pages?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
+    Inbox?: InboxUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserCreateWithoutSessionInput = {
@@ -14608,7 +14447,6 @@ export namespace Prisma {
     OAuth?: OAuthCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenCreateNestedManyWithoutUserInput
     Account?: AccountCreateNestedManyWithoutUserInput
-    Page?: PageCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserUncheckedCreateWithoutSessionInput = {
@@ -14625,7 +14463,6 @@ export namespace Prisma {
     OAuth?: OAuthUncheckedCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenUncheckedCreateNestedManyWithoutUserInput
     Account?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Page?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserCreateOrConnectWithoutSessionInput = {
@@ -14658,7 +14495,6 @@ export namespace Prisma {
     OAuth?: OAuthUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUpdateManyWithoutUserNestedInput
     Account?: AccountUpdateManyWithoutUserNestedInput
-    Page?: PageUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionInput = {
@@ -14675,7 +14511,6 @@ export namespace Prisma {
     OAuth?: OAuthUncheckedUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUncheckedUpdateManyWithoutUserNestedInput
     Account?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Page?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserCreateWithoutVerificationTokenInput = {
@@ -14692,7 +14527,6 @@ export namespace Prisma {
     Session?: SessionCreateNestedManyWithoutUserInput
     OAuth?: OAuthCreateNestedManyWithoutUserInput
     Account?: AccountCreateNestedManyWithoutUserInput
-    Page?: PageCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserUncheckedCreateWithoutVerificationTokenInput = {
@@ -14709,7 +14543,6 @@ export namespace Prisma {
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     OAuth?: OAuthUncheckedCreateNestedManyWithoutUserInput
     Account?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Page?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserCreateOrConnectWithoutVerificationTokenInput = {
@@ -14742,7 +14575,6 @@ export namespace Prisma {
     Session?: SessionUpdateManyWithoutUserNestedInput
     OAuth?: OAuthUpdateManyWithoutUserNestedInput
     Account?: AccountUpdateManyWithoutUserNestedInput
-    Page?: PageUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVerificationTokenInput = {
@@ -14759,7 +14591,6 @@ export namespace Prisma {
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     OAuth?: OAuthUncheckedUpdateManyWithoutUserNestedInput
     Account?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Page?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserCreateWithoutOAuthInput = {
@@ -14776,7 +14607,6 @@ export namespace Prisma {
     Session?: SessionCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenCreateNestedManyWithoutUserInput
     Account?: AccountCreateNestedManyWithoutUserInput
-    Page?: PageCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserUncheckedCreateWithoutOAuthInput = {
@@ -14793,7 +14623,6 @@ export namespace Prisma {
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     VerificationToken?: VerificationTokenUncheckedCreateNestedManyWithoutUserInput
     Account?: AccountUncheckedCreateNestedManyWithoutUserInput
-    Page?: PageUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type UserCreateOrConnectWithoutOAuthInput = {
@@ -14826,7 +14655,6 @@ export namespace Prisma {
     Session?: SessionUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUpdateManyWithoutUserNestedInput
     Account?: AccountUpdateManyWithoutUserNestedInput
-    Page?: PageUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOAuthInput = {
@@ -14843,49 +14671,9 @@ export namespace Prisma {
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     VerificationToken?: VerificationTokenUncheckedUpdateManyWithoutUserNestedInput
     Account?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    Page?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
-  export type UserCreateWithoutPageInput = {
-    id?: string
-    email: string
-    username?: string | null
-    password?: string | null
-    image?: string | null
-    isVerified?: boolean
-    emailVerified?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    workspace?: WorkspaceCreateNestedManyWithoutUserInput
-    Session?: SessionCreateNestedManyWithoutUserInput
-    OAuth?: OAuthCreateNestedManyWithoutUserInput
-    VerificationToken?: VerificationTokenCreateNestedManyWithoutUserInput
-    Account?: AccountCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutPageInput = {
-    id?: string
-    email: string
-    username?: string | null
-    password?: string | null
-    image?: string | null
-    isVerified?: boolean
-    emailVerified?: Date | string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    workspace?: WorkspaceUncheckedCreateNestedManyWithoutUserInput
-    Session?: SessionUncheckedCreateNestedManyWithoutUserInput
-    OAuth?: OAuthUncheckedCreateNestedManyWithoutUserInput
-    VerificationToken?: VerificationTokenUncheckedCreateNestedManyWithoutUserInput
-    Account?: AccountUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutPageInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPageInput, UserUncheckedCreateWithoutPageInput>
-  }
-
-  export type WorkspaceCreateWithoutPagesInput = {
+  export type WorkspaceCreateWithoutInboxInput = {
     id?: string
     name: string
     plan?: $Enums.Plan
@@ -14898,7 +14686,7 @@ export namespace Prisma {
     Messages?: MessagesCreateNestedManyWithoutWorkspaceInput
   }
 
-  export type WorkspaceUncheckedCreateWithoutPagesInput = {
+  export type WorkspaceUncheckedCreateWithoutInboxInput = {
     id?: string
     name: string
     userId: string
@@ -14911,68 +14699,23 @@ export namespace Prisma {
     Messages?: MessagesUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
-  export type WorkspaceCreateOrConnectWithoutPagesInput = {
+  export type WorkspaceCreateOrConnectWithoutInboxInput = {
     where: WorkspaceWhereUniqueInput
-    create: XOR<WorkspaceCreateWithoutPagesInput, WorkspaceUncheckedCreateWithoutPagesInput>
+    create: XOR<WorkspaceCreateWithoutInboxInput, WorkspaceUncheckedCreateWithoutInboxInput>
   }
 
-  export type UserUpsertWithoutPageInput = {
-    update: XOR<UserUpdateWithoutPageInput, UserUncheckedUpdateWithoutPageInput>
-    create: XOR<UserCreateWithoutPageInput, UserUncheckedCreateWithoutPageInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutPageInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPageInput, UserUncheckedUpdateWithoutPageInput>
-  }
-
-  export type UserUpdateWithoutPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    workspace?: WorkspaceUpdateManyWithoutUserNestedInput
-    Session?: SessionUpdateManyWithoutUserNestedInput
-    OAuth?: OAuthUpdateManyWithoutUserNestedInput
-    VerificationToken?: VerificationTokenUpdateManyWithoutUserNestedInput
-    Account?: AccountUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutPageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    isVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    workspace?: WorkspaceUncheckedUpdateManyWithoutUserNestedInput
-    Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    OAuth?: OAuthUncheckedUpdateManyWithoutUserNestedInput
-    VerificationToken?: VerificationTokenUncheckedUpdateManyWithoutUserNestedInput
-    Account?: AccountUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type WorkspaceUpsertWithoutPagesInput = {
-    update: XOR<WorkspaceUpdateWithoutPagesInput, WorkspaceUncheckedUpdateWithoutPagesInput>
-    create: XOR<WorkspaceCreateWithoutPagesInput, WorkspaceUncheckedCreateWithoutPagesInput>
+  export type WorkspaceUpsertWithoutInboxInput = {
+    update: XOR<WorkspaceUpdateWithoutInboxInput, WorkspaceUncheckedUpdateWithoutInboxInput>
+    create: XOR<WorkspaceCreateWithoutInboxInput, WorkspaceUncheckedCreateWithoutInboxInput>
     where?: WorkspaceWhereInput
   }
 
-  export type WorkspaceUpdateToOneWithWhereWithoutPagesInput = {
+  export type WorkspaceUpdateToOneWithWhereWithoutInboxInput = {
     where?: WorkspaceWhereInput
-    data: XOR<WorkspaceUpdateWithoutPagesInput, WorkspaceUncheckedUpdateWithoutPagesInput>
+    data: XOR<WorkspaceUpdateWithoutInboxInput, WorkspaceUncheckedUpdateWithoutInboxInput>
   }
 
-  export type WorkspaceUpdateWithoutPagesInput = {
+  export type WorkspaceUpdateWithoutInboxInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
@@ -14985,7 +14728,7 @@ export namespace Prisma {
     Messages?: MessagesUpdateManyWithoutWorkspaceNestedInput
   }
 
-  export type WorkspaceUncheckedUpdateWithoutPagesInput = {
+  export type WorkspaceUncheckedUpdateWithoutInboxInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -15054,17 +14797,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type PageCreateManyWorkspaceInput = {
-    id?: string
-    uniquePageLink: string
-    plan?: $Enums.Plan
-    totalMessages?: number | null
-    totalViews?: number | null
-    totalClicks?: number | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
   export type WorkspaceUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -15075,7 +14807,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Messages?: MessagesUpdateManyWithoutWorkspaceNestedInput
-    pages?: PageUpdateManyWithoutWorkspaceNestedInput
+    Inbox?: InboxUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutUserInput = {
@@ -15088,7 +14820,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Messages?: MessagesUncheckedUpdateManyWithoutWorkspaceNestedInput
-    pages?: PageUncheckedUpdateManyWithoutWorkspaceNestedInput
+    Inbox?: InboxUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateManyWithoutUserInput = {
@@ -15237,40 +14969,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PageUpdateWithoutWorkspaceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
-    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
-    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
-    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Workspace?: WorkspaceUpdateOneRequiredWithoutPagesNestedInput
-  }
-
-  export type PageUncheckedUpdateWithoutWorkspaceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
-    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
-    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
-    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PageUncheckedUpdateManyWithoutWorkspaceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
-    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
-    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
-    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type MessagesCreateManyWorkspaceInput = {
     id?: string
     slug?: string | null
@@ -15279,6 +14977,17 @@ export namespace Prisma {
     clicks?: number
     IpAddress?: string | null
     source?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InboxCreateManyWorkspaceInput = {
+    id?: string
+    InboxName: string
+    plan?: $Enums.Plan
+    totalMessages?: number | null
+    totalViews?: number | null
+    totalClicks?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15319,21 +15028,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PageUpdateWithoutWorkspaceInput = {
+  export type InboxUpdateWithoutWorkspaceInput = {
     id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
-    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
-    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
-    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
-    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    workspace?: UserUpdateOneRequiredWithoutPageNestedInput
-  }
-
-  export type PageUncheckedUpdateWithoutWorkspaceInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
+    InboxName?: StringFieldUpdateOperationsInput | string
     plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
     totalViews?: NullableIntFieldUpdateOperationsInput | number | null
@@ -15342,9 +15039,20 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type PageUncheckedUpdateManyWithoutWorkspaceInput = {
+  export type InboxUncheckedUpdateWithoutWorkspaceInput = {
     id?: StringFieldUpdateOperationsInput | string
-    uniquePageLink?: StringFieldUpdateOperationsInput | string
+    InboxName?: StringFieldUpdateOperationsInput | string
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
+    totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
+    totalViews?: NullableIntFieldUpdateOperationsInput | number | null
+    totalClicks?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InboxUncheckedUpdateManyWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    InboxName?: StringFieldUpdateOperationsInput | string
     plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     totalMessages?: NullableIntFieldUpdateOperationsInput | number | null
     totalViews?: NullableIntFieldUpdateOperationsInput | number | null

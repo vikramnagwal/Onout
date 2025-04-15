@@ -5,9 +5,7 @@ import { useEffect, useState } from "react";
 const MEDIA_BREAKPOINT = 769;
 
 export function useMediaQuery() {
-	const [isMobile, setIsMobile] = useState(
-		window.innerWidth < MEDIA_BREAKPOINT,
-	);
+	const [isMobile, setIsMobile] = useState<boolean>(false);
 
 	function onChange() {
 		setIsMobile(window.innerWidth < MEDIA_BREAKPOINT);

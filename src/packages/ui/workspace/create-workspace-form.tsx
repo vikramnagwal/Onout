@@ -11,9 +11,9 @@ import { checkWorkspaceExists } from "@/app/lib/actions/check-workspace-exists-a
 import { cn } from "@/packages/utils/functions/cn";
 import { toast } from "sonner";
 import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
-import { createWorkspace } from "@/app/lib/actions/create-workspace-action";
 import { useRouter } from "next/navigation";
-import { AlertIcon } from "@/packages/icons/alert";
+import { AlertIcon } from "../icons/alert";
+
 
 type CreateWorkspaceFormProps = z.infer<typeof CreateWorkspaceSchema>;
 
@@ -30,7 +30,6 @@ export function CreateWorkspaceForm() {
 		handleSubmit,
 		watch,
 		formState: { errors },
-		getValues,
 		setError,
 		clearErrors
 	} = useForm<CreateWorkspaceFormProps>({
@@ -59,15 +58,19 @@ export function CreateWorkspaceForm() {
 		},
 		onError: (_) => {
 			toast.error("Error checking workspace existence");
+			setError("name", {
+				type: "manual",
+				message: "failed to check workspace name",
+			});
 			setIsAvailable(null)
 		},
 	});
 
 	async function fetchWorkspaceExistance() {
+		clearErrors("name");
 		const isValidWorkspaceName = await CreateWorkspaceSchema.safeParseAsync({
 			name: debouncedWorkspaceName
-		})
-		
+		});	
 		if (isValidWorkspaceName.success && debouncedWorkspaceName.length > MIN_WORKSPACE_NAME_LENGTH) {
 			setIsAvailable(null);
 			clearErrors("name");
@@ -90,7 +93,7 @@ export function CreateWorkspaceForm() {
 			if (response.ok) {
 				const { workspace } = await response.json();
 				toast.success("Workspace created successfully");
-				router.push(`/${workspace?.name}`);
+				router.push(`/${workspace?.name}/inbox`);
 			} else {
 				toast.error("Error creating workspace");
 				setIsCreating(false);

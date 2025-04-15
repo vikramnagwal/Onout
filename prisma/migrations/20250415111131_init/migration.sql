@@ -4,6 +4,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "username" TEXT,
     "password" TEXT,
+    "image" TEXT,
     "isVerified" BOOLEAN NOT NULL DEFAULT false,
     "emailVerified" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -34,7 +35,6 @@ CREATE TABLE "Workspace" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "uniquePageLink" TEXT NOT NULL,
     "plan" TEXT NOT NULL DEFAULT 'Basic',
     "totalMessages" INTEGER DEFAULT 0,
     "totalViews" INTEGER DEFAULT 0,
@@ -97,6 +97,20 @@ CREATE TABLE "OAuth" (
     CONSTRAINT "OAuth_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "Inbox" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "InboxName" TEXT NOT NULL,
+    "plan" TEXT NOT NULL DEFAULT 'Basic',
+    "totalMessages" INTEGER DEFAULT 0,
+    "totalViews" INTEGER DEFAULT 0,
+    "totalClicks" INTEGER DEFAULT 0,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    "workspaceId" TEXT NOT NULL,
+    CONSTRAINT "Inbox_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "Workspace" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
@@ -110,13 +124,10 @@ CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provi
 CREATE UNIQUE INDEX "Workspace_name_key" ON "Workspace"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Workspace_uniquePageLink_key" ON "Workspace"("uniquePageLink");
+CREATE INDEX "Workspace_userId_id_totalMessages_idx" ON "Workspace"("userId", "id", "totalMessages");
 
 -- CreateIndex
-CREATE INDEX "Workspace_userId_uniquePageLink_id_totalMessages_idx" ON "Workspace"("userId", "uniquePageLink", "id", "totalMessages");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Workspace_id_name_userId_uniquePageLink_key" ON "Workspace"("id", "name", "userId", "uniquePageLink");
+CREATE UNIQUE INDEX "Workspace_id_name_userId_key" ON "Workspace"("id", "name", "userId");
 
 -- CreateIndex
 CREATE INDEX "Messages_workspaceId_content_views_idx" ON "Messages"("workspaceId", "content", "views");
@@ -132,3 +143,6 @@ CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationTok
 
 -- CreateIndex
 CREATE UNIQUE INDEX "OAuth_provider_providerAccountId_key" ON "OAuth"("provider", "providerAccountId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Inbox_InboxName_key" ON "Inbox"("InboxName");

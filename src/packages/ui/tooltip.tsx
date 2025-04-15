@@ -100,7 +100,7 @@ export function ButtonTooltip({
 	return (
 		<Tooltip content={content} {...tooltipProps}>
 			<Button
-			    text={text}
+				text={text}
 				type="button"
 				{...props}
 				className={cn("flex px-2 py-1 rounded-md duration-75", props.className)}
