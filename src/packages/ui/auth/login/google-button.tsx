@@ -1,6 +1,6 @@
 import { signIn } from "next-auth/react";
 import { Button } from "@ui/button";
-import { Google } from "@/packages/icons/google";
+import { Google } from "@/packages/ui/icons/google";
 
 export function GoogleButton() {
 	return (

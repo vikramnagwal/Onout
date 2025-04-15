@@ -200,16 +200,16 @@ exports.Prisma.OAuthScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.PageScalarFieldEnum = {
+exports.Prisma.InboxScalarFieldEnum = {
   id: 'id',
-  workspaceId: 'workspaceId',
-  uniquePageLink: 'uniquePageLink',
+  InboxName: 'InboxName',
   plan: 'plan',
   totalMessages: 'totalMessages',
   totalViews: 'totalViews',
   totalClicks: 'totalClicks',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  workspaceId: 'workspaceId'
 };
 
 exports.Prisma.SortOrder = {
@@ -234,7 +234,7 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   OAuth: 'OAuth',
-  Page: 'Page'
+  Inbox: 'Inbox'
 };
 
 /**

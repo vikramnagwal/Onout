@@ -32,7 +32,6 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
 
 	const session = await getSession();
-	console.log("Session: ", session);
 	if (!session) {
 		return NextResponse.json({ message: "Session Expired! Please login again" }, { status: 401 });
 	}

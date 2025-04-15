@@ -1,5 +1,5 @@
 import { signIn } from "next-auth/react";
-import { Github } from "@/packages/icons/github";
+import { Github } from "@/packages/ui/icons/github";
 import { Button } from "@ui/button";
 
 export function GithubButton({ next }: { next?: string }) {

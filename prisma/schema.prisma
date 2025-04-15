@@ -3,7 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../prisma/generated"
+  output   = "../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -26,7 +26,6 @@ model User {
   OAuth             OAuth[]
   VerificationToken VerificationToken[]
   Account           Account[]
-  Page              Page[]
 }
 
 enum Plan {
@@ -68,7 +67,7 @@ model Workspace {
   updatedAt     DateTime   @updatedAt
   user          User       @relation(fields: [userId], references: [id])
   Messages      Messages[]
-  pages         Page[]
+  Inbox         Inbox[]
 
   @@unique([id, name, userId])
   @@index([userId, id, totalMessages])
@@ -133,16 +132,16 @@ model OAuth {
   @@unique([provider, providerAccountId])
 }
 
-model Page {
-  id             String    @id @default(cuid())
-  workspaceId    String
-  uniquePageLink String    @unique
-  plan           Plan      @default(Basic)
-  totalMessages  Int?      @default(0)
-  totalViews     Int?      @default(0)
-  totalClicks    Int?      @default(0)
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  workspace      User      @relation(fields: [workspaceId], references: [id])
-  Workspace      Workspace @relation(fields: [workspaceId], references: [id])
+model Inbox {
+  id            String   @id @default(cuid())
+  title         String   @unique
+  plan          Plan     @default(Basic)
+  totalMessages Int?     @default(0)
+  totalViews    Int?     @default(0)
+  totalClicks   Int?     @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  workspaceId String
+  Workspace   Workspace @relation(fields: [workspaceId], references: [id])
 }
