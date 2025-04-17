@@ -66,35 +66,35 @@ export function Button({
 	...rest
 }: ButtonProps) {
 	return (
-    <button
-      ref={ref}
-      className={cn(buttonVariants({ variant, size }), className)}
-      disabled={disabled || loading}
-      {...(loading && { "aria-busy": true })}
-      {...rest}
-    >
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
-        icon && <span className="mr-3">{icon}</span>
-      )}
-      {text && <span className={textWrapperClassName}>{text}</span>}
-      {shortcut && (
-        <kbd
-          className={cn(
-            "hidden ml-2 rounded-sm border-none bg-neutral-600 px-2 py-0.5 text-xs font-light text-neutral-200 md:inline-block",
-            {
-              "bg-neutral-100": variant?.endsWith("outline"),
-		      "bg-neutral-200 text-neutral-400": disabled,
-            },
-            shortcutClassName
-          )}
-        >
-          {shortcut}
-        </kbd>
-      )}
-    </button>
-  );
+		<button
+			ref={ref}
+			className={cn(buttonVariants({ variant, size }), className)}
+			disabled={disabled || loading}
+			{...(loading && { "aria-busy": true })}
+			{...rest}
+		>
+			{loading ? (
+				<LoadingSpinner />
+			) : (
+				icon && <span className="mr-3">{icon}</span>
+			)}
+			{text && <span className={textWrapperClassName}>{text}</span>}
+			{shortcut && (
+				<kbd
+					className={cn(
+						"hidden ml-2 rounded-sm border-none bg-neutral-600 px-2 py-0.5 text-xs font-light text-neutral-200 md:inline-block",
+						{
+							"bg-neutral-100": variant?.endsWith("outline"),
+							"bg-neutral-200 text-neutral-400": disabled,
+						},
+						shortcutClassName,
+					)}
+				>
+					{shortcut}
+				</kbd>
+			)}
+		</button>
+	);
 }
 
 Button.displayName = "Button";

@@ -20,8 +20,8 @@ export const createNewUser = actionClient
 		const newUser = await prisma.user.create({
 			data: {
 				email,
-				password: await hashPassword(password),
-				isVerified: false,
+				hashedpassword: await hashPassword(password),
+				emailVerified: false,
 			},
 		});
 

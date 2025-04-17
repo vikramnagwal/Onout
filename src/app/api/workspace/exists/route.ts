@@ -1,11 +1,11 @@
 import { prisma } from "@/app/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 
+// GET: /api/workspace/exists?query={workspace_name} - check if a workspace exists.
+
 export async function GET(request: NextRequest) {
-	console.log("request", request);
 	const { searchParams } = new URL(request.url);
 	const query = searchParams.get("query") || "";
-	console.log("query", query);
 
 	if (!query) {
 		return NextResponse.json(
@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
 	try {
 		const workspaceExists = await prisma.workspace.findUnique({
 			where: {
-				name: query,
+				slug: query,
 			},
 			select: {
 				id: true,
@@ -25,10 +25,13 @@ export async function GET(request: NextRequest) {
 		});
 
 		if (!workspaceExists) {
-			return NextResponse.json(0);
+			return NextResponse.json(0); // true (good to go)
 		}
 		return NextResponse.json(1);
 	} catch (_) {
-		return NextResponse.json({message: "Error hj checking workspace existence"}, { status: 500 });
+		return NextResponse.json(
+			{ message: "Error checking workspace existence" },
+			{ status: 500 },
+		);
 	}
 }

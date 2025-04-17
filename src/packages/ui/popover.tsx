@@ -34,7 +34,6 @@ export function Popover({
 	onEscapeKeyDown,
 	onWheel,
 }: PopoverProps) {
-
 	const isMobile = useMediaQuery("only screen and (max-width : 768px)");
 
 	if (mobileOnly || isMobile) {

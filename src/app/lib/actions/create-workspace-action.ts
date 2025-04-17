@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { actionClient } from "./safe-action";
 import { CreateWorkspaceSchema } from "../zod/schema/workspace-schema";
@@ -8,27 +8,29 @@ export const createWorkspace = actionClient
 	.action(async ({ parsedInput }) => {
 		const { name: workspaceName } = parsedInput;
 		const workspaceId = workspaceName.replace(/\s+/g, "-").toLowerCase();
-		console.log("Creating workspace with ID:", workspaceId); // Remove this line in production
 
 		// Create the workspace
-		const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/workspace`, {
-			method: "POST",
-			body: JSON.stringify({ workspaceId }),
-			headers: {
-				"Content-Type": "application/json",
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_APP_URL}/api/workspace`,
+			{
+				method: "POST",
+				body: JSON.stringify({ workspaceId }),
+				headers: {
+					"Content-Type": "application/json",
+				},
 			},
-		})
+		);
 
 		if (!response.ok) {
-			console.error("Error creating workspace:", response.statusText); // Remove this line in production
+			console.error("Error creating workspace:", response.statusText);
 			return null;
 		}
 		const workspace = await response.json();
-		console.log("Workspace created:", workspace); // Remove this line in production
+
 
 		if (!workspace) {
 			return {
 				message: "Error creating workspace",
-			}
+			};
 		}
 	});
