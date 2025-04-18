@@ -5,10 +5,10 @@ export async function checkUserExists(id: string) {
 	try {
 		const user = await prisma.user.findUnique({
 			where: {
-				id
+				id,
 			},
 			select: {
-				isVerified: true,
+				emailVerified: true,
 			},
 		});
 

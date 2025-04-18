@@ -1,5 +1,11 @@
+"use server";
+
+import { prisma } from "../db";
 import { actionClient } from "./safe-action";
 import { z } from "zod";
+
+// fix this : (this is a server action but used like a client action)
+// fetch workspace name here from prisma and client use server
 
 const checkWorkspaceExistsSchema = z.object({
 	name: z
@@ -11,17 +17,23 @@ const checkWorkspaceExistsSchema = z.object({
 export const checkWorkspaceExists = actionClient
 	.schema(checkWorkspaceExistsSchema)
 	.action(async ({ parsedInput }) => {
+
 		const { name: workspaceName } = parsedInput;
 		try {
-			const response = await fetch(
-				`/api/workspace/exists?query=${workspaceName}`
-			);
+			const workspace = await prisma.workspace.findUnique({
+				where: {
+					slug: workspaceName,
+				},
+				select: {
+					id: true,
+				}
+			})
 			
-			if (!response.ok) {
-				throw new Error("failed to check workspace name");
+			if (!workspace) {
+				return false;
+			} else {
+				return true;
 			}
-			const data = await response.json();
-			return data === 1; // Assuming if 1 is returned, the workspace exists
 		} catch (error) {
 			return new Error("Error checking workspace existence");
 		}

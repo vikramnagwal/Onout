@@ -10,3 +10,4 @@ export async function decryptPassword({
 }: { password: string; passwordHash: string }): Promise<boolean> {
 	return await compare(password, passwordHash);
 }
+

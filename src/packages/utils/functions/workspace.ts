@@ -1,3 +1,4 @@
+import { getSession } from "@/app/lib/session";
 import { v4 as uuidv4 } from "uuid";
 
 export async function generateUniquePageId(email: string): Promise<string> {
@@ -19,4 +20,17 @@ export const getAuthTokenOrThrow = async (req: Request): Promise<string> => {
 	} catch (error) {
 		throw new Error("Token not found or invalid tokens");
 	}
+};
+
+export const getSessionOrThrow = async () => {
+	const session = await getSession();
+	if (!session) {
+		throw new Error("Session not found");
+	}
+
+	if (!session.user) {
+		throw new Error("Session Expired or User logged out");
+	}
+
+	return session;
 };

@@ -14,7 +14,6 @@ import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { useRouter } from "next/navigation";
 import { AlertIcon } from "../icons/alert";
 
-
 type CreateWorkspaceFormProps = z.infer<typeof CreateWorkspaceSchema>;
 
 const DEBOUNCE_DELAY = 800;
@@ -31,47 +30,51 @@ export function CreateWorkspaceForm() {
 		watch,
 		formState: { errors },
 		setError,
-		clearErrors
+		clearErrors,
 	} = useForm<CreateWorkspaceFormProps>({
 		defaultValues: {
 			name: "",
 		},
 	});
 
-
 	const slug = watch("name");
 	const debouncedWorkspaceName = useDebounce(slug, DEBOUNCE_DELAY);
 
-	const { executeAsync: executeNameCheck, status: checkStatus } = useAction(checkWorkspaceExists, {
-		onSuccess: (result) => {
-			const isTaken = result.data;
-			if (isTaken) {
-				setIsAvailable(false);
+	const { executeAsync: executeNameCheck, status: checkStatus } = useAction(
+		checkWorkspaceExists,
+		{
+			onSuccess: (result) => {
+				const isTaken = result.data;
+				if (isTaken) {
+					setIsAvailable(false);
+					setError("name", {
+						type: "manual",
+						message: "Workspace name already taken",
+					});
+				} else {
+					setIsAvailable(true);
+				}
+			},
+			onError: (error) => {
+				toast.error("Error checking workspace existence");
 				setError("name", {
 					type: "manual",
-					message: "Workspace name already taken",
+					message: "failed to check workspace name",
 				});
-			}
-			else {
-				setIsAvailable(true);
-			}
+				setIsAvailable(null);
+			},
 		},
-		onError: (_) => {
-			toast.error("Error checking workspace existence");
-			setError("name", {
-				type: "manual",
-				message: "failed to check workspace name",
-			});
-			setIsAvailable(null)
-		},
-	});
+	);
 
 	async function fetchWorkspaceExistance() {
 		clearErrors("name");
 		const isValidWorkspaceName = await CreateWorkspaceSchema.safeParseAsync({
-			name: debouncedWorkspaceName
-		});	
-		if (isValidWorkspaceName.success && debouncedWorkspaceName.length > MIN_WORKSPACE_NAME_LENGTH) {
+			name: debouncedWorkspaceName,
+		});
+		if (
+			isValidWorkspaceName.success &&
+			debouncedWorkspaceName.length > MIN_WORKSPACE_NAME_LENGTH
+		) {
 			setIsAvailable(null);
 			clearErrors("name");
 			await executeNameCheck({ name: debouncedWorkspaceName });
@@ -89,7 +92,8 @@ export function CreateWorkspaceForm() {
 				headers: {
 					"Content-Type": "application/json",
 				},
-			})
+			});
+			
 			if (response.ok) {
 				const { workspace } = await response.json();
 				toast.success("Workspace created successfully");
@@ -108,34 +112,40 @@ export function CreateWorkspaceForm() {
 	const isChecking = checkStatus === "executing";
 
 	return (
-    <>
-	  <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col my-2">
-          <Input
-            {...register("name", { required: true })}
-            placeholder="Workspace Name"
-            type="text"
-            error={errors.name?.message}
-            className={cn(
-              "mb-2",
-              isAvailable && "border-green-500 focus-visible:ring-green-300",
-              errors.name && "border-red-500 focus-visible:ring-red-300"
-            )}
-            autoComplete="off"
-            required
-          />
-		  <span className="text-sm text-red-500/80 min-h-[28px] flex items-end justify-center mb-2">{errors.name?.message && <><AlertIcon /> {errors.name.message}</>}</span>
-        </div>
+		<>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<div className="flex flex-col my-2">
+					<Input
+						{...register("name", { required: true })}
+						placeholder="Workspace Name"
+						type="text"
+						error={errors.name?.message}
+						className={cn(
+							"mb-2",
+							isAvailable && "border-green-500 focus-visible:ring-green-300",
+							errors.name && "border-red-500 focus-visible:ring-red-300",
+						)}
+						autoComplete="off"
+						required
+					/>
+					<span className="text-sm text-red-500/80 min-h-[28px] flex items-end justify-center mb-2">
+						{errors.name?.message && (
+							<>
+								<AlertIcon /> {errors.name.message}
+							</>
+						)}
+					</span>
+				</div>
 
-          <Button
-            text={isCreating ? "Creating..." : "Create Workspace"}
-            type="submit"
-            variant="primary"
-            className="w-full"
-            disabled={!!errors.name || isChecking || isCreating}
-            loading={isCreating}
-          />
-      </form>
-    </>
-  );
+				<Button
+					text={isCreating ? "Creating..." : "Create Workspace"}
+					type="submit"
+					variant="primary"
+					className="w-full"
+					disabled={!!errors.name || isChecking || isCreating}
+					loading={isCreating}
+				/>
+			</form>
+		</>
+	);
 }
