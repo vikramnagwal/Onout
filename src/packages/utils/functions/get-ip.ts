@@ -9,3 +9,9 @@ export const getIp = async (req: Request) => {
 
     return headers["x-forwarded-for"] || headers["x-real-ip"] || headers["cf-connecting-ip"] || headers["x-client-ip"] || headers["x-cluster-client-ip"] || "no ip";
 }
+
+export const getMessageSource = async(request: Request) => {
+    const url = new URL(request.url);
+    const source = url.searchParams.get("source") || "unknown";
+    return source;
+}

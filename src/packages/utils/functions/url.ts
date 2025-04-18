@@ -1,7 +1,9 @@
 
-export const getSearchParams = (request: Request) => {
-        // const params = new URL(request.url).searchParams;
-        let params: Record<string, string> = {};
-        new URL(request.url).searchParams.forEach((value, key) => params[key] = value);
-        return params
-}
+export const getSearchParams = (request: Request, query: string) => {
+        const parsedUrl = new URL(request.url).searchParams;
+        const params = parsedUrl.get(query);
+       if (!params) {
+            throw new Error(`Missing query parameter: ${query}`);
+        }
+        return params;
+};

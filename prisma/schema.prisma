@@ -64,21 +64,22 @@ enum type {
 }
 
 model Workspace {
-  id   String @id @default(cuid())
-  slug String @unique
+  id     String @id @default(cuid())
+  slug   String @unique
+  domain String @unique
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
 
-  type          type       @default(public)
-  plan          Plan       @default(Basic)
-  totalMessages Int?       @default(0)
-  totalViews    Int?       @default(0)
-  totalClicks   Int?       @default(0)
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  
-  Messages      Messages[]
+  type          type     @default(public)
+  plan          Plan     @default(Basic)
+  totalMessages Int?     @default(0)
+  totalViews    Int?     @default(0)
+  totalClicks   Int?     @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  Messages Messages[]
 
   @@unique([id, slug, userId])
   @@index([userId, id, totalMessages])
