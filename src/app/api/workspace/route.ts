@@ -2,6 +2,7 @@ import { prisma } from "@/app/lib/db";
 import { checkUserExists } from "@/app/lib/postgres/check-user-exists";
 import { getSession } from "@/app/lib/session";
 import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
+import { createDomainfromId } from "@/packages/utils/functions/domain";
 import { getSessionOrThrow } from "@/packages/utils/functions/workspace";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -63,6 +64,7 @@ export async function POST(request: NextRequest) {
 	const { name: workspaceName } = await CreateWorkspaceSchema.parseAsync(
 		await request.json(),
 	);
+	const domain = createDomainfromId(workspaceName)
 
 	if (!workspaceName || typeof workspaceName !== "string") {
 		return NextResponse.json(
@@ -81,6 +83,7 @@ export async function POST(request: NextRequest) {
 		const workspace = await prisma.workspace.create({
 			data: {
 				slug: workspaceName,
+				domain,
 				user: {
 					connect: {
 						id: userId,

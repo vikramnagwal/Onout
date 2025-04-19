@@ -11,7 +11,6 @@ export const getIp = async (req: Request) => {
 }
 
 export const getMessageSource = async(request: Request) => {
-    const url = new URL(request.url);
-    const source = url.searchParams.get("source") || "unknown";
-    return source;
+  const browser =  request.headers.get("sec-ch-ua")?.split(';')[0].replace(/"/g, "") || "unknown"
+  return browser
 }

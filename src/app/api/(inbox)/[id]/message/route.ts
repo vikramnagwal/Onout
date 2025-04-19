@@ -1,9 +1,14 @@
+import { encryptMessages } from '@/packages/utils/functions/messages';
 import { prisma } from "@/app/lib/db";
 import { EncryptedMessageSchema } from "@/app/lib/zod/schema/messages-schema";
 import { getIp, getMessageSource } from "@/packages/utils/functions/get-ip";
 import { getSearchParams } from "@/packages/utils/functions/url";
-import { getSessionOrThrow } from "@/packages/utils/functions/workspace";
 import { NextRequest, NextResponse } from "next/server";
+
+
+type Params = {
+    id: string;
+};
 
 // GET: /api/inbox/message?id=1234 - get message by id
 export async function GET(request: NextRequest) {
@@ -29,20 +34,21 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ message: "Failed to fetch message" }, { status: 500 });   
     }
 }
-// POST: /api/workspace/[idOrSlug]/messages - create a new message in workspace
-export async function POST(request: NextRequest) {
+
+
+// POST: /api/[id]/messages - create a new message in workspace
+export async function POST(request: NextRequest, { params }: { params: Promise<{id: string}>}) {
 
     const ip = await getIp(request);
     const messageSource = await getMessageSource(request);
-    const session = await getSessionOrThrow();
-    const userId = session?.user?.id;
-
-    if (!userId) {
-        return NextResponse.json({ message: "Session Expired! Please login again" }, { status: 401 });
-    }
-
-    const { encryptedMessage } = await EncryptedMessageSchema.parseAsync(request.json());
-
+    console.log("browser: ", messageSource); // remove this line after testing
+    const { id: slug } = await params;
+    const { data } = await request.json();
+    console.log("Encrypted message: ", data); // remove this line after testing
+    return 0
+    const { encryptedMessage  } = await EncryptedMessageSchema.parseAsync(await request.json());
+    console.log("Encrypted message: ", encryptedMessage);
+ return true
     try {   
         const message = await prisma.messages.create({
             data: {
@@ -52,7 +58,7 @@ export async function POST(request: NextRequest) {
 
                 workspace: {
                     connect: {
-                        userId: userId,
+                        slug: slug,
                     },
                 },
             }
