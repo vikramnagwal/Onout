@@ -44,15 +44,14 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     console.log("browser: ", messageSource); // remove this line after testing
     const { id: slug } = await params;
     const { data } = await request.json();
-    console.log("Encrypted message: ", data); // remove this line after testing
-    return 0
-    const { encryptedMessage  } = await EncryptedMessageSchema.parseAsync(await request.json());
-    console.log("Encrypted message: ", encryptedMessage);
- return true
+
+    const { encryptedMessage  } = await EncryptedMessageSchema.parseAsync(data);
+
     try {   
         const message = await prisma.messages.create({
             data: {
                 content: encryptedMessage,
+                slug: slug,
                 IpAddress: ip,
                 source: messageSource,
 
