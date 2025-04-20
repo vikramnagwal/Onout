@@ -4,19 +4,21 @@ import { getSession } from "@/app/lib/session";
 import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { createDomainfromId } from "@/packages/utils/functions/domain";
 import { getSessionOrThrow } from "@/packages/utils/functions/workspace";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-// GET: /api/workspace fetch workspace of user
+// GET: /api/workspace - fetch workspace of user
+
 export async function GET(request: NextRequest) {
 	const session = await getSessionOrThrow();
 	const userId = session?.user?.id;
+
 	if (!userId) {
 		return NextResponse.json(
 			{ message: "Unauthorizes: Session Expired or Invalid" },
 			{ status: 401 },
 		)
 	}
-	/* fetch workspace on given userId */
 
 	try {
 		const workspace = await prisma.workspace.findUnique({
