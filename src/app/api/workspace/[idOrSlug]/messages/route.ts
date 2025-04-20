@@ -11,7 +11,6 @@ interface Params {
 }
 
 // GET: /api/workspace/[idOrSlug]/messages - get all messages from workspace
-// don't allow get request 
 export async function GET(request: NextRequest, { params } : Params) {
     const { idOrSlug } = params;
     const session = await getSessionOrThrow();

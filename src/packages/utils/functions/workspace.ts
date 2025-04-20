@@ -1,5 +1,6 @@
 import { getSession } from "@/app/lib/session";
 import { v4 as uuidv4 } from "uuid";
+import { logger } from "./logger";
 
 export async function generateUniquePageId(email: string): Promise<string> {
 	const emailprefix = email.split("@")[0];
@@ -34,3 +35,14 @@ export const getSessionOrThrow = async () => {
 
 	return session;
 };
+
+// server side
+export const getUserId = async () => {
+	const { user } = await getSessionOrThrow();
+	const userId = user ? user.id : null
+	if (!userId) {
+		logger.error("User ID not found");
+		throw new Error("User ID not found");
+	} 
+	return { userId, user, email: user.email };
+}
