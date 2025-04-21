@@ -29,6 +29,9 @@ importers:
       '@uidotdev/usehooks':
         specifier: ^2.4.1
         version: 2.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      animejs:
+        specifier: ^4.0.1
+        version: 4.0.1
       bcryptjs:
         specifier: ^3.0.2
         version: 3.0.2
@@ -1811,6 +1814,9 @@ packages:
     resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
+
+  animejs@4.0.1:
+    resolution: {integrity: sha512-QbNbOrToapaZ7ebNuQpRgOhEGeyg/r8+bOUKbaaDNI/64XyjDrguVWW6Xgnt8PX+HHs0aAi34WpetczSbRZ3dQ==}
 
   aria-hidden@1.2.4:
     resolution: {integrity: sha512-y+CcFFwelSXpLZk/7fMB2mUbGtX9lKycf1MWJ7CaTIERyitVlyQx6C+sxcROU2BAJ24OiZyK+8wj2i8AlBoS3A==}
@@ -4096,6 +4102,8 @@ snapshots:
       acorn: 8.14.1
 
   acorn@8.14.1: {}
+
+  animejs@4.0.1: {}
 
   aria-hidden@1.2.4:
     dependencies:

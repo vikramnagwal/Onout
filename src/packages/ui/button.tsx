@@ -13,7 +13,7 @@ const buttonVariants = cva(
 				secondary:
 					"border border-neutral-300 focus-visible:border-neutral-400 bg-white text-black text-neutral-900 hover:bg-neutral-50 focus-visible:border-neutral-500 outline-none",
 				outline:
-					"border border-transparent hover:border-neutral-200 focus-visible:border-neutral-500",
+					"border border-neutral-200/80 hover:border-neutral-300 focus-visible:border-neutral-500",
 				success:
 					"border-green-500 bg-green-500 text-white hover:ring-4 hover:ring-green-100",
 				danger:
