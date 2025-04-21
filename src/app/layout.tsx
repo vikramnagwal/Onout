@@ -5,6 +5,7 @@ import "./globals.css";
 import { RegisterProvider } from "@/packages/ui/auth/register/context";
 import AuthSession from "./lib/auth/auth-provider";
 import { cn } from "@/packages/utils/functions/cn";
+import { NavHeader } from "@/packages/ui/components/header";
 
 export const metadata: Metadata = {
 	title: "Anom",
@@ -22,6 +23,7 @@ export default function RootLayout({
 			className={cn(switzer.variable, poppins.variable, geistMono.variable)}
 		>
 			<body>
+				<NavHeader />
 				<AuthSession>
 					<RegisterProvider>
 						<Toaster />
