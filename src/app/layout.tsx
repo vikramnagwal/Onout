@@ -18,19 +18,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html
-			lang="en"
-			className={cn(switzer.variable, poppins.variable, geistMono.variable)}
-		>
-			<body>
-				<NavHeader />
-				<AuthSession>
-					<RegisterProvider>
-						<Toaster />
-						{children}
-					</RegisterProvider>
-				</AuthSession>
-			</body>
-		</html>
-	);
+    <html
+      lang="en"
+      className={cn(switzer.variable, poppins.variable, geistMono.variable)}
+    >
+      <body>
+        <AuthSession>
+          <RegisterProvider>
+            <NavHeader />
+            <Toaster />
+            {children}
+          </RegisterProvider>
+        </AuthSession>
+      </body>
+    </html>
+  );
 }
