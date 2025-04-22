@@ -1,6 +1,4 @@
 "use client";
-
-import { SignOutButton } from "@/packages/ui/auth/sign-out";
 import { useWorkspace } from "./lib/swr/use-Workspace";
 import { WorkspaceNamePreview } from "@/packages/ui/workspace/workspace-name-preview";
 
@@ -14,7 +12,6 @@ export default function Home() {
 					<WorkspaceNamePreview />
 				</h2>
 				<h1 className="font-semibold text-3xl">OnOut</h1>
-				<SignOutButton />
 			</div>
 		</div>
 	);
