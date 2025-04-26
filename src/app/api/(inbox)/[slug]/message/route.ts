@@ -1,23 +1,29 @@
 import { encryptMessages } from '@/packages/utils/functions/messages';
 import { prisma } from "@/app/lib/db";
 import { EncryptedMessageSchema } from "@/app/lib/zod/schema/messages-schema";
-import { getIp, getMessageSource } from "@/packages/utils/functions/get-ip";
+import { getIP, getMessageSource } from "@/packages/utils/functions/get-ip";
 import { getSearchParams } from "@/packages/utils/functions/url";
 import { NextRequest, NextResponse } from "next/server";
+import { withSession } from '@/app/lib/session';
 
 
 type Params = {
     id: string;
 };
 
-// GET: /api/inbox/message?id=1234 - get message by id
-export async function GET(request: NextRequest) {
-    const messageId = getSearchParams(request, "id");
+// GET: /api/[slug]/messages - get all messages in workspace
+export const GET = withSession( async ({ params }) => {
+    console.log("hi")
+    // const ip = await getIP();
+    console.log(params)
     
+    return NextResponse.json({ message: "Hello" }, { status: 200 });
     try {
-        const message = await prisma.messages.findUnique({
+        const message = await prisma.messages.findMany({
             where: {
-                id: messageId,
+                workspace: {
+                    // slug: workspaceName,
+                }
             },
             select: {
                 content: true,
@@ -33,13 +39,13 @@ export async function GET(request: NextRequest) {
      console.error("Error fetching message: ", error);
         return NextResponse.json({ message: "Failed to fetch message" }, { status: 500 });   
     }
-}
+})
 
 
 // POST: /api/[id]/messages - create a new message in workspace
 export async function POST(request: NextRequest, { params }: { params: Promise<{id: string}>}) {
 
-    const ip = await getIp(request);
+    const ip = await getIP();
     const messageSource = await getMessageSource(request);
     console.log("browser: ", messageSource); // remove this line after testing
     const { id: slug } = await params;

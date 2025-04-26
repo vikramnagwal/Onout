@@ -1,18 +1,17 @@
 "use client";
-import { useWorkspace } from "./lib/swr/use-Workspace";
-import { WorkspaceNamePreview } from "@/packages/ui/workspace/workspace-name-preview";
+
+import { NavHeader } from "@/packages/ui/nav/header";
+import { Hero } from "@/packages/ui/web/hero-section";
+import { useState } from "react";
 
 export default function Home() {
-	const data = useWorkspace();
-	console.log("Workspace data: ", data);
+	const [openModal, setOpenModel] = useState<boolean>(false)
 	return (
-		<div>
-			<div className="flex flex-col items-center justify-center h-screen z-30">
-				<h2 className="text-3xl font-bold">
-					<WorkspaceNamePreview />
-				</h2>
-				<h1 className="font-semibold text-3xl">OnOut</h1>
-			</div>
-		</div>
-	);
+    <div className="p-2">
+      <NavHeader />
+      <div id="landing-page" className=" max-w-[1280px] mx-auto mt-3 p-3 text-center">
+        <Hero />
+      </div>
+    </div>
+  );
 }

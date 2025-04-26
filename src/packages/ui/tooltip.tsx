@@ -55,7 +55,7 @@ export function Tooltip({
 					onMouseEnter={() => setOpen(true)}
 					onMouseLeave={() => setOpen(false)}
 					onBlur={() => setOpen(false)}
-					className="flex px-2 py-1 cursor-pointer mx-auto"
+					className="flex px-4 py-2 cursor-pointer mx-auto"
 				>
 					{children}
 				</TooltipTrigger>
@@ -69,7 +69,7 @@ export function Tooltip({
 						{typeof content === "string" ? (
 							<span
 								className={cn(
-									"block text-pretty px-4 py-2 text-center text-sm text-neutral-700",
+									"block text-pretty px-4 py-2 bg-background text-center text-sm text-neutral-700",
 									contentClassName,
 								)}
 							>
@@ -103,7 +103,7 @@ export function ButtonTooltip({
 				text={text}
 				type="button"
 				{...props}
-				className={cn("flex px-2 py-1 rounded-md duration-75", props.className)}
+				className={cn("flex px-4 py-2 rounded-md duration-75", props.className)}
 			/>
 		</Tooltip>
 	);

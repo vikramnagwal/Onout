@@ -19,12 +19,12 @@ const MenuBarItem = ({title, href, danger, disabled} : {
     disabled?: boolean
 }) => {
     return (
-      <div className="mx-1 px-2 font-base">
+      <div className="mx-1 px-2 py-1 font-base">
         <Link
           href={href ?? "#"}
           className={cn(
-            "text-sm font-semibold text-neutral-900 hover:bg-neutral-200 rounded-md px-2 py-1",
-            danger && "text-red-500",
+            "text-sm duration-300 font-semibold text-neutral-900 hover:bg-neutral-200 rounded-md px-2 py-1",
+            danger && "text-red-500 hover:bg-red-200",
             disabled && "text-neutral-500 cursor-not-allowed",
          )}
         >
