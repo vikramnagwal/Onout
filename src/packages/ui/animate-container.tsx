@@ -1,6 +1,6 @@
 "use client";
 import React, { PropsWithChildren, ComponentPropsWithRef, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useResizeObserver } from "../hooks/use-resize-observer";
 
 type AnimatedContinerProps = PropsWithChildren<{

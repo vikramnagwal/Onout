@@ -1,35 +1,28 @@
 "use client";
 
-import { onScroll, animate } from "animejs";
-import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Button } from "../button";
 import { MenuBar } from "../menu-bar";
 import { Wordmark } from "../wordmark";
-import { useEffect, useRef } from "react";
+import { motion, useScroll } from "motion/react";
+import { useState } from "react";
+
 
 
 export function NavHeader() {
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (headerRef.current) {
-      animate(headerRef.current, {
-        ease: "easeInOut",
-        duration: 0.5,
-        opacity: [0, 1]
-      });
-    }
-  }, []);
+  const navigate = useRouter();
+  const { scrollYProgress } = useScroll();
+  const [shrink, setShrink] = useState<boolean>(false);
+  console.log(scrollYProgress, "scrollYProgress");
 
     return (
-      <div 
-       ref={headerRef} id="header"
-        className="fixed top-2 flex justify-between items-center max-w-[1280px] mx-auto py-3 px-4 bg-trnsparent">
+     <motion.nav 
+          className="z-50 flex justify-between items-center max-w-[1280px] mx-auto py-3 px-4 bg-transparent">
         <Wordmark />
         <MenuBar />
-        <div>
-            <Button text="Sign In" />
+        <div className="flex items-center gap-2">
+          <Button text="Sign In" onClick={() => navigate.push('/login')} />
         </div>
-      </div>
-    );
+      </motion.nav>
+      );
 }

@@ -7,7 +7,7 @@ import {
 import { SignUpForm } from "@/packages/ui/auth/register/signup-form";
 import { VerifyEmailForm } from "@/packages/ui/auth/register/verify-email";
 import Link from "next/link";
-import { useSonner } from "sonner";
+
 
 export default function RegisterPageClient() {
 	return (
