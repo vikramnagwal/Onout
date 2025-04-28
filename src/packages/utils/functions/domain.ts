@@ -18,5 +18,3 @@ export const createDomainfromId = (uid: string) => {
     const domain = `${DOMAIN}/${uid}`;
     return domain;
 }
-
-console.log("Domain: ", getDomainfromUrl("https://www.google.com"));

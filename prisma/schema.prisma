@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "../node_modules/.prisma/client"
@@ -12,32 +9,25 @@ datasource db {
 }
 
 model User {
-  id              String    @id @default(cuid())
-  email           String    @unique
-  name            String?
-  hashedpassword  String?
-  image           String?
-  emailVerified   Boolean   @default(false)
-  emailVerifiedAt DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-
-  workspace Workspace?
-  accountId String?    @unique
-  account   Account?
-
-  Session           Session[]
+  id                String              @id @default(cuid())
+  email             String              @unique
+  name              String?
+  hashedpassword    String?
+  image             String?
+  emailVerified     Boolean             @default(false)
+  emailVerifiedAt   DateTime?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  accountId         String?             @unique
+  account           Account?
   OAuth             OAuth[]
+  Session           Session[]
   VerificationToken VerificationToken[]
-}
-
-enum Plan {
-  Basic
-  Premium
+  workspace         Workspace?
 }
 
 model Account {
-  id                String  @id @default(cuid())
+  id                String   @id @default(cuid())
   type              String
   provider          String
   providerAccountId String
@@ -48,38 +38,28 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerAccountId])
 }
 
-enum type {
-  public
-  private
-}
-
 model Workspace {
-  id     String @id @default(cuid())
-  slug   String @unique
-  domain String @unique
-
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
-
-  type          type     @default(public)
-  plan          Plan     @default(Basic)
-  totalMessages Int?     @default(0)
-  totalViews    Int?     @default(0)
-  totalClicks   Int?     @default(0)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  Messages Messages[]
+  id            String     @id @default(cuid())
+  slug          String     @unique
+  domain        String     @unique
+  userId        String     @unique
+  type          String     @default("public")
+  plan          String     @default("Basic")
+  totalMessages Int?       @default(0)
+  totalViews    Int?       @default(0)
+  totalClicks   Int?       @default(0)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  Messages      Messages[]
+  user          User       @relation(fields: [userId], references: [id])
 
   @@unique([id, slug, userId])
   @@index([userId, id, totalMessages])
@@ -106,24 +86,23 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
-  user       User?    @relation(fields: [userId], references: [id])
   userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
 
   @@unique([identifier, token])
 }
 
 model OAuth {
-  id                String  @id @default(cuid())
+  id                String   @id @default(cuid())
   provider          String
   providerAccountId String
   refresh_token     String?
@@ -133,12 +112,10 @@ model OAuth {
   scope             String?
   id_token          String?
   session_state     String?
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId            String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id])
 
   @@unique([provider, providerAccountId])
 }

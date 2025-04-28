@@ -44,6 +44,7 @@ export function CreateWorkspaceForm() {
 		checkWorkspaceExists,
 		{
 			onSuccess: (result) => {
+				console.log("Workspace name check result:", result);
 				const isTaken = result.data;
 				if (isTaken) {
 					setIsAvailable(false);
@@ -81,7 +82,7 @@ export function CreateWorkspaceForm() {
 		}
 		return;
 	}
-
+// TODO: if workspace of user already exists, show him/her existing workspace. don't show create new workspace form redirect him to existing workspace
 	async function onSubmit(data: CreateWorkspaceFormProps) {
 		setIsCreating(true);
 		if (isAvailable) {
@@ -93,11 +94,10 @@ export function CreateWorkspaceForm() {
 					"Content-Type": "application/json",
 				},
 			});
-			
 			if (response.ok) {
 				const { workspace } = await response.json();
 				toast.success("Workspace created successfully");
-				router.push(`/${workspace?.name}/inbox`);
+				router.push(`/${name}/inbox`);
 			} else {
 				toast.error("Error creating workspace");
 				setIsCreating(false);

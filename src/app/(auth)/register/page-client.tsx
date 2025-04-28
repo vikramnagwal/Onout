@@ -6,6 +6,7 @@ import {
 } from "@/packages/ui/auth/register/context";
 import { SignUpForm } from "@/packages/ui/auth/register/signup-form";
 import { VerifyEmailForm } from "@/packages/ui/auth/register/verify-email";
+import { Grid } from "@/packages/ui/grid";
 import Link from "next/link";
 
 
@@ -21,8 +22,8 @@ function SignUp() {
 	return (
 		<>
 			<div className="w-full max-w-md overflow-hidden border-y border-neutral-200 sm:rounded-2xl sm:border sm:shadow-sm">
-				<div className="border-b border-neutral-200 bg-white pb-6 pt-8 text-center">
-					<h3 className="text-lg font-semibold">Get started with Anom</h3>
+				<div className="bg-white pb-6 pt-8 text-center">
+					<h3 className="text- border-b border-neutral-200 pb-4 font-semibold">Get started with Onout</h3>
 				</div>
 				<div className="bg-neutral-50 px-4 py-8 sm:px-16">
 					<SignUpForm />

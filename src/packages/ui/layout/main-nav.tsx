@@ -41,14 +41,14 @@ export function MainNavProvider({
           setIsOpen(false);
         }, [searchParams]);
 
+
     return (
-        <div className="p-2 m-1">
-          <Wordmark />
-         <div>
-          {sidebar}
-         </div>
+      <div className="flex p-2">
+        <nav className="md:w-80">{sidebar}</nav>
         <SideNavContext.Provider value={{ open: isOpen, setOpen: setIsOpen }}>
-          <div className="rounded-xl bg-neutral-200 min-h-full p-2">{children}</div>
+          <div className="rounded-xl flex-1 bg-neutral-200 min-h-full p-2">
+            {children}
+          </div>
         </SideNavContext.Provider>
       </div>
     );
