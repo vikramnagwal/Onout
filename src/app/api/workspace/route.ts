@@ -8,7 +8,6 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 // GET: /api/workspace - fetch workspace of user
-
 export async function GET(request: NextRequest) {
 	const session = await getSessionOrThrow();
 	const userId = session?.user?.id;
@@ -17,32 +16,34 @@ export async function GET(request: NextRequest) {
 		return NextResponse.json(
 			{ message: "Unauthorizes: Session Expired or Invalid" },
 			{ status: 401 },
-		)
+		);
 	}
 
 	try {
 		const workspace = await prisma.workspace.findUnique({
-		where: {
-			userId
-		},
-		select: {
-			id: true,
-			slug: true,
-			plan: true,
-			type: true,
-			user: {
-				select: {
-					email: true,
-					emailVerified: true,
-				}
-			}
-		}
-	})
-	return NextResponse.json(workspace, {status: 200})
+			where: {
+				userId,
+			},
+			select: {
+				id: true,
+				slug: true,
+				plan: true,
+				type: true,
+				user: {
+					select: {
+						email: true,
+						emailVerified: true,
+					},
+				},
+			},
+		});
+		return NextResponse.json(workspace, { status: 200 });
 	} catch (error) {
-		return NextResponse.json({message: "failed to fetch workspace"}, {status: 500})
+		return NextResponse.json(
+			{ message: "failed to fetch workspace" },
+			{ status: 500 },
+		);
 	}
-
 }
 
 // POST: /api/workspace - creates a new workspace
@@ -66,7 +67,7 @@ export async function POST(request: NextRequest) {
 	const { name: workspaceName } = await CreateWorkspaceSchema.parseAsync(
 		await request.json(),
 	);
-	const domain = createDomainfromId(workspaceName)
+	const domain = createDomainfromId(workspaceName);
 
 	if (!workspaceName || typeof workspaceName !== "string") {
 		return NextResponse.json(
@@ -81,11 +82,31 @@ export async function POST(request: NextRequest) {
 		throw new Error("Session Expired or Invalid Token");
 	}
 
+
 	try {
+		// check if workspace exists
+		// if exists return the workspace
+		// else create a new workspace
+
+		const existingWorkspace = await prisma.workspace.findFirst({
+			where: {
+				OR: [{ slug: workspaceName }, { domain: domain }, { userId: userId }],
+			},
+		});
+
+		if (existingWorkspace) {
+			return NextResponse.json(
+				{existingWorkspace, message: "Workspace already exists" },
+				{ status: 200 },
+			);
+		}
+
+		// create a new workspace
+		// if not exists
 		const workspace = await prisma.workspace.create({
 			data: {
 				slug: workspaceName,
-				domain,
+				domain: domain,
 				user: {
 					connect: {
 						id: userId,
@@ -95,8 +116,11 @@ export async function POST(request: NextRequest) {
 			select: {
 				id: true,
 				slug: true,
+				plan: true,
+				type: true,
 			},
 		});
+		console.log("Workspace created successfully", workspace);
 
 		return NextResponse.json(
 			{ message: "workspace created successfully", workspace },
@@ -104,7 +128,7 @@ export async function POST(request: NextRequest) {
 		);
 	} catch (error) {
 		return NextResponse.json(
-			{ message: "Failed to create workspace" },
+			{ message: "Failed to create workspace", error },
 			{ status: 500 },
 		);
 	}

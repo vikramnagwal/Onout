@@ -1,6 +1,7 @@
 "use client";
 
 import { MainNavProvider } from "@/packages/ui/layout/main-nav";
+import { Sidebar } from "@/packages/ui/sidebar";
 
 type MessageSchema = {
 	messages: string[] | string
@@ -10,7 +11,7 @@ export default function InboxName() {
 
 
 	return (
-		<MainNavProvider sidebar={null}>
+		<MainNavProvider sidebar={<Sidebar />}>
 			<div className="flex flex-col items-center justify-center w-full h-full p-4">
 				<h1 className="text-2xl font-bold">Inbox</h1>
 				<p className="text-lg">Welcome to your inbox</p>

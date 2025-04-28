@@ -1,8 +1,12 @@
+"use client";
+
 import Balancer from "react-wrap-balancer";
 import { Button } from "../button";
 import { Grid } from "../grid";
+import { useRouter } from "next/navigation";
 
 export function Hero() {
+  const navigate = useRouter();
     return (
       <div className="py-12">
         <Grid cellSize={64} strokeWidth={2} />
@@ -17,7 +21,7 @@ export function Hero() {
               start with because Dare to say! Dare to Listen!
             </p>
           </Balancer>
-          <Button className="mt-3" text="Get Started" />
+          <Button className="mt-3" text="Get Started" onClick={() => navigate.push('/register')} />
         </div>
       </div>
     );
