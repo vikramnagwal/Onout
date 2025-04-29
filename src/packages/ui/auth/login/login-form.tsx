@@ -8,6 +8,7 @@ import { Button } from "@ui/button";
 import { EmailSignUp } from "../register/signup-email";
 import { SignUpOAuth } from "../register/signup-oauth";
 import { signIn } from "next-auth/react";
+import { Divider } from "../../divider";
 
 export interface LoginFormProps {
 	authMethod: "credentials" | "google";
@@ -67,7 +68,7 @@ export function LoginForm() {
 							/>
 						</div>
 					</form>
-					<span className="text-center">or</span>
+					<Divider text="or"/>
 					<SignUpOAuth />
 				</div>
 			</AnimatedContainer>

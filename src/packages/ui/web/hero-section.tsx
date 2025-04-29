@@ -4,6 +4,8 @@ import Balancer from "react-wrap-balancer";
 import { Button } from "../button";
 import { Grid } from "../grid";
 import { useRouter } from "next/navigation";
+import { FlickeringGrid } from "../flickering-dots";
+
 
 export function Hero() {
   const navigate = useRouter();
@@ -21,7 +23,11 @@ export function Hero() {
               start with because Dare to say! Dare to Listen!
             </p>
           </Balancer>
-          <Button className="mt-3" text="Get Started" onClick={() => navigate.push('/register')} />
+          <Button
+            className="mt-3"
+            text="Get Started"
+            onClick={() => navigate.push("/register")}
+          />
         </div>
       </div>
     );
