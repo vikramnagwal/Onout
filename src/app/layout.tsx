@@ -8,7 +8,7 @@ import { cn } from "@/packages/utils/functions/cn";
 import { Provider } from "react-wrap-balancer";
 
 export const metadata: Metadata = {
-	title: "Anom",
+	title: "Onout",
 	description: "Send messages anonymously",
 };
 

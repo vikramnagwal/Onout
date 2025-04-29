@@ -44,7 +44,7 @@ const ErrorSchema = z.object({
 export type ErrorResponse = z.infer<typeof ErrorSchema>;
 export type ErrorCodes = z.infer<typeof ErrorCode>;
 
-export class AnomApiError extends Error {
+export class OnoutApiError extends Error {
 	public readonly code: z.infer<typeof ErrorCode>;
 
 	constructor({
@@ -53,7 +53,7 @@ export class AnomApiError extends Error {
 	}: { code: z.infer<typeof ErrorCode>; message: string }) {
 		super(message);
 		this.code = code;
-		this.name = "AnomApiError";
+		this.name = "OnoutApiError";
 		this.message = message;
 	}
 }

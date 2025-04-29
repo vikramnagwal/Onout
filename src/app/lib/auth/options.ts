@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
 		}),
 		CredentialsProvider({
 			id: "credentials",
-			name: "AnomCredentials",
+			name: "OnoutCredentials",
 			type: "credentials",
 			credentials: {
 				email: { type: "email" },
