@@ -1,6 +1,7 @@
+import { SignOutButton } from "@/packages/ui/auth/sign-out";
+import { Card } from "@/packages/ui/card";
 import { NavHeader } from "@/packages/ui/nav/header";
 import { Hero } from "@/packages/ui/web/hero-section";
-
 
 export default function Home() {
 	return (

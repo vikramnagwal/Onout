@@ -3,12 +3,14 @@
 import { useSession } from "next-auth/react";
 import { sha256 } from "js-sha256";
 import { useEffect, useState } from "react";
+import { cn } from "../utils/functions/cn";
 
 interface AvatarProps {
   size?: number;
+  className?: string;
 }
 
-export function Avatar({size}: AvatarProps) {
+export function Avatar({size, className}: AvatarProps) {
   const {data: session} = useSession();
   const [avatar, setAvatar] = useState<string>("https://www.gravatar.com/avatar/");
 
@@ -33,6 +35,10 @@ export function Avatar({size}: AvatarProps) {
 
 
   return (
-    <img src={avatar} alt="profile" className="w-10 h-10 border border-gray-100 rounded-full" />
-  )
+    <img
+      src={avatar}
+      alt="profile"
+      className={cn("w-10 h-10 border border-gray-100 rounded-full", className)}
+    />
+  );
 }
