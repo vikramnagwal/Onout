@@ -6,6 +6,7 @@ import { MenuBar } from "../menu-bar";
 import { Wordmark } from "../wordmark";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import { SignOutButton } from "../auth/sign-out";
 
 // TODO: add animation to navbar
 
@@ -25,20 +26,24 @@ export function NavHeader() {
       setShrink(false);
     }
   })
-  const navWidth = useTransform(scrollYProgress, [0, 1], ["100%", "20%"]);
+  const navWidth = useTransform(scrollYProgress, [0, 1], ["100%", "40%"]);
   
     return (
      <motion.nav  
           ref={navRef} 
+          style={{
+            width: navWidth,
+          }}
           animate={{
-            width: shrink ? "40px" : "100%",
             opacity: shrink ? 0.8 : 1,
           }}
+          transition={{ duration: 0.3 }}
           className="z-50 backdrop-blur-sm flex justify-between items-center max-w-[1280px] mx-auto py-3 px-4 bg-transparent">
         <Wordmark />
         <MenuBar />
         <div className="flex items-center gap-2">
           <Button text="Sign In" onClick={() => navigate.push('/login')} />
+                    <SignOutButton />
         </div>
       </motion.nav>
       );
