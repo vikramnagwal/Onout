@@ -12,9 +12,6 @@ type Params = {
 
 // GET: /api/[slug]/messages - get all messages in workspace
 export const GET = withSession(async ({ params }) => {
-	console.log("hi");
-	// const ip = await getIP();
-	console.log(params);
 
 	return NextResponse.json({ message: "Hello" }, { status: 200 });
 	try {
@@ -50,7 +47,6 @@ export async function POST(
 ) {
 	const ip = await getIP();
 	const messageSource = await getMessageSource(request);
-	console.log("browser: ", messageSource); // remove this line after testing
 	const { id: slug } = await params;
 	const { data } = await request.json();
 

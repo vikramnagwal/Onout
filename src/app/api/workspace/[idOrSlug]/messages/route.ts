@@ -1,13 +1,7 @@
 import { prisma } from "@/app/lib/db";
-import { Workspace } from "./../../../../lib/types";
 import { WorkspaceNameSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { getSessionOrThrow } from "@/packages/utils/functions/workspace";
 import { NextRequest, NextResponse } from "next/server";
-import {
-	EncryptedMessageSchema,
-	MessageSchema,
-} from "@/app/lib/zod/schema/messages-schema";
-import { getIp } from "@/packages/utils/functions/get-ip";
 
 interface Params {
 	params: { idOrSlug: string };

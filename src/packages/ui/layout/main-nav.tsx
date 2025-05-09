@@ -4,9 +4,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { createContext, Dispatch, PropsWithChildren, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { useMediaQuery } from "@/packages/hooks/use-media";
 import { Wordmark } from "../wordmark";
-import { IconLayoutSidebarLeftExpand, IconMailFilled } from "@tabler/icons-react";
-import { useSession } from "next-auth/react";
+import { IconLayoutSidebarLeftExpand } from "@tabler/icons-react";
 import { cn } from "@/packages/utils/functions/cn";
+import { LayoutIcon } from "../icons/layout";
+import { Sidebar } from "../icons/sidebar";
+import { SidebarIcon } from "./sidebar/icon/sidebar";
 import { Avatar } from "../avatar";
 
 
@@ -31,19 +33,9 @@ export function MainNavProvider({
 }>)
 {
         const searchParams = useSearchParams();
-        const router = useRouter();
 
         const [isOpen, setIsOpen] = useState<boolean>(true);
         const { isMobile } = useMediaQuery();
-
-        const { data: session } = useSession({
-          required: true,
-          onUnauthenticated() {
-            return router.push("/auth/signin?callbackUrl=/dashboard")
-          },
-        })
-
-        console.log("session", session)
 
         // block scroll whn slidebar is open
         useEffect(() => {
@@ -57,21 +49,22 @@ export function MainNavProvider({
           setIsOpen(false);
         }, [searchParams]);
 
+        { isMobile && (
+          <div>
+            <h2>hello world</h2>
+          </div>
+        )}
 
     return (
       <div className="flex bg-neutral-100 overflow-hidden">
         <aside
-          className={cn("w-44 md:w-1/6 h-dvh", {isOpen: "-translate-96"})}
+          className={cn("w-44 md:w-1/6 h-dvh")}
         >
-          <div className="relative flex items-center justify-center space-x-4 my-2 p-4">
-            {!isMobile ? (
-              <>
-                <Wordmark className="mb-2 pointer-events-none" />
-                <Avatar className="w-8 h-8"/>
-              </>
-            ) : (
-              <IconLayoutSidebarLeftExpand onClick={() => setIsOpen(!isOpen)} />
-            )}
+          <div className="relative flex justify-between items-center space-x-4 my-2 p-4">
+            <Wordmark />
+            <button onClick={() => setIsOpen((prev) => !prev)}>
+              <SidebarIcon className="cursor-pointer" />
+            </button>
           </div>
           {sidebar}
         </aside>

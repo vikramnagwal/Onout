@@ -24,6 +24,7 @@ export async function GET(request: NextRequest, { params }: { params: Params}) {
                 slug: true,
                 plan: true,
                 type: true,
+                Messages: true,
                 user: {
                     select: {
                         image: true,
