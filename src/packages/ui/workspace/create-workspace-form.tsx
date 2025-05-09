@@ -1,6 +1,6 @@
 "use client";
 
-import { z } from "zod";
+import { set, z } from "zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@ui/input";
 import { Button } from "@ui/button";
@@ -85,24 +85,34 @@ export function CreateWorkspaceForm() {
 // TODO: if workspace of user already exists, show him/her existing workspace. don't show create new workspace form redirect him to existing workspace
 	async function onSubmit(data: CreateWorkspaceFormProps) {
 		setIsCreating(true);
-		if (isAvailable) {
-			const { name } = data;
-			const response = await fetch("/api/workspace", {
-				method: "POST",
-				body: JSON.stringify({ name }),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-			if (response.ok) {
-				const { workspace } = await response.json();
-				toast.success("Workspace created successfully");
-				router.push(`/${name}/inbox`);
-			} else {
-				toast.error("Error creating workspace");
-				setIsCreating(false);
-			}
-		}
+		try {
+      if (isAvailable) {
+        const { name } = data;
+        const response = await fetch("/api/workspace", {
+          method: "POST",
+          body: JSON.stringify({ name }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const result = await response.json();
+
+        if (response.ok) {
+          toast.success("Workspace created successfully");
+          router.push(`/${name}/inbox`);
+        } else if (response.status === 409) {
+          const workspaceName = result.workspaceSlug;
+          toast.error(
+            `Workspace \`${workspaceName}\` already exists at your email`
+          );
+		  router.push(`/${workspaceName}/inbox`);
+        } else {
+          toast.error("Error creating workspace");
+        }
+      }
+    } finally {
+      setIsCreating(false);
+    }
 	}
 
 	useEffect(() => {

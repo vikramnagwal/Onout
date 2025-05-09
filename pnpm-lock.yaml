@@ -44,6 +44,9 @@ importers:
       bcryptjs:
         specifier: ^3.0.2
         version: 3.0.2
+      boring-avatars:
+        specifier: ^1.11.2
+        version: 1.11.2
       chalk:
         specifier: ^5.4.1
         version: 5.4.1
@@ -1930,6 +1933,9 @@ packages:
 
   blurhash@2.0.5:
     resolution: {integrity: sha512-cRygWd7kGBQO3VEhPiTgq4Wc43ctsM+o46urrmPOiuAe+07fzlSB9OJVdpgDL0jPqXUVQ9ht7aq7kxOeJHRK+w==}
+
+  boring-avatars@1.11.2:
+    resolution: {integrity: sha512-3+wkwPeObwS4R37FGXMYViqc4iTrIRj5yzfX9Qy4mnpZ26sX41dGMhsAgmKks1r/uufY1pl4vpgzMWHYfJRb2A==}
 
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
@@ -4314,6 +4320,8 @@ snapshots:
   bcryptjs@3.0.2: {}
 
   blurhash@2.0.5: {}
+
+  boring-avatars@1.11.2: {}
 
   busboy@1.6.0:
     dependencies:

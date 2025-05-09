@@ -7,6 +7,7 @@ declare module "next-auth/jwt" {
 			id: string;
 			email: string;
 			name: string;
+			image?: string;
 			emailVerified: boolean;
 			accessToken?: string;
 			refreshToken?: string;
@@ -19,6 +20,7 @@ declare module "next-auth" {
 		id: string;
 		email: string;
 		name: string;
+		image?: string;
 		emailVerified: boolean;
 		accessToken?: string;
 		refreshToken?: string;
@@ -30,6 +32,7 @@ declare module "next-auth" {
 			email: string;
 			emailVerified: boolean;
 			name?: string;
+			image?: string;
 		} & DefaultSession;
 	}
 }

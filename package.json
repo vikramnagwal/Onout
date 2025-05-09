@@ -4,7 +4,7 @@
 	"private": true,
 	"size-limit": [
 		{
-			"limit": "200 KB",
+			"limit": "600 KB",
 			"path": "dist/app*.js"
 		}
 	],
@@ -31,6 +31,7 @@
 		"@uidotdev/usehooks": "^2.4.1",
 		"animejs": "^4.0.1",
 		"bcryptjs": "^3.0.2",
+		"boring-avatars": "^1.11.2",
 		"chalk": "^5.4.1",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",

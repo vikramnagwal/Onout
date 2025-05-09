@@ -20,7 +20,6 @@ export function CreateMessageForm() {
 
     const param = useParams();
     const workspaceName = param.slug?.toString();
-    console.log("workspaceName", workspaceName) // remove this line after testing
     const pathName = usePathname(); 
     
     const { executeAsync, status: isVerifying } = useAction(checkWorkspaceExists, {
@@ -70,7 +69,6 @@ export function CreateMessageForm() {
                         "Content-Type": "application/json",
                     }
                 })
-                console.log("createdMessage", createdMessage) // remove this line after testing
                 if (createdMessage.ok) {
                     toast.success("Message sent successfully")
                 }

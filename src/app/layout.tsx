@@ -6,6 +6,7 @@ import { RegisterProvider } from "@/packages/ui/auth/register/context";
 import AuthSession from "./lib/auth/auth-provider";
 import { cn } from "@/packages/utils/functions/cn";
 import { Provider } from "react-wrap-balancer";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "Onout",
@@ -23,14 +24,16 @@ export default function RootLayout({
       className={cn(switzer.variable, poppins.variable, geistMono.variable)}
     >
       <body className="z-30">
-        <AuthSession>
-          <RegisterProvider>
-            <Provider>
-              <Toaster />
-              {children}
-            </Provider>
-          </RegisterProvider>
-        </AuthSession>
+        <Suspense>
+          <AuthSession>
+            <RegisterProvider>
+              <Provider>
+                <Toaster />
+                {children}
+              </Provider>
+            </RegisterProvider>
+          </AuthSession>
+        </Suspense>
       </body>
     </html>
   );

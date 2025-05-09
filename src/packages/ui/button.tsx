@@ -17,7 +17,7 @@ const buttonVariants = cva(
         success:
           "border-green-500 bg-green-500 text-white hover:ring-4 hover:ring-green-100",
         danger:
-          "border-red-500 shadow-md bg-red-500 text-white hover:ring-4 hover:ring-red-300",
+          "border-red-500 outline-none shadow-md bg-red-500 text-white hover:ring-4 hover:ring-red-300",
         fancy:
           "rounded-2xl border-2 border-dashed border-black bg-white px-6 py-3 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none",
       },

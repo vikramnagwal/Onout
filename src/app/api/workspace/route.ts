@@ -82,27 +82,31 @@ export async function POST(request: NextRequest) {
 		throw new Error("Session Expired or Invalid Token");
 	}
 
-
 	try {
-		// check if workspace exists
-		// if exists return the workspace
-		// else create a new workspace
-
 		const existingWorkspace = await prisma.workspace.findFirst({
 			where: {
 				OR: [{ slug: workspaceName }, { domain: domain }, { userId: userId }],
 			},
+			select: {
+				id: true,
+				slug: true,
+				plan: true,
+				type: true,
+				user: {
+					select: {
+						email: true,
+						emailVerified: true,
+					},
+				},
+				domain: true,
+			}
 		});
 
 		if (existingWorkspace) {
-			return NextResponse.json(
-				{existingWorkspace, message: "Workspace already exists" },
-				{ status: 200 },
-			);
+			return NextResponse.json({ workspaceSlug: existingWorkspace.slug, message: "workspace alredy exists, cannot create multiple workspaces" }, { status: 409 });
 		}
+		console.log('yey')
 
-		// create a new workspace
-		// if not exists
 		const workspace = await prisma.workspace.create({
 			data: {
 				slug: workspaceName,
@@ -120,8 +124,7 @@ export async function POST(request: NextRequest) {
 				type: true,
 			},
 		});
-		console.log("Workspace created successfully", workspace);
-
+		
 		return NextResponse.json(
 			{ message: "workspace created successfully", workspace },
 			{ status: 201 },

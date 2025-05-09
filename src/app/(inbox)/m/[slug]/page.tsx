@@ -1,10 +1,12 @@
 import { CreateMessageForm } from "@/packages/ui/message/create-message-form";
+import { useParams } from "next/navigation";
 
 export default function MessagePage() {
+    const { slug } = useParams(); 
     return (
         <div>
-            <h1>Message Page</h1>
-            <div className="bg-neutral-200 p-4 rounded-md shadow-md mb-4">
+            <p>{`hola stranger 👋, i am ${slug}. share your thoughts`}</p>
+            <div className="bg-neutral-200 rounded-md shadow-md p-4 mb-4">
             <CreateMessageForm />
         </div>
         </div>
