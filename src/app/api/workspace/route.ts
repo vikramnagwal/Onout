@@ -1,10 +1,8 @@
 import { prisma } from "@/app/lib/db";
 import { checkUserExists } from "@/app/lib/postgres/check-user-exists";
-import { getSession } from "@/app/lib/session";
 import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { createDomainfromId } from "@/packages/utils/functions/domain";
 import { getSessionOrThrow } from "@/packages/utils/functions/workspace";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 // GET: /api/workspace - fetch workspace of user
@@ -48,13 +46,7 @@ export async function GET(request: NextRequest) {
 
 // POST: /api/workspace - creates a new workspace
 export async function POST(request: NextRequest) {
-	const session = await getSession();
-	if (!session) {
-		return NextResponse.json(
-			{ message: "Session Expired! Please login again" },
-			{ status: 401 },
-		);
-	}
+	const session = await getSessionOrThrow();
 
 	const userId = session?.user?.id;
 	if (!userId) {
@@ -83,6 +75,7 @@ export async function POST(request: NextRequest) {
 	}
 
 	try {
+		console.log("heer")
 		const existingWorkspace = await prisma.workspace.findFirst({
 			where: {
 				OR: [{ slug: workspaceName }, { domain: domain }, { userId: userId }],
@@ -104,8 +97,8 @@ export async function POST(request: NextRequest) {
 
 		if (existingWorkspace) {
 			return NextResponse.json({ workspaceSlug: existingWorkspace.slug, message: "workspace alredy exists, cannot create multiple workspaces" }, { status: 409 });
-		}
-		console.log('yey')
+		}  
+		console.log("Creating new workspace with name:", existingWorkspace);
 
 		const workspace = await prisma.workspace.create({
 			data: {
