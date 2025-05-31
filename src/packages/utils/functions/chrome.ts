@@ -1,0 +1,1 @@
+const chrome = new window.BroadcastChannel('rogoromo')
