@@ -2,5 +2,8 @@
     "ocaml.sandbox": {
         "kind": "custom",
         "template": "$prog $args"
-    }
+    },
+    "files.autoSave": "afterDelay",
+    "editor.fontSize": 15,
+    "editor.accessibilityPageSize": 500
 }

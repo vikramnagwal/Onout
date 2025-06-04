@@ -8,9 +8,9 @@ import { useRouter } from "next/navigation";
 export function Hero() {
   const navigate = useRouter();
     return (
-      <div className="py-12">
-        <Grid cellSize={64} strokeWidth={2} />
-        <div className="flex flex-col items-center max-w-[1280px] mx-auto mb-4 md:mb-8 p-3 pt-[60px] rounded-t-3xl backdrop-blur-lg bg-[#f9f7f3] h-[600px] text-center relative rounded-2xl">
+      <div className="pt-12">
+        <Grid cellSize={42} strokeWidth={2} />
+        <div className="flex flex-col items-center max-w-[1280px] mx-auto mb-4 md:mb-8 p-3 pt-[60px] rounded-t-3xl backdrop-blur-lg bg-[#f9f7f3] h-[600px] text-center relative rounded-2xl shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
           <Balancer ratio={0.17}>
             <h1 className="text-4xl md:text-6xl font-semibold md:mt-4 mt-2">
               Your Secret diary written by others
