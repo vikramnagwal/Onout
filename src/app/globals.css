@@ -10,6 +10,8 @@
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
 	--font-mono: var(--font-geist-mono);
+
+	--animate-marquee: marquee var(--duration) infinite linear;
 }
 
 @media (prefers-color-scheme: light) {
@@ -37,3 +39,12 @@ body {
 	background: var(--foreground);
 	color: var(--background);
 }
+
+@keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
