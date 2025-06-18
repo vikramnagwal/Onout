@@ -94,7 +94,6 @@ export function CreateWorkspaceForm() {
             "Content-Type": "application/json",
           },
         });
-		console.log("Response from workspace creation:", response);
         const result = await response.json();
 
         if (response.ok) {

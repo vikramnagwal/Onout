@@ -31,7 +31,7 @@ export function MainNavProvider({
 {
         const searchParams = useSearchParams();
 
-        const [expanded, setExpanded] = useState<boolean>(true);
+        const [expanded, setExpanded] = useState<boolean >(false);
         const { isMobile } = useMediaQuery();
 
         // block scroll when slidebar is open
@@ -52,24 +52,24 @@ export function MainNavProvider({
           transition: spring,
         }}
         className={cn(
-          "flex overflow-hidden p-1",
+          "flex h-screen overflow-hidden p-1",
           !expanded && "bg-neutral-100"
         )}
       >
         <aside
           className={cn(
-            "transition-all duration-300 bg-neutral-100 h-dvh",
-            expanded ? "w-56" : "w-18" // Shrink width when collapsed
+            "transition-all duration-300 bg-gray-100 h-dvh",
+            expanded ? "w-54" : "w-20" // Shrink width when collapsed
           )}
         >
           <div className="relative flex justify-between items-center space-x-4 my-2 p-4">
-            <Wordmark />
-            <button
-              className="p-2 bg-white rounded-full cursor-pointer"
-              onClick={() => setExpanded((prev) => !prev)}
-            >
-              <SidebarIcon />
-            </button>
+            {expanded && <Wordmark />}
+              <button
+                className="p-2 bg-white rounded-full cursor-pointer"
+                onClick={() => setExpanded((prev) => !prev)}
+              >
+                <SidebarIcon />
+              </button>
           </div>
           {expanded && sidebar}
         </aside>
