@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Button } from "../../button";
-import { MenuBar } from "../../menu-bar";
+import { MenuBar } from "./nav";
 import { Wordmark } from "../../wordmark";
 import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
