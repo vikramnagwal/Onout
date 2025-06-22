@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cn } from "../utils/functions/cn";
+import { cn } from "../../../utils/functions/cn";
 
 
 export function MenuBar() {
