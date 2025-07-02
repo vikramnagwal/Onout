@@ -1,4 +1,3 @@
-import { prisma } from "@/app/lib/db";
 import { getToken } from "next-auth/jwt";
 import { NextResponse, NextRequest } from "next/server";
 

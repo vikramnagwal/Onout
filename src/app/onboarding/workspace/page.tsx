@@ -1,12 +1,10 @@
 "use client";
 
-import { useMediaQuery } from "@/packages/hooks/use-media";
 import { ShimmerDots } from "@/packages/ui/shimmer-dots";
 import { CreateWorkspaceForm } from "@/packages/ui/workspace/create-workspace-form";
 
 // create a context here so if user left the page and came back, the form is still there
 export default function WorkspacePage() {
-  const {isMobile} = useMediaQuery();
 	return (
     <div className="flex justify-between h-screen p-4">
       <ShimmerDots className="hidden md:block" cellSize={12} />

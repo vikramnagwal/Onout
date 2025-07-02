@@ -1,9 +1,15 @@
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
+/**
+ * Custom hook to manage cookies in a React application.
+ * 
+ * @param key - The key of the cookie.
+ * @param initialValue - The initial value of the cookie.
+ * @param options - Optional cookie attributes (e.g., expires, path, domain).
+ * @returns An array containing the current value and a function to update the cookie.
+ */
 
-// key: string, initialValue: T, options?: CookieAttributes
-//  ex: key: "user", initialValue: { name: "John Doe" }, options: { expires: 7 }
 export function useCookie<T>(key: string, initialValue: T, options?: Cookies.CookieAttributes) {
    const [storedValue, setStoredValue] = useState<T>(() => {
         const items = Cookies.get(key);
@@ -20,7 +26,6 @@ export function useCookie<T>(key: string, initialValue: T, options?: Cookies.Coo
 
         window.addEventListener("storage", handleStorageChange);
 
-        // cleanup function to remove event listener
         return () => {
             window.removeEventListener("storage", handleStorageChange);
         }

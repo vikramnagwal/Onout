@@ -47,7 +47,7 @@ export function SidebarNav({className}: SidebarNavProps) {
       >
         <div className="flex flex-col p-1 space-y-2">
           {NavLinks.map((link, id) => (
-            <Link key={id} href={link.href} className="p-2 rounded-md hover:bg-cyan-500">{link.name}</Link>
+            <Link key={id} href={link.href} className="p-2 rounded-md hover:bg-neutral-200">{link.name}</Link>
           ))}
         </div>
         <div className="w-12 h-12 bg-red-500">

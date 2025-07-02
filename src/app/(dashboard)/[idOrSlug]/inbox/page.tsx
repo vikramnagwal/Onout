@@ -1,18 +1,13 @@
+"use client";
 import { useWorkspace } from "@/app/lib/swr/use-Workspace"
+import { Messages } from "@/packages/ui/message/messages";
 
 export default function () {
-
+	const workspace = useWorkspace();
+	console.log("workspace", workspace);
 	return (
 			<div className="flex flex-col items-center justify-center w-full h-full p-4">
-				<h1 className="text-2xl font-bold">Inbox</h1>
-				<p className="text-lg">Welcome to your inbox</p>
-				{/* <div className="flex flex-col items-center justify-center w-full h-full p-4">
-					{messages?.map((message: MessageSchema) => (
-						<div key={message.id} className="p-4 m-2 bg-gray-100 rounded-lg shadow-md">
-							<p>{message.messages}</p>
-						</div>
-					))}
-				</div> */}
+				<Messages />
 			</div>
 	)
 }
