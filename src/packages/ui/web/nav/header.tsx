@@ -8,6 +8,7 @@ import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-mot
 import { useRef, useState } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { SignOutButton } from "../../auth/sign-out";
+import { DashboardRedirectButton } from "../../dashboard-redirect-btn";
 
 // TODO: add animation to navbar
 
@@ -44,7 +45,7 @@ export function NavHeader() {
         <Wordmark />
         <MenuBar />
         <div className="flex items-center gap-2">
-          {status === "authenticated" ?  (<div className="flex items-center space-x-2"><Button text="Dashboard"/><SignOutButton /></div>) : <Button text="Sign In" onClick={() => navigate.push("/login")} />}
+          {status === "authenticated" ?  (<div className="flex items-center space-x-2"><DashboardRedirectButton /><SignOutButton /></div>) : <Button text="Sign In" onClick={() => navigate.push("/login")} />}
         </div>
       </motion.nav>
     );

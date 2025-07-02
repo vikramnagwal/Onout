@@ -13,6 +13,9 @@ import { toast } from "sonner";
 import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { useRouter } from "next/navigation";
 import { AlertIcon } from "../icons/alert";
+import { Info } from "../icons/info";
+import { Stars } from "../icons/stars";
+import { useCookie } from "@/packages/hooks/use-cookie";
 
 type CreateWorkspaceFormProps = z.infer<typeof CreateWorkspaceSchema>;
 
@@ -22,6 +25,9 @@ const MIN_WORKSPACE_NAME_LENGTH = 2;
 export function CreateWorkspaceForm() {
 	const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
 	const [isCreating, setIsCreating] = useState<boolean>(false);
+	const [workspaceName, setWorkspaceName] = useState<string>("");
+
+  const [spaceCookie, setSpaceCookie] = useCookie("workspace_Cookies", "notfound", { expires: 7 });
 	const router = useRouter();
 
 	const {
@@ -85,8 +91,9 @@ export function CreateWorkspaceForm() {
 	async function onSubmit(data: CreateWorkspaceFormProps) {
 		try {
       if (isAvailable) {
-		setIsCreating(true);
+		    setIsCreating(true);
         const { name } = data;
+        setWorkspaceName(name);
         const response = await fetch("/api/workspace", {
           method: "POST",
           body: JSON.stringify({ name }),
@@ -94,11 +101,13 @@ export function CreateWorkspaceForm() {
             "Content-Type": "application/json",
           },
         });
+
         const result = await response.json();
 
         if (response.ok) {
           toast.success("Workspace created successfully");
           router.push(`/${name}/inbox`);
+          setSpaceCookie(name);
         } else if (response.status === 409) {
           const workspaceName = result.workspaceSlug;
           toast.error(
@@ -121,40 +130,63 @@ export function CreateWorkspaceForm() {
 	const isChecking = checkStatus === "executing";
 
 	return (
-		<>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<div className="flex flex-col my-2">
-					<Input
-						{...register("name", { required: true })}
-						placeholder="Workspace Name"
-						type="text"
-						error={errors.name?.message}
-						className={cn(
-							"mb-2",
-							isAvailable && "border-green-500 focus-visible:ring-green-300",
-							errors.name && "border-red-500 focus-visible:ring-red-300",
-						)}
-						autoComplete="off"
-						required
-					/>
-					<span className="text-sm text-red-500/80 min-h-[28px] flex items-end justify-center mb-2">
-						{errors.name?.message && (
-							<>
-								<AlertIcon /> {errors.name.message}
-							</>
-						)}
-					</span>
-				</div>
+    <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col my-2">
+          <Input
+            {...register("name", { required: true })}
+            placeholder="Workspace Name"
+            onChange={(e) => {
+              setWorkspaceName(e.target.value);
+            }}
+            type="text"
+            icon={<Stars className="size-4 opacity-80" />}
+            iconContent="generate a random workspace name"
+            error={errors.name?.message}
+            className={cn(
+              "my-2",
+              isAvailable && "border-green-500 focus-visible:ring-green-300",
+              errors.name && "border-red-500 focus-visible:ring-red-300"
+            )}
+            autoComplete="off"
+            required
+          />
 
-				<Button
-					text={isCreating ? "Creating..." : "Create Workspace"}
-					type="submit"
-					variant="primary"
-					className="w-full"
-					disabled={!!errors.name || isChecking || isCreating}
-					loading={isCreating}
-				/>
-			</form>
-		</>
-	);
+          <Input
+            value={workspaceName ? workspaceName.replaceAll(" ", "-") : ""}
+            placeholder="your workspace name"
+            icon={<Info className="p-1 opacity-80" />}
+            iconContent="your workspace name will be look like this"
+            readOnly
+          />
+
+          <span className="text-sm text-red-500/80 min-h-[28px] flex items-end justify-center mb-2">
+            {errors.name?.message && (
+              <>
+                <AlertIcon /> {errors.name.message}
+              </>
+            )}
+          </span>
+        </div>
+        <div className="flex flex-col items-center mb-4">
+          <div className="text-sm text-neutral-500 mb-4">
+            Workspace name must be at least {MIN_WORKSPACE_NAME_LENGTH}{" "}
+            characters long and can only contain letters, numbers, and hyphens.
+          </div>
+          <div className="text-sm text-neutral-500 mb-4">
+            Workspace name will be used in your workspace URL, so choose wisely!
+          </div>
+        </div>
+
+        <Button
+          text={isCreating ? "Creating..." : "Create Workspace"}
+          type="submit"
+          variant="primary"
+          className="w-full"
+          disabled={!!errors.name || isChecking || isCreating}
+          loading={isCreating}
+        />
+      </form>
+    </>
+  );
 }

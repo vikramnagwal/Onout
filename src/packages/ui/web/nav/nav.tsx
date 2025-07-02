@@ -1,15 +1,28 @@
+import { cn } from "@/packages/utils/functions/cn";
+import {Item, NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuList, NavigationMenuTrigger, } from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
-import { cn } from "../../../utils/functions/cn";
+import { AboutMenu } from "./graphic/about";
 
 
 export function MenuBar() {
 
     return (
-        <div className="hidden md:flex flex-row items-center justify-between p-2 rounded-md backdrop:blur-xl">
-            <MenuBarItem title="About" href="/" />
-            <MenuBarItem title="Report abuse" href="/report-abuse" danger />
-        </div>
-    )
+      <div className="hidden md:flex flex-row items-center justify-between mx-auto p-2">
+        <NavigationMenu>
+          <NavigationMenuList className="flex">
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>
+                <MenuBarItem title="about"/>
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="z-20 absolute p-2 shadow-md mt-2 rounded-md bg-white"><AboutMenu /></NavigationMenuContent>
+            </NavigationMenuItem>
+            <Item>
+              <MenuBarItem title="report abuse" danger/>
+            </Item>
+          </NavigationMenuList>
+        </NavigationMenu>
+      </div>
+    );
 }
 
 const MenuBarItem = ({title, href, danger, disabled} : {
