@@ -1,89 +1,146 @@
 "use client";
- 
+
 import { useSearchParams } from "next/navigation";
-import { createContext, Dispatch, PropsWithChildren, ReactNode, SetStateAction, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useMediaQuery } from "@/packages/hooks/use-media";
 import { Wordmark } from "../wordmark";
 import { cn } from "@/packages/utils/functions/cn";
 import { SidebarIcon, SidebarIconClose } from "./sidebar/icon/sidebar";
-import { AnimatePresence, motion, spring } from "motion/react";
-
-
+import { AnimatePresence, motion } from "motion/react";
 
 type SideNavContext = {
-    open: boolean;
-    setOpen: Dispatch<SetStateAction<boolean>>;
-    isActive?: boolean;
-}
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  isActive?: boolean;
+};
 
 export const SideNavContext = createContext<SideNavContext>({
-    open: false,
-    setOpen: () => {},
-    isActive: false
-})
+  open: false,
+  setOpen: () => {},
+  isActive: false,
+});
 
 export function MainNavProvider({
-    children,
-    sidebar
+  children,
+  sidebar,
 }: PropsWithChildren<{
-    sidebar: ReactNode;
-}>)
-{
-        const searchParams = useSearchParams();
+  sidebar: ReactNode;
+}>) {
+  const searchParams = useSearchParams();
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const { isMobile } = useMediaQuery();
 
-        const [expanded, setExpanded] = useState<boolean >(false);
-        const { isMobile } = useMediaQuery();
+  // Block scroll when sidebar is open on mobile
+  useEffect(() => {
+    if (isMobile) {
+      document.body.style.overflow = expanded ? "hidden" : "auto";
+    } else {
+      document.body.style.overflow = "auto";
+    }
 
-        // block scroll when slidebar is open
-        useEffect(() => {
-            document.body.style.overflow = expanded && isMobile ? "hidden" : "auto";
-            return () => {
-                document.body.style.overflow = "auto";
-            }
-        }, [expanded, isMobile]);
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [expanded, isMobile]);
 
-        useEffect(() => {
-          setExpanded(false);
-        }, [searchParams]);
+  // Close sidebar when route changes
+  useEffect(() => {
+    setExpanded(false);
+  }, [searchParams]);
 
-    return (
-      <motion.div
-        animate={{
-          transition: spring,
-        }}
-        className={cn(
-          "flex h-screen overflow-hidden p-1",
-          !expanded && "bg-neutral-100"
-        )}
-      >
-        <aside
+  return (
+    <SideNavContext.Provider value={{ open: expanded, setOpen: setExpanded }}>
+      <div className="flex h-screen overflow-hidden bg-gray-50">
+        {/* Mobile overlay */}
+        <AnimatePresence>
+          {expanded && isMobile && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/50 z-40"
+              onClick={() => setExpanded(false)}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Sidebar */}
+        <motion.aside
+          initial={false}
+          animate={{
+            width: isMobile
+              ? expanded
+                ? "280px"
+                : "0px"
+              : expanded
+              ? "280px"
+              : "80px",
+            transition: { duration: 0.3, ease: "easeInOut" },
+          }}
           className={cn(
-            "transition-all duration-300 bg-gray-100 h-dvh",
-            expanded ? "w-54" : "w-20" // Shrink width when collapsed
+            "relative bg-white border-r border-gray-300 flex flex-col overflow-hidden z-50",
+            isMobile && "fixed left-0 top-0 h-full shadow-lg"
           )}
         >
-          <div className="relative flex justify-between items-center space-x-4 my-2 p-4">
-            {expanded && <Wordmark />}
-              <button
-                className="p-2 bg-white rounded-full cursor-pointer"
-                onClick={() => setExpanded((prev) => !prev)}
-              >
-                <SidebarIcon />
-              </button>
+          {/* Header */}
+          <div className="flex items-center justify-between p-4 border-b border-gray-300 min-h-[72px]">
+            <AnimatePresence mode="wait">
+              {expanded && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Wordmark />
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <button
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              onClick={() => setExpanded((prev) => !prev)}
+              aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
+            >
+              {expanded ? <SidebarIconClose /> : <SidebarIcon />}
+            </button>
           </div>
-          {expanded && sidebar}
-        </aside>
-        <SideNavContext.Provider
-          value={{ open: expanded, setOpen: setExpanded }}
+
+          {/* Sidebar content */}
+          <div className="flex-1 overflow-y-auto">
+            <AnimatePresence mode="wait">
+              {expanded && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2, delay: 0.1 }}
+                >
+                  {sidebar}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.aside>
+
+        {/* Main content */}
+        <main
+          className={cn(
+            "flex-1 flex flex-col overflow-hidden p-1",
+            isMobile && expanded && "pointer-events-none"
+          )}
         >
-          <div
-            className={cn(
-              "flex-grow overflow-hidden bg-white mt-3 rounded-xl transition-all duration-300"
-            )}
-          >
-            {children}
-          </div>
-        </SideNavContext.Provider>
-      </motion.div>
-    );
+          {children}
+        </main>
+      </div>
+    </SideNavContext.Provider>
+  );
 }
