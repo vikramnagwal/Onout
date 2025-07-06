@@ -41,16 +41,23 @@ export function SidebarNav({className}: SidebarNavProps) {
     return (
       <div
         className={cn(
-          "flex flex-col gap-2 py-6 px-2 justify-between h-full",
+          "flex flex-col justify-between h-dvh overflow-hidden p-2",
           className
         )}
       >
         <div className="flex flex-col p-1 space-y-2">
           {NavLinks.map((link, id) => (
-            <Link key={id} href={link.href} className="p-2 rounded-md hover:bg-neutral-200">{link.name}</Link>
+            <Link
+              key={id}
+              href={link.href}
+              className="p-2 rounded-md hover:bg-neutral-200 flex gap-2 items-center"
+            >
+              {link.icon}
+              {link.name}
+            </Link>
           ))}
         </div>
-        <div className="w-12 h-12 bg-red-500">
+        <div className="flex-shrink-0 border border-neutral-500 p-2 mt-4">
           <Avatar />
         </div>
       </div>
