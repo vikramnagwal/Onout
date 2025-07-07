@@ -9,10 +9,14 @@ import { useRouter } from "next/navigation";
 export default function NotFound() {
   const navigator = useRouter();
   function goBack() {
+    if (navigator.back() === undefined) {
+      navigator.push("/");
+      return;
+    }
     navigator.back();
   }
     return (
-      <div className="flex flex-col md:flex-row justify-center items-center min-h-screen text-neutral-900 p-2">
+      <div className="flex flex-col md:flex-row justify-center items-center min-h-screen text-neutral-900 p-4">
         <div className="relative flex flex-col px-4">
           <h1 className="text-4xl font-semibold z-10">
             The page you are looking for does not exists.

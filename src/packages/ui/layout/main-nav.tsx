@@ -51,7 +51,7 @@ export function MainNavProvider({
     };
   }, [expanded, isMobile]);
 
-  // Close sidebar when route changes
+  // Close sidebar when route changes **
   useEffect(() => {
     setExpanded(false);
   }, [searchParams]);
@@ -91,7 +91,10 @@ export function MainNavProvider({
           )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-300 min-h-[72px]">
+          <div
+            className="flex items-center justify-between p-4 border-b border-gray-300 min-h-[72px] cursor-pointer hover:bg-gray-100 transition-colors"
+            onClick={() => setExpanded((prev) => !prev)}
+          >
             <AnimatePresence mode="wait">
               {expanded && (
                 <motion.div
@@ -106,8 +109,7 @@ export function MainNavProvider({
             </AnimatePresence>
 
             <button
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              onClick={() => setExpanded((prev) => !prev)}
+              className="p-2 rounded-lg"
               aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
             >
               {expanded ? <SidebarIconClose /> : <SidebarIcon />}
