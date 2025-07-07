@@ -15,7 +15,7 @@ export function useWorkspace() {
         return null
     }
     return {
-        ...workspace,
+       others: workspace,
         user: {
             ...session.user,
             emailVerified: session.user.emailVerified,

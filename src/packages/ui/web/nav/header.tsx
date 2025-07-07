@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import { Button } from "../../button";
 import { MenuBar } from "./nav";
 import { Wordmark } from "../../wordmark";
-import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
-import { getSession, useSession } from "next-auth/react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { useSession } from "next-auth/react";
 import { SignOutButton } from "../../auth/sign-out";
 import { DashboardRedirectButton } from "../../dashboard-redirect-btn";
 
