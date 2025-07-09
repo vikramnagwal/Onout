@@ -1,6 +1,4 @@
-"use client";
-
-import { set, z } from "zod";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { Input } from "@ui/input";
 import { Button } from "@ui/button";
@@ -12,22 +10,20 @@ import { cn } from "@/packages/utils/functions/cn";
 import { toast } from "sonner";
 import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { useRouter } from "next/navigation";
-import { AlertIcon } from "../icons/alert";
 import { Info } from "../icons/info";
 import { Stars } from "../icons/stars";
 import { useCookie } from "@/packages/hooks/use-cookie";
 
 type CreateWorkspaceFormProps = z.infer<typeof CreateWorkspaceSchema>;
 
-const DEBOUNCE_DELAY = 800;
+const DEBOUNCE_DELAY = 600;
 const MIN_WORKSPACE_NAME_LENGTH = 2;
 
 export function CreateWorkspaceForm() {
 	const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
 	const [isCreating, setIsCreating] = useState<boolean>(false);
-	const [workspaceName, setWorkspaceName] = useState<string>("");
 
-  const [spaceCookie, setSpaceCookie] = useCookie("workspace_Cookies", "notfound", { expires: 7 });
+  const [workspaceName, setWorkspaceName] = useCookie("workspaceName", "not-found",{expires: 7});
 	const router = useRouter();
 
 	const {
@@ -39,12 +35,13 @@ export function CreateWorkspaceForm() {
 		clearErrors,
 	} = useForm<CreateWorkspaceFormProps>({
 		defaultValues: {
-			name: "",
+			name: ""
 		},
 	});
 
 	const slug = watch("name");
 	const debouncedWorkspaceName = useDebounce(slug, DEBOUNCE_DELAY);
+  console.log("debouncedWorkspaceName", debouncedWorkspaceName);
 
 	const { executeAsync: executeNameCheck, status: checkStatus } = useAction(
 		checkWorkspaceExists,
@@ -62,6 +59,7 @@ export function CreateWorkspaceForm() {
 				}
 			},
 			onError: (error) => {
+        console.error(error)
 				toast.error("Error checking workspace existence");
 				setError("name", {
 					type: "manual",
@@ -73,6 +71,7 @@ export function CreateWorkspaceForm() {
 	);
 
 	async function fetchWorkspaceExistance() {
+    console.log("checking name")
 		clearErrors("name");
 		const isValidWorkspaceName = await CreateWorkspaceSchema.safeParseAsync({
 			name: debouncedWorkspaceName,
@@ -87,13 +86,13 @@ export function CreateWorkspaceForm() {
 		}
 		return;
 	}
+
 // TODO: if workspace of user already exists, show him/her existing workspace. don't show create new workspace form redirect him to existing workspace
 	async function onSubmit(data: CreateWorkspaceFormProps) {
 		try {
       if (isAvailable) {
 		    setIsCreating(true);
         const { name } = data;
-        setWorkspaceName(name);
         const response = await fetch("/api/workspace", {
           method: "POST",
           body: JSON.stringify({ name }),
@@ -105,9 +104,9 @@ export function CreateWorkspaceForm() {
         const result = await response.json();
 
         if (response.ok) {
+          setWorkspaceName(name);
           toast.success("Workspace created successfully");
           router.push(`/${name}/inbox`);
-          setSpaceCookie(name);
         } else if (response.status === 409) {
           const workspaceName = result.workspaceSlug;
           toast.error(
@@ -136,9 +135,6 @@ export function CreateWorkspaceForm() {
           <Input
             {...register("name", { required: true })}
             placeholder="Workspace Name"
-            onChange={(e) => {
-              setWorkspaceName(e.target.value);
-            }}
             type="text"
             icon={<Stars className="size-4 opacity-80" />}
             iconContent="generate a random workspace name"
@@ -151,22 +147,12 @@ export function CreateWorkspaceForm() {
             autoComplete="off"
             required
           />
-
-          <Input
-            value={workspaceName ? workspaceName.replaceAll(" ", "-") : ""}
-            placeholder="your workspace name"
-            icon={<Info className="p-1 opacity-80" />}
-            iconContent="your workspace name will be look like this"
-            readOnly
-          />
-
-          <span className="text-sm text-red-500/80 min-h-[28px] flex items-end justify-center mb-2">
-            {errors.name?.message && (
-              <>
-                <AlertIcon /> {errors.name.message}
-              </>
-            )}
-          </span>
+          {isAvailable === true && (
+            <div className="text-green-500 text-sm flex items-center gap-2">
+              <Info className="size-4" />
+              Workspace name is available!
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-center mb-4">
           <div className="text-sm text-neutral-500 mb-4">

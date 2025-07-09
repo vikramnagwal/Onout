@@ -22,7 +22,7 @@ interface NavLinksProps {
      {
        name: "Messages",
        icon: <Message />,
-       href: `/inbox`,
+       href: `inbox`,
      },
      {
        name: "Settings",
@@ -41,7 +41,7 @@ export function SidebarNav({className}: SidebarNavProps) {
     return (
       <div
         className={cn(
-          "flex flex-col justify-between h-dvh overflow-hidden p-2",
+          "flex flex-col justify-between overflow-hidden p-2",
           className
         )}
       >
@@ -57,7 +57,7 @@ export function SidebarNav({className}: SidebarNavProps) {
             </Link>
           ))}
         </div>
-        <div className="flex-shrink-0 border border-neutral-500 p-2 mt-4">
+        <div className="flex-shrink-0 p-2 mt-4">
           <Avatar />
         </div>
       </div>
