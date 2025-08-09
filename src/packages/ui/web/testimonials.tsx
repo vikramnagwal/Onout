@@ -3,18 +3,22 @@ import { Marquee } from "../marquee";
 const data = [
     {
        name: "instagram",
+       icon: '/branding/instagram.svg',
        href: ""
     },
     {
         name: "facebook",
+        icon: '/branding/facebook.svg',
         href: ""
     },
     {
         name: "whatsApp",
+        icon: '/branding/whatsapp.svg',
         href: ""
     },
     {
         name: "tiktok",
+        icon: '/branding/tiktok.svg',
         href: ""
     }
 ]
@@ -24,8 +28,15 @@ export function Testimonials() {
       <div className="relative mt-8">
         <Marquee pauseOnHover>
           {data.map((items, id) => (
-            <div key={id} className="px-2 mx-2 text-lg md:text-xl font-semibold font-sans opacity-80 w-full cursor-default">
-              <p>{items.name}</p>
+            <div
+              key={id}
+              className="px-2 mx-2 text-lg md:text-xl font-semibold font-sans opacity-80 w-full cursor-default"
+            >
+              <img
+                src={items.icon}
+                alt={items.name}
+                className="size-36 object-contain inline-block"
+              />
             </div>
           ))}
         </Marquee>
