@@ -29,6 +29,7 @@ model User {
   Session           Session[]
   OAuth             OAuth[]
   VerificationToken VerificationToken[]
+  Token             Token[]
 }
 
 enum Plan {
@@ -141,4 +142,15 @@ model OAuth {
   updatedAt DateTime @updatedAt
 
   @@unique([provider, providerAccountId])
+}
+
+model Token {
+  id                  String   @id @default(cuid())
+  verificationToken   String   @unique
+  resetPasswordToken  String?  @unique
+  rasedTicketComplain String
+  userId              String
+  user                User     @relation(fields: [userId], references: [id])
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
