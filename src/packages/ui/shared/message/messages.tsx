@@ -1,4 +1,10 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { motion } from "motion/react";
+import { Modal } from "../../model";
+import { Button } from "../../button";
+import { Dot, MessageSquareText } from "lucide-react";
+import { MessageIcon } from "../../icons/message";
+
 
 interface MessagesProps {
   message: string;
@@ -7,12 +13,36 @@ interface MessagesProps {
   onClick?: () => void;
 }
 
-export function Messages() {
-    return (
-      <div
-        className="flex flex-col items-center justify-center p-3 rounded-md h-24 w-80 md:w-[420px] border border-neutral-400"
-      >
-        <p>here's your message</p>
-      </div>
-    );
+export function Messages({
+  message = "here's your message",
+  icon,
+  className,
+  onClick,
+}: MessagesProps) {
+  const [showModel, setShowModel] = useState(false);
+
+  return (
+    <>
+      <Button 
+        text={message}
+        icon={<MessageIcon className="w-6 h-6" />}
+        onClick={() => setShowModel(true)}
+        className={className}
+      />
+        
+      
+
+      <Modal showModal={showModel} setShowModel={setShowModel}>
+        <div className="p-4">
+          <span className="relative"><MessageSquareText /><Dot color="red" className="absolute top-[-18px] left-[-18px]" size={40}/></span>
+          <p>{message}</p>
+          <Button 
+            text="Close"
+            onClick={() => setShowModel(false)}
+            className="mt-4"
+          />
+        </div>
+      </Modal>
+    </>
+  );
 }

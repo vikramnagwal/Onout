@@ -1,8 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form"
-import { Input } from "../input"
-import { Button } from "../button"
+
 import { EncryptedMessageSchema, MessageSchema } from "@/app/lib/zod/schema/messages-schema"
 import { z } from "zod"
 import { encryptMessages } from "@/packages/utils/functions/messages"
@@ -11,7 +10,9 @@ import { useParams, usePathname } from "next/navigation";
 import { useAction } from "next-safe-action/hooks";
 import { checkWorkspaceExists } from "@/app/lib/actions/check-workspace-exists-action";
 import { useEffect, useState } from "react";
-import { Send } from "../icons/send";
+import { Button } from "@packages/ui/button";
+import { Send } from "@packages/ui/icons/send";
+
 
 
 type MessageProps = z.infer<typeof MessageSchema>;

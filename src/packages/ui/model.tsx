@@ -67,7 +67,7 @@ export function Modal({ children, showModal, setShowModel, className, onClose, p
         onOpenChange={closeModal}
       >
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-50 bg-neutral-100 bg-opacity-10 backdrop-blur" />
+          <Dialog.Overlay className="fixed inset-0 z-40 bg-neutral-100 bg-opacity-10 backdrop-blur" />
           <Dialog.Content
             onOpenAutoFocus={(e) => e.preventDefault()}
             onCloseAutoFocus={(e) => e.preventDefault()}
@@ -82,7 +82,7 @@ export function Modal({ children, showModal, setShowModel, className, onClose, p
             }}
             className={cn(
               "fixed inset-0 z-40 m-auto h-fit w-full max-w-md",
-              "border border-neutral-200 bg-white p-0 shadow-xl sm:rounded-2xl",
+              "border border-neutral-800 bg-blur p-0 shadow-xl sm:rounded-2xl",
               "scrollbar-hide animate-scale-in overflow-y-auto",
               className
             )}
@@ -97,7 +97,7 @@ export function Modal({ children, showModal, setShowModel, className, onClose, p
 function DrawerIsland() {
   return (
     <div className="sticky top-0 z-20 flex items-center justify-center rounded-t-[10px] bg-inherit">
-      <div className="my-3 h-1 w-12 rounded-full bg-neutral-300" />
+      <div className="my-3 h-1 w-12 rounded-sm bg-neutral-300" />
     </div>
   );
 }

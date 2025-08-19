@@ -123,7 +123,7 @@ export function MainNavProvider({
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2, type: "spring", stiffness: 600 }}
+                  transition={{ duration: 0.2 }}
                   className="p-4 flex flex-col gap-4"
                 >
                   {sidebar}

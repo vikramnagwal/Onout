@@ -10,8 +10,8 @@ import { cn } from "@/packages/utils/functions/cn";
 import { toast } from "sonner";
 import { CreateWorkspaceSchema } from "@/app/lib/zod/schema/workspace-schema";
 import { useRouter } from "next/navigation";
-import { Info } from "../icons/info";
-import { Stars } from "../icons/stars";
+import { Info } from "@packages/ui/icons/info";
+import { Stars } from "@packages/ui/icons/stars";
 import { useCookie } from "@/packages/hooks/use-cookie";
 
 type CreateWorkspaceFormProps = z.infer<typeof CreateWorkspaceSchema>;
@@ -147,11 +147,18 @@ export function CreateWorkspaceForm() {
             autoComplete="off"
             required
           />
-          {isAvailable === true && (
+          {isAvailable ? (
             <div className="text-green-500 text-sm flex items-center gap-2">
               <Info className="size-4" />
               Workspace name is available!
             </div>
+          ) : (
+            isAvailable === false && (
+              <div className="text-red-500 text-sm flex items-center gap-2">
+                <Info className="size-4" />
+                Workspace name is not available.
+              </div>
+            )
           )}
         </div>
         <div className="flex flex-col items-center mb-4">
