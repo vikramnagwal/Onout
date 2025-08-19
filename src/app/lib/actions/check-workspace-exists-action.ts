@@ -17,7 +17,6 @@ const checkWorkspaceExistsSchema = z.object({
 export const checkWorkspaceExists = actionClient
 	.schema(checkWorkspaceExistsSchema)
 	.action(async ({ parsedInput }) => {
-
 		const { name: workspaceName } = parsedInput;
 		try {
 			const workspace = await prisma.workspace.findUnique({

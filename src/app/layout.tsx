@@ -5,9 +5,11 @@ import "./globals.css";
 import { RegisterProvider } from "@/packages/ui/auth/register/context";
 import AuthSession from "./lib/auth/auth-provider";
 import { cn } from "@/packages/utils/functions/cn";
+import { Provider } from "react-wrap-balancer";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
-	title: "Anom",
+	title: "Onout",
 	description: "Send messages anonymously",
 };
 
@@ -17,18 +19,22 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html
-			lang="en"
-			className={cn(switzer.variable, poppins.variable, geistMono.variable)}
-		>
-			<body>
-				<AuthSession>
-					<RegisterProvider>
-						<Toaster />
-						{children}
-					</RegisterProvider>
-				</AuthSession>
-			</body>
-		</html>
-	);
+    <html
+      lang="en"
+      className={cn(switzer.variable, poppins.variable, geistMono.variable)}
+    >
+      <body className="z-30">
+        <Suspense>
+          <AuthSession>
+            <RegisterProvider>
+              <Provider>
+                <Toaster />
+                {children}
+              </Provider>
+            </RegisterProvider>
+          </AuthSession>
+        </Suspense>
+      </body>
+    </html>
+  );
 }

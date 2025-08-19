@@ -3,13 +3,14 @@
 import React, { PropsWithChildren, WheelEventHandler } from "react";
 import * as PopoverPrimitive from "@radix-ui/themes/components/popover";
 import { Drawer } from "vaul";
-import { useMediaQuery } from "@uidotdev/usehooks";
 import { cn } from "../utils/functions/cn";
+import { useMediaQuery } from "../hooks/use-media";
 
 export type PopoverProps = PropsWithChildren<{
 	content: React.ReactNode;
 	align?: "center" | "start" | "end";
 	side?: "bottom" | "top" | "left" | "right";
+	className?: string;
 	openPopover: boolean;
 	setOpenPopover: (open: boolean) => void;
 	mobileOnly?: boolean;
@@ -25,6 +26,7 @@ export function Popover({
 	content,
 	align = "center",
 	side = "bottom",
+	className,
 	openPopover,
 	setOpenPopover,
 	mobileOnly = false,
@@ -34,7 +36,7 @@ export function Popover({
 	onEscapeKeyDown,
 	onWheel,
 }: PopoverProps) {
-	const isMobile = useMediaQuery("only screen and (max-width : 768px)");
+	const { isMobile } = useMediaQuery();
 
 	if (mobileOnly || isMobile) {
 		return (
@@ -59,7 +61,7 @@ export function Popover({
 						<div className="sticky top-0 z-20 flex w-full items-center justify-center rounded-t-[10px] bg-inherit">
 							<div className="bg-border-default my-3 h-1 w-12 rounded-full" />
 						</div>
-						<div className="bg-bg-default flex min-h-[150px] w-full items-center justify-center overflow-hidden pb-8 align-middle shadow-xl">
+						<div className={cn("relative flex min-h-[150px] w-full overflow-hidden pb-8 align-middle shadow-xl", className)}>
 							{content}
 						</div>
 					</Drawer.Content>
@@ -77,7 +79,7 @@ export function Popover({
 				align={align}
 				side={side}
 				className={cn(
-					"animate-slide-up-fade border-border-subtle bg-bg-default z-50 items-center rounded-lg border drop-shadow-lg sm:block",
+					"animate-slide-up-fade backdrop-blur-md z-50 items-center rounded-md drop-shadow-lg sm:block border-none",
 					popoverContentClassName,
 				)}
 				sticky={sticky}

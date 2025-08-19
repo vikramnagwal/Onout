@@ -1,4 +1,4 @@
-import { NextAuthOptions, User } from "next-auth";
+import { Account, NextAuthOptions, User } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { decryptPassword } from "./password";
 import { JWT } from "next-auth/jwt";
@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
 		}),
 		CredentialsProvider({
 			id: "credentials",
-			name: "AnomCredentials",
+			name: "OnoutCredentials",
 			type: "credentials",
 			credentials: {
 				email: { type: "email" },
@@ -132,6 +132,7 @@ export const authOptions: NextAuthOptions = {
 						data: {
 							name: user.name || userExists.name,
 							emailVerified: true,
+							emailVerifiedAt: new Date(),
 						},
 					});
 				} catch (error) {
@@ -140,6 +141,7 @@ export const authOptions: NextAuthOptions = {
 
 				return true;
 			}
+
 			const userExists = await prisma.user.findUnique({
 				where: { email: user.email },
 				select: {
@@ -154,15 +156,36 @@ export const authOptions: NextAuthOptions = {
 			}
 			return true;
 		},
+
 		async jwt({
 			token,
 			user,
+			account,
 			trigger,
 		}: {
 			token: JWT;
 			user: User | AdapterUser | UserProps;
+			account?: Account | null;
 			trigger?: "signIn" | "update" | "signUp";
 		}) {
+			if (account?.provider === "google" && user?.email) {
+				try {
+				  // Update the user's emailVerified status in the database
+				  await prisma.user.update({
+					where: { email: user.email },
+					data: {
+					  emailVerified: true,
+					  emailVerifiedAt: new Date(), // Set the verification date
+					},
+				  });
+				  
+				  // Update the user object to reflect the change
+				  (user as any).emailVerified = true;
+				} catch (error) {
+				  console.error("Error updating emailVerified for Google user:", error);
+				}
+			  }
+
 			if (user) {
 				token.user = {
 					id: user.id ?? token.sub ?? "",

@@ -1,20 +1,15 @@
-"use client";
-
-import { SignOutButton } from "@/packages/ui/auth/sign-out";
-import { useWorkspace } from "./lib/swr/use-Workspace";
+import { HeroSection } from "@/packages/ui/web/hero-section";
+import { NavHeader } from "@/packages/ui/web/nav/header";
+import { Testimonials } from "@/packages/ui/web/testimonials";
 
 export default function Home() {
-	const data = useWorkspace();
-	console.log("Workspace data: ", data);
 	return (
-		<div>
-			<div className="flex flex-col items-center justify-center h-screen z-30">
-				<h2 className="text-3xl font-bold">
-					{/* Welcome abroad {session?.user?.email}! */}
-				</h2>
-				<h1 className="font-semibold text-3xl">OnOut</h1>
-				<SignOutButton />
-			</div>
-		</div>
-	);
+    <div className="p-2 relative">
+      <NavHeader />
+      <div className="max-w-[1280px] mx-auto mt-3 p-3 text-center">
+        <HeroSection />
+        <Testimonials />
+      </div>
+    </div>
+  );
 }
