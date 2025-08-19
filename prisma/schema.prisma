@@ -23,6 +23,7 @@ model User {
   OAuth             OAuth[]
   Session           Session[]
   VerificationToken VerificationToken[]
+  Token             Token[]
   workspace         Workspace?
 }
 
