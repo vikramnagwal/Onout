@@ -26,7 +26,7 @@ export const createWorkspace = actionClient
 			return null;
 		}
 		const workspace = await response.json();
-
+		console.log("Workspace created:", workspace);
 
 		if (!workspace) {
 			return {

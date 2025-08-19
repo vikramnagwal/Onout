@@ -8,7 +8,7 @@ type Params = {
 
 // GET: /api/workspace/[idOrSlug] = fetch workspace by id or slug
 export async function GET(request: NextRequest, { params }: { params: Params}) {
-    const { idOrSlug } = params;
+    const { idOrSlug } = await params;
     const { userId } = await getUserId();
 
     try {
