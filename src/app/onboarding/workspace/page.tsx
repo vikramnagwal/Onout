@@ -1,7 +1,8 @@
 "use client";
 
+import { CreateWorkspaceForm } from "@/packages/ui/shared/workspace/create-workspace-form";
 import { ShimmerDots } from "@/packages/ui/shimmer-dots";
-import { CreateWorkspaceForm } from "@/packages/ui/workspace/create-workspace-form";
+
 
 // create a context here so if user left the page and came back, the form is still there
 export default function WorkspacePage() {

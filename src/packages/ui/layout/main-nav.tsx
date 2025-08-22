@@ -86,7 +86,7 @@ export function MainNavProvider({
             transition: { duration: 0.3, ease: "easeInOut" },
           }}
           className={cn(
-            "relative bg-white border-r border-gray-300 flex flex-col overflow-hidden z-50",
+            "thereafter relative bg-white border-r border-gray-300 flex flex-col z-50",
             isMobile && "fixed left-0 top-0 h-full shadow-lg"
           )}
         >
@@ -95,18 +95,16 @@ export function MainNavProvider({
             className="flex items-center justify-between p-4 border-b border-gray-300 min-h-[72px] cursor-pointer hover:bg-gray-100 transition-colors"
             onClick={() => setExpanded((prev) => !prev)}
           >
-            <AnimatePresence mode="wait">
-              {expanded && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Wordmark />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {expanded && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Wordmark />
+              </motion.div>
+            )}
 
             <button
               className="p-2 rounded-lg"
@@ -118,18 +116,7 @@ export function MainNavProvider({
 
           {/* Sidebar content */}
           <div className="flex-1 overflow-y-auto">
-            <AnimatePresence mode="wait">
-              {expanded && (
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2, type: "spring", stiffness: 600 }}
-                  className="p-4 flex flex-col gap-4"
-                >
-                  {sidebar}
-                </motion.div>
-              )}
-            </AnimatePresence>
+              <div className="p-2 flex flex-col gap-4">{sidebar}</div>
           </div>
         </motion.aside>
 

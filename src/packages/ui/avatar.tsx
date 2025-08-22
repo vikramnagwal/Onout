@@ -53,7 +53,7 @@ const name = getUserName;
         side="top"
       >
         <img
-          src={`https://ui-avatars.com/api/?name=${name}?background=${bgColor}`}
+          src={`https://ui-avatars.com/api/?name=${name}?background=${bgColor || "f3f4f6"}&color=000&size=128`}
           alt="avatar"
           className={cn("cursor-pointer w-10 h-10 rounded-full border border-neutral-400", className)}
         />
@@ -71,7 +71,7 @@ function AvatarPopOver({user}: {user: UserSessionProps}) {
         <Tooltip content="You are currently on free plan.">
           <div className="flex items-center space-x-2 text-xs border-r border-neutral-300 pr-2">
             <p>Free Plan</p>
-            <Currency className="w-6 h-6 p-1 rounded-full border border-neutral-400" />
+            <Currency color="green" className="w-6 h-6 p-1 rounded-full border border-neutral-400" />
           </div>
         </Tooltip>
         <div className="px-2">

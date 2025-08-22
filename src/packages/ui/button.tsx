@@ -4,7 +4,7 @@ import { cn } from "../utils/functions/cn";
 import { LoadingSpinner } from "./loaders/loading-spinner";
 
 const buttonVariants = cva(
-  "transitions-all duration-200 ease-in-out rounded-md text-sm p-2 cursor-pointer flex items-center justify-center shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]",
+  "relative transitions-all duration-200 ease-in-out rounded-md text-sm p-2 cursor-pointer flex items-center justify-center shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]",
   {
     variants: {
       variant: {
@@ -45,6 +45,7 @@ export interface ButtonProps
 	shortcutClassName?: string;
 	loading?: boolean;
 	disabled?: boolean;
+	notification?: boolean;
 	icon?: ReactNode;
 	right?: ReactNode;
 	ref?: React.Ref<HTMLButtonElement>;
@@ -61,6 +62,7 @@ export function Button({
 	shortcutClassName,
 	className,
 	disabled,
+	notification,
 	loading,
 	icon,
 	...rest
