@@ -75,7 +75,6 @@ export function Button({
 			{...(loading && { "aria-busy": true })}
 			{...rest}
 		>
-			{notification}
 			{loading ? (
 				<LoadingSpinner />
 			) : (

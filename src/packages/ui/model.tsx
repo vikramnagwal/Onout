@@ -97,7 +97,7 @@ export function Modal({ children, showModal, setShowModel, className, onClose, p
 function DrawerIsland() {
   return (
     <div className="sticky top-0 z-20 flex items-center justify-center rounded-t-[10px] bg-inherit">
-      <div className="my-3 h-1 w-12 rounded-sm bg-neutral-300" />
+      <div className="my-3 h-1 w-12 rounded-sm bg-neutral-400" />
     </div>
   );
 }
