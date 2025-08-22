@@ -47,7 +47,7 @@ export function SidebarNav({ className }: SidebarNavProps) {
       <ClientOnly className="size-full">
         <div className={cn("h-full flex flex-col justify-between", className)}>
           <div className="flex-1 p-2">
-            <div className="space-y-2">
+            <div className="space-y-4">
               {NavLinks.map((link, id) => (
                 <Link
                   key={id}
@@ -69,8 +69,7 @@ export function SidebarNav({ className }: SidebarNavProps) {
                 </Link>
               ))}
             </div>
-          </div>
-          
+          </div>            
         </div>
       </ClientOnly>
     </div>

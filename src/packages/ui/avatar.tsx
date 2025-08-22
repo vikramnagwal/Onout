@@ -55,7 +55,7 @@ const name = getUserName;
         <img
           src={`https://ui-avatars.com/api/?name=${name}?background=${bgColor || "f3f4f6"}&color=000&size=128`}
           alt="avatar"
-          className={cn("cursor-pointer w-10 h-10 rounded-full border border-neutral-400", className)}
+          className={cn("cursor-pointer w-10 h-10 rounded-full border border-neutral-400 m-1", className)}
         />
       </Popover>
     );

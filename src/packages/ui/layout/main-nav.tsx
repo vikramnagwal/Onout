@@ -15,6 +15,7 @@ import { Wordmark } from "../wordmark";
 import { cn } from "@/packages/utils/functions/cn";
 import { SidebarIcon, SidebarIconClose } from "./sidebar/icon/sidebar";
 import { AnimatePresence, motion } from "motion/react";
+import { Avatar } from "../avatar";
 
 type SideNavContext = {
   open: boolean;
@@ -116,7 +117,10 @@ export function MainNavProvider({
 
           {/* Sidebar content */}
           <div className="flex-1 overflow-y-auto">
-              <div className="p-2 flex flex-col gap-4">{sidebar}</div>
+            <div className="p-2 flex flex-col gap-4">{sidebar}</div>
+          </div>
+          <div className="mt-[180px] border-t border-neutral-300">
+            <Avatar />
           </div>
         </motion.aside>
 
