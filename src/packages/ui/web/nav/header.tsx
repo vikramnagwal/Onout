@@ -35,17 +35,26 @@ export function NavHeader() {
         animate={{
           opacity: [1, 0.8, 1],
         }}
-        transition={{ 
+        transition={{
           duration: 0.3,
           type: "spring",
           stiffness: 100,
-         }}
-        className="z-50 sticky top-4 flex justify-between items-center rounded-full max-w-[1280px] mx-auto py-1 px-4"
+        }}
+        className="z-50 border border-stone-300 sticky top-4 flex justify-between items-center rounded-full max-w-[1280px] mx-auto py-1 px-4"
       >
-        <Wordmark />
+        <div className="border-r border-neutral-400 pr-2">
+          <Wordmark />
+        </div>
         <MenuBar />
-        <div className="flex items-center gap-2">
-          {status === "authenticated" ?  (<div className="flex items-center space-x-2"><DashboardRedirectButton /><SignOutButton /></div>) : <Button text="Sign In" onClick={() => navigate.push("/login")} />}
+        <div className="flex items-center gap-2 border-l border-neutral-400 pl-2">
+          {status === "authenticated" ? (
+            <div className="flex items-center space-x-2">
+              <DashboardRedirectButton />
+              <SignOutButton />
+            </div>
+          ) : (
+            <Button text="Sign In" onClick={() => navigate.push("/login")} />
+          )}
         </div>
       </motion.nav>
     );

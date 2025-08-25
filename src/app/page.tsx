@@ -4,7 +4,7 @@ import { Testimonials } from "@/packages/ui/web/testimonials";
 
 export default function Home() {
 	return (
-    <div className="p-2 relative">
+    <div className="p-2">
       <NavHeader />
       <div className="max-w-[1280px] mx-auto mt-3 p-3 text-center">
         <HeroSection />
