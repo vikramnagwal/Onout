@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 const helpMenuContext = [
   {
     icon: false,
@@ -10,8 +12,12 @@ const helpMenuContext = [
 
 export function HelpMenu() {
   return (
-    <div className="w-full p-2 bg-red-300 ">
-      
+    <div className="w-60 p-2 ">
+      <ul>
+        <Link href={report-abuse}>
+          <li className="text-red">Report abuse</li>
+        </Link>
+      </ul>
     </div>
   );
 }
