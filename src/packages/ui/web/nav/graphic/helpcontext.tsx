@@ -12,10 +12,15 @@ const helpMenuContext = [
 
 export function HelpMenu() {
   return (
-    <div className="w-60 p-2 ">
-      <ul>
-        <Link href={report-abuse}>
-          <li className="text-red">Report abuse</li>
+    <div className="w-60 p-2 border border-stone-300 rounded-md">
+      <ul className="">
+        <Link href={"/reportabuse"}>
+          <li className="text-red-500 my-2">Report Abuse</li>
+        </Link>
+        <Link href={"#"}>
+          <li className="my-2">
+            Contact Us
+          </li>
         </Link>
       </ul>
     </div>
