@@ -21,7 +21,7 @@ export function MenuBar() {
               <NavigationMenuTrigger>
                 <MenuBarItem title="Help" danger />
               </NavigationMenuTrigger>
-              <NavigationMenuContent className="absolute bg-white p-2 mt-4 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto">
+              <NavigationMenuContent className="absolute backdrop-blur-lg bg-neutral-100 rounded-md p-2 mt-4 w-full data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft sm:w-auto">
                 <HelpMenu />
               </NavigationMenuContent>
             </NavigationMenuItem>
