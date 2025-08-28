@@ -41,3 +41,6 @@ export async function GET(request: Request) {
 		);
 	}
 }
+
+
+// Route: /api/[userid]/user name
