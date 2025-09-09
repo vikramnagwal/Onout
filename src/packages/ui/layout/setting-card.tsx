@@ -57,7 +57,7 @@ export function SettingCard({
             </div>
           ) : (
             text && (
-              <div className="p-3 border border-neutral-300 rounded-md bg-amber-50 max-w-[50%]">
+              <div className="p-3 border border-neutral-300 rounded-md bg-neutral-300 max-w-[50%]">
                 {text}
               </div>
             )
