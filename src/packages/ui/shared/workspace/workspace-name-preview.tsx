@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Input } from "../input"
-import { Info } from "../icons/info"
+import { Input } from "@/packages/ui/input"
+import { Info } from "@packages/ui/icons/info"
 
 export function WorkspaceNamePreview() {
     const [workspaceName, setWorkspaceName] = useState<string>("")

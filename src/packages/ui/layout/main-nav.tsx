@@ -16,6 +16,7 @@ import { cn } from "@/packages/utils/functions/cn";
 import { SidebarIcon, SidebarIconClose } from "./sidebar/icon/sidebar";
 import { AnimatePresence, motion } from "motion/react";
 import { Avatar } from "../avatar";
+import { DashboardHeader } from "./dashboard/dashboard-header";
 
 type SideNavContext = {
   open: boolean;
@@ -127,11 +128,12 @@ export function MainNavProvider({
         {/* Main content */}
         <main
           className={cn(
-            "flex-1 flex flex-col overflow-hidden p-1",
+            "flex-1 flex flex-col overflow-y-auto",
             isMobile && expanded && "pointer-events-none"
           )}
         >
-          {children}
+          <DashboardHeader headerTitle="General"/>
+          <div>{children}</div>
         </main>
       </div>
     </SideNavContext.Provider>

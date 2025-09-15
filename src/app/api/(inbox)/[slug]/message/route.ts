@@ -4,7 +4,7 @@ import { EncryptedMessageSchema } from "@/app/lib/zod/schema/messages-schema";
 import { getIP, getMessageSource } from "@/packages/utils/functions/get-ip";
 import { getSearchParams } from "@/packages/utils/functions/url";
 import { NextRequest, NextResponse } from "next/server";
-import { withSession } from "@/app/lib/session";
+import { withSession } from "@/app/lib/auth/session";
 
 type Params = {
 	id: string;

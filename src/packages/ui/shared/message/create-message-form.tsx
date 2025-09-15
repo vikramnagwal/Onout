@@ -12,6 +12,7 @@ import { checkWorkspaceExists } from "@/app/lib/actions/check-workspace-exists-a
 import { useEffect, useState } from "react";
 import { Button } from "@packages/ui/button";
 import { Send } from "@packages/ui/icons/send";
+import { MessageDock } from "./message-dock";
 
 
 
@@ -87,13 +88,13 @@ export function CreateMessageForm() {
             {...register("message")}
             placeholder="share your message"
             className="bg-white rounded-md p-2 outline-none shadow-sm"
-          >
-          </textarea>
+          ></textarea>
 
           {errors.message && (
             <p className="text-red-500/80 text-sm">{errors.message.message}</p>
           )}
-          <Button text="Send" type="submit" icon={<Send />} />
+          {/* <Button text="Send" type="submit" icon={<Send />} /> */}
+          <MessageDock />
         </form>
       </div>
     );

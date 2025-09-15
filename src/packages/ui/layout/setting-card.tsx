@@ -1,7 +1,9 @@
+import { useSettingContext } from "@/app/(dashboard)/[idOrSlug]/settings/page";
 import { CapitalChar } from "@/packages/utils/functions/capital";
 import { cn } from "@/packages/utils/functions/cn";
+import { useDebounce } from "@uidotdev/usehooks";
 import { cva, VariantProps } from "class-variance-authority";
-import { ReactNode } from "react";
+import { ReactNode, useContext, useState } from "react";
 
 interface CardProps extends VariantProps<typeof settingCardVariants> {
     title: string;
@@ -11,6 +13,7 @@ interface CardProps extends VariantProps<typeof settingCardVariants> {
     actionDescription: string;
     img?: string;
     classname?: string;
+    getModal?: boolean;
 }
 
 const settingCardVariants = cva(
@@ -38,8 +41,13 @@ export function SettingCard({
     actionDescription,
     text,
     img,
-    classname
+    classname,
+    getModal
 }: CardProps) {
+
+
+  const { input, setInput, showModal, setShowModal } = useSettingContext();
+
     return (
       <section className={cn(settingCardVariants({ variant }), classname)}>
         <div className="flex flex-col p-1 space-y-1">
@@ -48,7 +56,7 @@ export function SettingCard({
             {CapitalChar(description) || ""}
           </p>
           {img ? (
-            <div className="w-24 h-24 rounded-full border border-neutral-300 overflow-hidden">
+            <div className={cn("w-24 h-24 rounded-full border border-neutral-300 overflow-hidden", variant === "danger" && "border-red-500")}>
               <img
                 src={img}
                 alt="not-found"
@@ -57,16 +65,14 @@ export function SettingCard({
             </div>
           ) : (
             text && (
-              <div className="p-3 border border-neutral-300 rounded-md bg-neutral-300 max-w-[50%]">
-                {text}
-              </div>
+              <input placeholder={text} onChange={(e) => setInput(useDebounce(e.target.value, 500))}  className="p-3 placeholder-black border border-neutral-300 rounded-md bg-neutral-300 max-w-[50%]" /> 
             )
           )}
         </div>
         {/* Setting Card: action section */}
         {action && (
-          <div className="flex justify-between items-center-safe border border-neutral-300 rounded-md mx-1 p-4 mt-2">
-            <p className="text-sm font-semibold text-blue-500">
+          <div className={cn("z-0 flex justify-between items-center-safe border border-neutral-300 rounded-md mx-1 p-4 mt-2", variant === "danger" && "border-red-500")}>
+            <p className={cn("font-semibold text-blue-500 text-sm max-w-[70%]", variant === "danger" && "text-red-500")}>
               {actionDescription}
             </p>
             {action}
