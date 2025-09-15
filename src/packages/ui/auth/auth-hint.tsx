@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import { Info } from "../icons/info";
+import { Info } from "@packages/ui/icons/info";
 
 export function AuthHint() {
     const { data: session } = useSession();

@@ -1,6 +1,6 @@
 "use client";
 
-import { CreateMessageForm } from "@/packages/ui/message/create-message-form";
+import { CreateMessageForm } from "@/packages/ui/shared/message/create-message-form";
 import { useParams } from "next/navigation";
 
 export default function MessagePage() {

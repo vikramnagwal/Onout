@@ -23,7 +23,8 @@ export function CreateWorkspaceForm() {
 	const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
 	const [isCreating, setIsCreating] = useState<boolean>(false);
 
-  const [workspaceName, setWorkspaceName] = useCookie("workspaceName", "not-found",{expires: 7});
+  const [workspace, setWorkspaceName] = useCookie("workspaceName", "not-found",{ expires: 7 });
+  console.log("workspaceName",workspace)
 	const router = useRouter();
 
 	const {
@@ -60,7 +61,7 @@ export function CreateWorkspaceForm() {
 			},
 			onError: (error) => {
         console.error(error)
-				toast.error("Error checking workspace existence");
+				toast.error("Error checking your workspace existence");
 				setError("name", {
 					type: "manual",
 					message: "failed to check workspace name",

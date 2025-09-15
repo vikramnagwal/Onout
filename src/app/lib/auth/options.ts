@@ -138,7 +138,6 @@ export const authOptions: NextAuthOptions = {
 				} catch (error) {
 					throw new Error("Error updating user");
 				}
-
 				return true;
 			}
 

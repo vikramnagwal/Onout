@@ -1,5 +1,5 @@
 import { getServerSession, Session } from "next-auth";
-import { authOptions } from "./auth/options";
+import { authOptions } from "./options";
 import { NextRequest, NextResponse } from "next/server";
 import { getSearchParams } from "@/packages/utils/functions/url";
 

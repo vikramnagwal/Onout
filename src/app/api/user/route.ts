@@ -1,9 +1,12 @@
 import { authOptions } from "@/app/lib/auth/options";
 import { prisma } from "@/app/lib/db";
+import { withSession } from "@/app/lib/auth/session";
 import { trim } from "@/packages/utils/functions/trim";
+import { Session } from "inspector/promises";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { cookies } from "next/headers";
 
 
 const updateUserSchema = z.object({
@@ -36,3 +39,25 @@ export async function PATCH(request: NextRequest, response: NextResponse) {
         }, { status: 500 })
     }
 }
+
+// api/user - delete user account
+export const DELETE = withSession(async ({ session }) => {
+    if (!session.user) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    // check if user is the real owner of the account
+    if (session.user.id !== session.user.id) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    try {
+        await prisma.user.delete({
+            where: { id: session.user.id }
+        });
+        return NextResponse.json({ message: "User account deleted" }, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting user account: ", error);
+        return NextResponse.json({ message: "Failed to delete user account" }, { status: 500 });
+    }
+});

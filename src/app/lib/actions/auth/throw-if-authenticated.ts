@@ -1,4 +1,4 @@
-import { getSession } from "../../session";
+import { getSession } from "../../auth/session";
 
 interface AuthParams {
 	next: (options: { ctx: any }) => any;
