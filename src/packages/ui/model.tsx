@@ -1,3 +1,5 @@
+'use client';
+
 import React, { Dispatch } from "react";
 import { useMediaQuery } from "../hooks/use-media";
 import { useRouter } from "next/navigation";

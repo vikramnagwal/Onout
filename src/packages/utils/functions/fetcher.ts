@@ -8,7 +8,7 @@ export async function fetcher<JSON = any>(
 	options?: RequestInit,
 ): Promise<JSON> {
 	const res = await fetch(url, options);
-
+	//  fetch: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 	if (!res.ok) {
 		const message =
 			(await res.json())?.error?.message ||

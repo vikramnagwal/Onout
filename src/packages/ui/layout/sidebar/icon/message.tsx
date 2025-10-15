@@ -1,4 +1,4 @@
-import { SVGProps, useEffect, useRef } from "react";
+import { SVGProps, useRef } from "react";
 
 
 const path = [

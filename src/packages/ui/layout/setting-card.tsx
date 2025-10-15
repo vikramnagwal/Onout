@@ -24,7 +24,7 @@ const settingCardVariants = cva(
                 primary: 
                  "border-neutral-300 text-black",
                 danger:
-                 "border-red-600 text-red-500"
+                 "border-red-600 text-red-500 bg-red-50"
             }
         },
         defaultVariants: {
@@ -71,7 +71,7 @@ export function SettingCard({
         </div>
         {/* Setting Card: action section */}
         {action && (
-          <div className={cn("z-0 flex justify-between items-center-safe border border-neutral-300 rounded-md mx-1 p-4 mt-2", variant === "danger" && "border-red-500")}>
+          <div className={cn("z-0 flex justify-between items-center-safe border border-neutral-300 rounded-md mx-1 p-4 mt-2", variant === "danger" && "border-red-500 bg-red-300")}>
             <p className={cn("font-semibold text-blue-500 text-sm max-w-[70%]", variant === "danger" && "text-red-500")}>
               {actionDescription}
             </p>
