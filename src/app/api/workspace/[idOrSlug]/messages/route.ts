@@ -1,6 +1,7 @@
+import { checkWorkspaceExists } from "@/app/lib/actions/check-workspace-exists-action";
+import { getSession } from "@/app/lib/auth/session";
 import { prisma } from "@/app/lib/db";
-import { WorkspaceNameSchema } from "@/app/lib/zod/schema/workspace-schema";
-import { getSessionOrThrow } from "@/packages/utils/functions/workspace";
+import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 
 interface Params {
@@ -8,50 +9,31 @@ interface Params {
 }
 
 // GET: /api/workspace/[idOrSlug]/messages - get all messages from workspace
-export async function GET(request: NextRequest, { params }: Params) {
-	const { idOrSlug } = params;
-	const session = await getSessionOrThrow();
-	const userId = session?.user?.id;
+export async function GET(req: NextRequest, { params }: { params: Promise<{idOrSlug: string }>}) {
+	
+	const workspaceSlug = (await params).idOrSlug;
+	const session = await getSession();
+	
+	// verify user is authenticated
+	// check workspace exists and user is a member of the workspace
+	// if not return 403
+	// if exists fetch messages from database
+	// format messages in structured manner
 
-	// check is workspace name valid
-	const workspaceName = await WorkspaceNameSchema.parseAsync(idOrSlug);
-	if (!workspaceName) {
-		return NextResponse.json(
-			{ message: "Invalid workspace name" },
-			{ status: 400 },
-		);
-	}
+	if (!session) return NextResponse.json({message: "Unauthorized"}, { status: 403 })
+		const workspaceExists = await checkWorkspaceExists({name: workspaceSlug});
+	if (!workspaceExists) return NextResponse.json({message: "Workspace not found"}, { status: 404 })
 
-	// validate sessions
-	if (!session) {
-		return NextResponse.json(
-			{ message: "Session Expired! Please login again" },
-			{ status: 401 },
-		);
-	}
-	// check if user is the owner of the workspace
-	try {
-		const messages = await prisma.workspace.findFirst({
+		const messages = await prisma.messages.findMany({
 			where: {
-				slug: workspaceName.slug,
-				userId: userId,
-			},
-			select: {
-				Messages: true,
-			},
-		});
-		if (!messages) {
-			return NextResponse.json(
-				{ message: "No messages found" },
-				{ status: 404 },
-			);
-		}
-		return NextResponse.json(messages, { status: 200 });
-	} catch (error) {
-		console.error("Error fetching messages: ", error);
-		return NextResponse.json(
-			{ message: "Failed to fetch messages" },
-			{ status: 500 },
-		);
-	}
+				workspace: {
+					slug: workspaceSlug
+				}
+			}
+		})
+
+	return NextResponse.json({ 
+		success: true,
+		messages
+	}, { status: 200 });
 }

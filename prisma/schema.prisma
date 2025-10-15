@@ -67,7 +67,7 @@ model Workspace {
 model Messages {
   id          String    @id @default(cuid())
   workspaceId String
-  slug        String?
+  slug        String
   content     String
   views       Int       @default(0)
   clicks      Int       @default(0)

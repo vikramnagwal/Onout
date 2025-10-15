@@ -40,14 +40,14 @@ export const GET = withSession(async ({ params }) => {
 	}
 });
 
-// POST: /api/[id]/messages - create a new message in workspace
+// POST: /api/[slug]/messages - create a new message in workspace
 export async function POST(
 	request: NextRequest,
-	{ params }: { params: Promise<{ id: string }> },
+	{ params }: { params: Promise<{ slug: string }> },
 ) {
 	const ip = await getIP();
 	const messageSource = await getMessageSource(request);
-	const { id: slug } = await params;
+	const { slug } = await params;
 	const { data } = await request.json();
 
 	const { encryptedMessage } = await EncryptedMessageSchema.parseAsync(data);

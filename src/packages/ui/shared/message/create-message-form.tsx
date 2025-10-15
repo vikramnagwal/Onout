@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm } from "react-hook-form"
-
 import { EncryptedMessageSchema, MessageSchema } from "@/app/lib/zod/schema/messages-schema"
 import { z } from "zod"
 import { encryptMessages } from "@/packages/utils/functions/messages"
@@ -12,7 +11,9 @@ import { checkWorkspaceExists } from "@/app/lib/actions/check-workspace-exists-a
 import { useEffect, useState } from "react";
 import { Button } from "@packages/ui/button";
 import { Send } from "@packages/ui/icons/send";
-import { MessageDock } from "./message-dock";
+// import { MessageDock } from "./message-dock";
+// import { Tooltip } from "../../tooltip";
+import { Stars } from "@packages/ui/icons/stars";
 
 
 
@@ -20,12 +21,12 @@ type MessageProps = z.infer<typeof MessageSchema>;
 
 export function CreateMessageForm() {
     const [validWorkspaceName, setValidWorkspaceName] = useState<boolean>(false)
-    const {register, handleSubmit, formState: {isDirty, errors}} = useForm<MessageProps>();
+    const {register, handleSubmit, resetField, formState: {isDirty, errors}} = useForm<MessageProps>();
 
     const param = useParams();
     const workspaceName = param.slug?.toString();
-    const pathName = usePathname(); 
-    
+    const pathName = usePathname();
+
     const { executeAsync, status: isVerifying } = useAction(checkWorkspaceExists, {
         onSuccess: ({data}) => {
             if (data) {
@@ -66,7 +67,7 @@ export function CreateMessageForm() {
               encryptedMessage: encryptedMessage,
             });
             if (!isEncrypted.success) {
-              toast.error("Failed to encrypt message");
+              toast.error("Your message could not be encrypted! you can try again.");
               return;
             }
             const createdMessage = await fetch(
@@ -80,21 +81,24 @@ export function CreateMessageForm() {
               }
             );
             if (createdMessage.ok) {
-              toast.success("Message sent successfully");
+              resetField("message")
+              return toast.success("Message sent successfully");
             }
           })}
         >
           <textarea
             {...register("message")}
             placeholder="share your message"
-            className="bg-white rounded-md p-2 outline-none shadow-sm"
+            className="bg-white rounded-md p-2 outline-none shadow-sm h-[120px] text-sm border border-gray-300"
           ></textarea>
 
           {errors.message && (
             <p className="text-red-500/80 text-sm">{errors.message.message}</p>
           )}
-          {/* <Button text="Send" type="submit" icon={<Send />} /> */}
-          <MessageDock />
+          <Button text={isVerifying ? "Sending..." : "Send"} type="submit" icon={<Send />} />
+          {/* <Tooltip content="Generate a message with AI"> */}
+            <Button text="Ask AI" icon={<Stars scale={36} />} />
+          {/* </Tooltip> */}
         </form>
       </div>
     );
