@@ -3,7 +3,7 @@ import { Messages } from "@/packages/ui/shared/message/messages";
 
 export default function Page() {
   return (
-    <div>
+    <div className="container mx-auto p-4 flex justify-center items-center">
       <Messages message="New message received!" icon={<MessageIcon />} />
     </div>
   )
