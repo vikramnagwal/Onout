@@ -70,6 +70,7 @@ export function CreateMessageForm() {
               toast.error("Your message could not be encrypted! you can try again.");
               return;
             }
+            // api call
             const createdMessage = await fetch(
               `/api/${workspaceName}/message`,
               {
