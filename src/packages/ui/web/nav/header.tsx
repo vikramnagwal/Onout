@@ -7,8 +7,10 @@ import { Wordmark } from "../../wordmark";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { useSession } from "next-auth/react";
-import { SignOutButton } from "../../auth/sign-out";
-import { DashboardRedirectButton } from "../../dashboard-redirect-btn";
+import { DashboardRedirectButton } from "@packages/ui/dashboard-redirect-btn";
+import { SignOutButton } from "@packages/ui/auth/sign-out";
+import { useMediaQuery } from "@/packages/hooks/use-media";
+
 
 // TODO: add animation to navbar
 
@@ -17,17 +19,18 @@ export function NavHeader() {
   const navRef = useRef(null);
   const navigate = useRouter();
   const { scrollY } = useScroll();
+  const { isMobile } = useMediaQuery();
 
   const navWidth = useTransform(scrollY, [0, 100], ["100%", "60%"]);
   const navOutline = useTransform(scrollY, [0, 100], ["none", "1px solid rgba(0, 0, 0, 0.1)"]); 
   const navBackground = useTransform(scrollY, [0, 100], ["rgba(255, 255, 255, 0.8)", "rgba(255, 255, 255, 1)"]);
-
+  
   const { status } = useSession();
     return (
       <motion.nav
         ref={navRef}
         style={{
-          width: navWidth,
+          width: isMobile ? "100%" : navWidth,
           outline: navOutline,
           backgroundColor: navBackground,
           backdropFilter: "blur(10px)",

@@ -90,12 +90,19 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+enum VerificationTokenType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
 model VerificationToken {
   identifier String
   token      String
   expires    DateTime
+  type       VerificationTokenType?
+  createdAt  DateTime               @default(now())
   userId     String?
-  user       User?    @relation(fields: [userId], references: [id])
+  user       User?                  @relation(fields: [userId], references: [id])
 
   @@unique([identifier, token])
 }

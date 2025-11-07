@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { switzer, poppins, geistMono } from "./styles/fonts";
 import { Toaster } from "sonner";
+// @ts-ignore
 import "./globals.css";
 import { RegisterProvider } from "@/packages/ui/auth/register/context";
 import AuthSession from "./lib/auth/auth-provider";
