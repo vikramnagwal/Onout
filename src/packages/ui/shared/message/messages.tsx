@@ -17,7 +17,7 @@ interface MessagesProps {
 }
 
 export function Messages({
-  message = "here's your message",
+  message = "Hello from onout",
   icon,
   className,
   onClick,
