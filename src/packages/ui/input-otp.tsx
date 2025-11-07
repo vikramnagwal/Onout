@@ -7,6 +7,12 @@ import { useState } from "react";
 export function InputOTP({ length = 4 }: { length: number }) {
 	const [code, setCode] = useState<string>("");
 	const [otp, setOtp] = useState<string>("");
+	const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
+	function handleComplete(code: string) {
+		setOtp(code);
+		setIsCompleted(true);
+	}
 
 	return (
 		<div>
@@ -18,12 +24,14 @@ export function InputOTP({ length = 4 }: { length: number }) {
 				onChange={(code) => setCode(code)}
 				render={({ slots }) => (
 					<>
+					{ console.log(slots) }
 						<div className="flex">
 							{slots.map((slot, idx) => (
 								<div key={idx} className="flex items-center">
 									<Slot {...slot} />
 								</div>
 							))}
+							
 						</div>
 					</>
 				)}
@@ -42,7 +50,7 @@ function Slot(props: SlotProps) {
 				"border-border border-y border-r first:border-l first:rounded-l-md last:rounded-r-md",
 				"group-hover:border-accent-foreground/20 group-focus-within:border-accent-foreground/20",
 				"outline outline-accent-foreground/20",
-				{ "outline-3 outline-green-500 border-none": props.isActive },
+				{ "outline-3 outline-green-500 border-none": props.isActive && props.char !== null },
 			)}
 		>
 			{props.char !== null && <div>{props.char}</div>}
