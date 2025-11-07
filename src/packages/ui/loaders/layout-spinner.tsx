@@ -5,11 +5,11 @@ export function LayoutSpinner({className}: React.SVGProps<SVGSVGElement>) {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150">
         <path
           fill="none"
-          stroke="#0A0200"
+          stroke="#080808ff"
           strokeWidth="15"
           strokeLinecap="round"
           strokeDasharray="300 385"
-          strokeDashoffset="0"
+          strokeDashoffset="100"
           className={className}
           d="M275 75c0 31-27 50-50 50-58 0-92-100-150-100-28 0-50 22-50 50s23 50 50 50c58 0 92-100 150-100 24 0 50 19 50 50Z"
         >

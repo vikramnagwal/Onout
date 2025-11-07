@@ -43,6 +43,7 @@ export function SignUpEmail() {
 				await executeAsync({
 					email: getValues().email,
 					password: getValues().password,
+					type: "EMAIL_VERIFICATION",
 				});
 			}}
 		>
