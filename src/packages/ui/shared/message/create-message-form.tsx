@@ -11,23 +11,23 @@ import { checkWorkspaceExists } from "@/app/lib/actions/check-workspace-exists-a
 import { useEffect, useState } from "react";
 import { Button } from "@packages/ui/button";
 import { Send } from "@packages/ui/icons/send";
-// import { MessageDock } from "./message-dock";
-// import { Tooltip } from "../../tooltip";
-import { Stars } from "@packages/ui/icons/stars";
+import { AutoExpandingTextarea } from "@packages/ui/resizable-textarea";
 
 
 
 type MessageProps = z.infer<typeof MessageSchema>;
 
 export function CreateMessageForm() {
-    const [validWorkspaceName, setValidWorkspaceName] = useState<boolean>(false)
+    const [validWorkspaceName, setValidWorkspaceName] = useState<boolean>(false);
+    const [clicked, setClicked] = useState<boolean>(false);
+
     const {register, handleSubmit, resetField, formState: {isDirty, errors}} = useForm<MessageProps>();
 
     const param = useParams();
     const workspaceName = param.slug?.toString();
     const pathName = usePathname();
 
-    const { executeAsync, status: isVerifying } = useAction(checkWorkspaceExists, {
+    const { executeAsync } = useAction(checkWorkspaceExists, {
         onSuccess: ({data}) => {
             if (data) {
                 setValidWorkspaceName(true)
@@ -52,16 +52,22 @@ export function CreateMessageForm() {
         }
     }
 
+    function handleTrigger(delay: number) {
+      return new Promise((res, rej) => setTimeout(() => res, delay))
+    }
+
     useEffect(() => {
         validateWorkspaceName()
     }, [param, pathName])
 
     return (
-      <div>
+      <div className="pt-8">
         <form
-          className="flex flex-col gap-2 z-20"
+          className="flex flex-col gap-2 z-20 mt-8"
           onSubmit={handleSubmit(async (data) => {
+            setClicked(true)
             if (!validWorkspaceName) return;
+            handleTrigger(5000); // delayed mechanism
             const encryptedMessage = await encryptMessages(data.message);
             const isEncrypted = await EncryptedMessageSchema.safeParseAsync({
               encryptedMessage: encryptedMessage,
@@ -83,23 +89,22 @@ export function CreateMessageForm() {
             );
             if (createdMessage.ok) {
               resetField("message")
+              setClicked(false)
               return toast.success("Message sent successfully");
             }
           })}
         >
-          <textarea
-            {...register("message")}
-            placeholder="share your message"
-            className="bg-white rounded-md p-2 outline-none shadow-sm h-[120px] text-sm border border-gray-300"
-          ></textarea>
+          <AutoExpandingTextarea 
+          {...register("message")}
+            minHeight={120}
+            maxHeight={400}
+            placeholder="Type your message here..."
+          />
 
           {errors.message && (
             <p className="text-red-500/80 text-sm">{errors.message.message}</p>
           )}
-          <Button text={isVerifying ? "Sending..." : "Send"} type="submit" icon={<Send />} />
-          {/* <Tooltip content="Generate a message with AI"> */}
-            <Button text="Ask AI" icon={<Stars scale={36} />} />
-          {/* </Tooltip> */}
+          <Button text={ clicked ? "Sending..." : "Send"} type="submit" icon={<Send />} />
         </form>
       </div>
     );
