@@ -1,8 +1,8 @@
 "use client";
 
 import { CircleUserRoundIcon } from "lucide-react";
-import { useFileUpload } from "@/hooks/use-file-upload";
-import { Button } from "@/components/ui/button";
+import { useFileUpload } from "@/packages/hooks/use-file-upload";
+import { Button } from "@/packages/ui/button-alt";
 
 interface ImageProps {
   inputRef: React.RefObject<HTMLInputElement>;
