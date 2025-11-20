@@ -137,8 +137,8 @@ export function CreateWorkspaceForm() {
             {...register("name", { required: true })}
             placeholder="Workspace Name"
             type="text"
-            icon={<Stars className="size-4 opacity-80" />}
-            iconContent="generate a random workspace name"
+            icon={<Stars className="size-4 opacity-80" />} // here
+            iconContent="generate a random workspace name" //here
             error={errors.name?.message}
             className={cn(
               "my-2",
